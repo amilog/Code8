@@ -1,11 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import Onboarding from './src/screens/Onboarding';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Ağla İlham</Text>
       <StatusBar style="auto" />
+      <Onboarding />
+      {/* <Text>Ağla İlham</Text> */}
     </View>
   );
 }
