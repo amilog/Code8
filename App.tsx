@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Amilin findiq baglari cox BOYUKDUR</Text>
+      <Text>ilhamın limonlarına çatmaz .</Text>
       <StatusBar style="auto" />
     </View>
   );
