@@ -33,7 +33,7 @@ const Animation = () => {
         style={styles.backgroundImage}
       />
       <Animated.Image
-        source={require('../assets/images/AnimationScreen1.png')}
+        source={require('../assets/images/AnimationScreen1.jpg')}
         style={[styles.backgroundImage, { opacity: fadeAnimation }]}
       />
     </View>
