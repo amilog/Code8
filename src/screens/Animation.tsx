@@ -3,37 +3,34 @@ import { View, Image, Animated, Easing, StyleSheet } from 'react-native';
 
 const Animation = () => {
   const [fadeAnimation] = useState(new Animated.Value(0));
+  const totalAnimationDuration = 300;
+  const initialImageDuration = 800;
 
   useEffect(() => {
     startAnimation();
   }, []);
 
   const startAnimation = () => {
-    Animated.timing(fadeAnimation, {
-      toValue: 1,
-      duration: 1500,
-      easing: Easing.linear,
-      useNativeDriver: true,
-    }).start();
-
     setTimeout(() => {
       Animated.timing(fadeAnimation, {
-        toValue: 0,
-        duration: 1500,
+        toValue: 1,
+        duration: totalAnimationDuration,
         easing: Easing.linear,
         useNativeDriver: true,
-      }).start();
-    }, 2000);
+      }).start(() => {
+        fadeAnimation.setValue(1);
+      });
+    }, initialImageDuration);
   };
 
   return (
     <View style={styles.container}>
       <Image
-        source={require('../assets/images/AnimationScreen2.jpg')}
+        source={require('../assets/images/AnimationScreen1.jpg')}
         style={styles.backgroundImage}
       />
       <Animated.Image
-        source={require('../assets/images/AnimationScreen1.jpg')}
+        source={require('../assets/images/AnimationScreen2.jpg')}
         style={[styles.backgroundImage, { opacity: fadeAnimation }]}
       />
     </View>
