@@ -23,7 +23,7 @@ const Animation = () => {
         easing: Easing.linear,
         useNativeDriver: true,
       }).start();
-    }, 2000); // İlk resmin 3 saniye gösterilmesi
+    }, 2000);
   };
 
   return (
