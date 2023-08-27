@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Ilhamdan olaninki</Text>
+      <Text>Amilin findiq baglari cox BOYUKDUR</Text>
       <StatusBar style="auto" />
     </View>
   );
