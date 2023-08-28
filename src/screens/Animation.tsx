@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Image, Animated, Easing, StyleSheet } from 'react-native';
+import WhiteCodeIcon from '../assets/svgs/WhiteCodeIcon';
+import GradientCodeIcon from '../assets/svgs/GradientCodeIcon';
 
 const Animation = () => {
   const [fadeAnimation] = useState(new Animated.Value(0));
@@ -25,14 +27,15 @@ const Animation = () => {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../assets/images/AnimationScreen1.jpg')}
-        style={styles.backgroundImage}
-      />
+      <View style={styles.background} />
+      <GradientCodeIcon style={styles.centeredIcon0} />
       <Animated.Image
-        source={require('../assets/images/AnimationScreen2.jpg')}
+        source={require('../assets/images/Gradient.jpg')}
         style={[styles.backgroundImage, { opacity: fadeAnimation }]}
       />
+      <View style={styles.centeredIcon}>
+        <WhiteCodeIcon />
+      </View>
     </View>
   );
 };
@@ -43,10 +46,30 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  background: {
+    width: '100%',
+    height: '100%',
+  },
   backgroundImage: {
     position: 'absolute',
     width: '100%',
     height: '100%',
+  },
+  centeredIcon: {
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    transform: [{ translateX: -12.5 }, { translateY: -18 }],
+    width: 144,
+    height: 36,
+  },
+  centeredIcon0: {
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    transform: [{ translateX: -12.5 }, { translateY: -18 }],
+    width: 144,
+    height: 36,
   },
 });
 
