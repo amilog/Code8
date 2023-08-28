@@ -1,0 +1,130 @@
+import { TeamsModel } from "../models/TeamsModel";
+
+export const Teams: TeamsModel[] = [
+  {
+    _id: "131231231",
+    name: "Amil",
+    teamPic: require("../assets/images/teamPic.jpeg"),
+    members: [
+      {
+        _id: "1231231231",
+        fullName: "Amil Khan",
+        memberPic: "../assets/images/memberPic.jpg",
+        branch: "Computer Science",
+        majority: "Frontend",
+        linkedIn: "sample",
+        github: "sample",
+        behance: "sample",
+        cv: "sample",
+      },
+    ],
+  },
+  {
+    _id: "131231232",
+    name: "Amil",
+    teamPic: require("../assets/images/teamPic.jpeg"),
+    members: [
+      {
+        _id: "1231231232",
+        fullName: "Amil Khan",
+        memberPic: "../assets/images/memberPic.jpg",
+        branch: "Computer Science",
+        majority: "Frontend",
+        linkedIn: "sample",
+        github: "sample",
+        behance: "sample",
+        cv: "sample",
+      },
+    ],
+  },
+  {
+    _id: "131231233",
+    name: "Amil",
+    teamPic: require("../assets/images/teamPic.jpeg"),
+    members: [
+      {
+        _id: "123123123",
+        fullName: "Amil Khan",
+        memberPic: "../assets/images/memberPic.jpg",
+        branch: "Computer Science",
+        majority: "Frontend",
+        linkedIn: "sample",
+        github: "sample",
+        behance: "sample",
+        cv: "sample",
+      },
+    ],
+  },
+  {
+    _id: "131231234",
+    name: "Amil",
+    teamPic: require("../assets/images/teamPic.jpeg"),
+    members: [
+      {
+        _id: "1231231234",
+        fullName: "Amil Khan",
+        memberPic: "../assets/images/memberPic.jpg",
+        branch: "Computer Science",
+        majority: "Frontend",
+        linkedIn: "sample",
+        github: "sample",
+        behance: "sample",
+        cv: "sample",
+      },
+    ],
+  },
+  {
+    _id: "131231235",
+    name: "Amil",
+    teamPic: require("../assets/images/teamPic.jpeg"),
+    members: [
+      {
+        _id: "1231231235",
+        fullName: "Amil Khan",
+        memberPic: "../assets/images/memberPic.jpg",
+        branch: "Computer Science",
+        majority: "Frontend",
+        linkedIn: "sample",
+        github: "sample",
+        behance: "sample",
+        cv: "sample",
+      },
+    ],
+  },
+  {
+    _id: "131231236",
+    name: "Amil",
+    teamPic: require("../assets/images/teamPic.jpeg"),
+    members: [
+      {
+        _id: "1231231236",
+        fullName: "Amil Khan",
+        memberPic: "../assets/images/memberPic.jpg",
+        branch: "Computer Science",
+        majority: "Frontend",
+        linkedIn: "sample",
+        github: "sample",
+        behance: "sample",
+        cv: "sample",
+      },
+    ],
+  },
+  {
+    _id: "131231237",
+    name: "Amil",
+    teamPic: require("../assets/images/teamPic.jpeg"),
+    members: [
+      {
+        _id: "1231231237",
+        fullName: "Amil Khan",
+        memberPic: "../assets/images/memberPic.jpg",
+        branch: "Computer Science",
+        majority: "Frontend",
+        linkedIn: "sample",
+        github: "sample",
+        behance: "sample",
+        cv: "sample",
+      },
+    ],
+  },
+];
