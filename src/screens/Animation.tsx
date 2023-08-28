@@ -3,12 +3,14 @@ import { View, Image, Animated, Easing, StyleSheet } from 'react-native';
 import WhiteCodeIcon from '../assets/svgs/WhiteCodeIcon';
 import GradientCodeIcon from '../assets/svgs/GradientCodeIcon';
 import Code8Text from '../assets/svgs/Code8Text';
+import FromCodeText from '../assets/svgs/FromCodeText';
 
 const Animation = () => {
   const [fadeAnimation] = useState(new Animated.Value(0));
   const [iconOpacity] = useState(new Animated.Value(0));
   const [textTranslateX] = useState(new Animated.Value(-300));
   const [textOpacity] = useState(new Animated.Value(0));
+  const [fromCodeTextTranslateY] = useState(new Animated.Value(-30)); // Initial position for FromCodeText
   const totalAnimationDuration = 300;
   const initialImageDuration = 800;
 
@@ -38,7 +40,7 @@ const Animation = () => {
         setTimeout(() => {
           Animated.timing(textTranslateX, {
             toValue: 1,
-            duration: totalAnimationDuration * 1.5, 
+            duration: totalAnimationDuration * 1.5,
             easing: Easing.linear,
             useNativeDriver: true,
           }).start();
@@ -47,6 +49,14 @@ const Animation = () => {
           Animated.timing(textOpacity, {
             toValue: 1,
             duration: totalAnimationDuration * 5,
+            easing: Easing.linear,
+            useNativeDriver: true,
+          }).start();
+
+          // FromCodeText animation
+          Animated.timing(fromCodeTextTranslateY, {
+            toValue: 0,
+            duration: totalAnimationDuration * 1.5,
             easing: Easing.linear,
             useNativeDriver: true,
           }).start();
@@ -76,6 +86,16 @@ const Animation = () => {
         ]}
       >
         <Code8Text />
+      </Animated.View>
+      <Animated.View
+        style={[
+          styles.fromCodeTextContainer,
+          {
+            transform: [{ translateY: fromCodeTextTranslateY }],
+          },
+        ]}
+      >
+        <FromCodeText />
       </Animated.View>
     </View>
   );
@@ -118,6 +138,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 117,
     height: 26.28,
+  },
+  fromCodeTextContainer: {
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    transform: [ { translateY: 50 }],
+    width: 136,
+    height: 13,
   },
 });
 
