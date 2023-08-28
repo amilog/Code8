@@ -7,7 +7,6 @@ import SvgHomeInactive from "../icons/HomeInactive";
 import { View, Text, StyleSheet } from "react-native";
 import SvgValutionInactive from "../icons/ValutionInactive";
 import SvgInfoInactive from "../icons/InfoInactive";
-import * as Animatable from "react-native-animatable";
 import SvgHomeActive from "../icons/HomeActive";
 import SvgValutionActive from "../icons/ValutionActive";
 import SvgInfoActive from "../icons/InfoActive";
@@ -30,14 +29,24 @@ const Tab = () => {
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.tabItem}>
-              {focused ? <SvgHomeActive /> : <SvgHomeInactive />}
+              {focused ? (
+                <View
+                  style={styles.zoomedTabItem}
+                >
+                  <SvgHomeActive />
+                </View>
+              ) : (
+                <View style={styles.normalTabItem}>
+                  <SvgHomeInactive />
+                </View>
+              )}
               <Text
                 style={[
                   styles.labelText,
                   { color: focused ? "#54226C" : "#5E5E5E" },
                 ]}
               >
-                Layihe
+                Lahiye
               </Text>
             </View>
           ),
@@ -49,7 +58,17 @@ const Tab = () => {
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.tabItem}>
-              {focused ? <SvgValutionActive /> : <SvgValutionInactive />}
+              {focused ? (
+                <View
+                  style={styles.zoomedTabItem}
+                >
+                  <SvgValutionActive />
+                </View>
+              ) : (
+                <View style={styles.normalTabItem}>
+                  <SvgValutionInactive />
+                </View>
+              )}
               <Text
                 style={[
                   styles.labelText,
@@ -69,27 +88,24 @@ const Tab = () => {
           tabBarIcon: ({ focused }) => (
             <View style={styles.tabItem}>
               {focused ? (
-                <Animatable.View
-                  animation={"zoomIn"}
-                  duration={5000}
+                <View
                   style={styles.zoomedTabItem}
                 >
                   <SvgInfoActive />
-                </Animatable.View>
+                </View>
               ) : (
                 <View style={styles.normalTabItem}>
                   <SvgInfoInactive />
                 </View>
               )}
-              <Animatable.Text
-                animation={"fadeIn"}
+              <Text
                 style={[
                   styles.labelText,
                   { color: focused ? "#54226C" : "#5E5E5E" },
                 ]}
               >
                 Melumat
-              </Animatable.Text>
+              </Text>
             </View>
           ),
         }}
@@ -115,6 +131,7 @@ const styles = StyleSheet.create({
     height: 32,
     justifyContent: "center",
     alignItems: "center",
+    borderRadius: 16,
   },
   normalTabItem: {
     height: 32,
