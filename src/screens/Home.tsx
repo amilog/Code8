@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Platform,
 } from "react-native";
 import React from "react";
 import GradientHeader from "../components/GradientHeader";
@@ -25,17 +26,16 @@ const Home = () => {
           paddingTop: 20,
           flexGrow: 1,
         }}
-
         renderItem={({ item }: { item: TeamsModel }) => {
           return (
             <View style={styles.teamCard}>
               <Image
                 source={item.teamPic}
                 style={{
-                  width: '24%',
-                  height: '100%',
+                  width: 75,
+                  height: 75,
                   resizeMode: "contain",
-                  borderRadius: Dimensions.get("window").height / 2
+                  borderRadius: 38,
                 }}
               />
             </View>
@@ -55,12 +55,14 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight! + 20,
   },
   teamCard: {
-    width: "85%",
-    height: Dimensions.get("window").height / 8,
-    // height: 96
+    width: "95%",
+    height: Dimensions.get("window").height / 7,
     flexDirection: "row",
-    padding:16,
+    padding: 16,
     borderWidth: 1,
     alignSelf: "center",
+    marginBottom: 10,
+    borderRadius: 16,
+    alignItems: "center",
   },
 });
