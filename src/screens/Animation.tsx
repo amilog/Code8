@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { View, Image, Animated, Easing, StyleSheet } from 'react-native';
 import WhiteCodeIcon from '../assets/svgs/WhiteCodeIcon';
 import GradientCodeIcon from '../assets/svgs/GradientCodeIcon';
+import Code8Text from '../assets/svgs/Code8Text';
 
 const Animation = () => {
   const [fadeAnimation] = useState(new Animated.Value(0));
+  const [iconOpacity] = useState(new Animated.Value(0));
+  const [textTranslateX] = useState(new Animated.Value(-300));
+  const [textOpacity] = useState(new Animated.Value(0));
   const totalAnimationDuration = 300;
   const initialImageDuration = 800;
 
@@ -21,6 +25,32 @@ const Animation = () => {
         useNativeDriver: true,
       }).start(() => {
         fadeAnimation.setValue(1);
+
+        // Icon animation
+        Animated.timing(iconOpacity, {
+          toValue: 1,
+          duration: totalAnimationDuration,
+          easing: Easing.linear,
+          useNativeDriver: true,
+        }).start();
+
+        // Text animation
+        setTimeout(() => {
+          Animated.timing(textTranslateX, {
+            toValue: 1,
+            duration: totalAnimationDuration * 1.5, 
+            easing: Easing.linear,
+            useNativeDriver: true,
+          }).start();
+
+          // Text opacity animation
+          Animated.timing(textOpacity, {
+            toValue: 1,
+            duration: totalAnimationDuration * 5,
+            easing: Easing.linear,
+            useNativeDriver: true,
+          }).start();
+        }, 500);
       });
     }, initialImageDuration);
   };
@@ -33,9 +63,20 @@ const Animation = () => {
         source={require('../assets/images/Gradient.jpg')}
         style={[styles.backgroundImage, { opacity: fadeAnimation }]}
       />
-      <View style={styles.centeredIcon}>
+      <Animated.View style={[styles.centeredIcon, { opacity: iconOpacity }]}>
         <WhiteCodeIcon />
-      </View>
+      </Animated.View>
+      <Animated.View
+        style={[
+          styles.centeredText,
+          {
+            transform: [{ translateX: textTranslateX }],
+            opacity: textOpacity,
+          },
+        ]}
+      >
+        <Code8Text />
+      </Animated.View>
     </View>
   );
 };
@@ -59,7 +100,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    transform: [{ translateX: -12.5 }, { translateY: -18 }],
+    transform: [{ translateX: -12.5 }, { translateY: -5 }],
     width: 144,
     height: 36,
   },
@@ -67,9 +108,16 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    transform: [{ translateX: -12.5 }, { translateY: -18 }],
+    transform: [{ translateX: -12.5 }, { translateY: -5 }],
     width: 144,
     height: 36,
+  },
+  centeredText: {
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 117,
+    height: 26.28,
   },
 });
 
