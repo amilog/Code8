@@ -4,13 +4,14 @@ import WhiteCodeIcon from '../assets/svgs/WhiteCodeIcon';
 import GradientCodeIcon from '../assets/svgs/GradientCodeIcon';
 import Code8Text from '../assets/svgs/Code8Text';
 import FromCodeText from '../assets/svgs/FromCodeText';
-
+//biraz sağa sürüşdürmək lazım
 const Animation = () => {
   const [fadeAnimation] = useState(new Animated.Value(0));
   const [iconOpacity] = useState(new Animated.Value(0));
   const [textTranslateX] = useState(new Animated.Value(-300));
   const [textOpacity] = useState(new Animated.Value(0));
-  const [fromCodeTextTranslateY] = useState(new Animated.Value(-30)); // Initial position for FromCodeText
+  const [fromCodeTextTranslateY] = useState(new Animated.Value(-30));
+  const [startFromCodeTextAnimation, setStartFromCodeTextAnimation] = useState(false);
   const totalAnimationDuration = 300;
   const initialImageDuration = 800;
 
@@ -40,7 +41,7 @@ const Animation = () => {
         setTimeout(() => {
           Animated.timing(textTranslateX, {
             toValue: 1,
-            duration: totalAnimationDuration * 1.5,
+            duration: totalAnimationDuration * 1.6,
             easing: Easing.linear,
             useNativeDriver: true,
           }).start();
@@ -52,18 +53,26 @@ const Animation = () => {
             easing: Easing.linear,
             useNativeDriver: true,
           }).start();
-
-          // FromCodeText animation
-          Animated.timing(fromCodeTextTranslateY, {
-            toValue: 0,
-            duration: totalAnimationDuration * 1.5,
-            easing: Easing.linear,
-            useNativeDriver: true,
-          }).start();
         }, 500);
+
+        // FromCodeText animation
+        setTimeout(() => {
+          setStartFromCodeTextAnimation(true);
+        }, totalAnimationDuration * 4.5); 
       });
-    }, initialImageDuration);
+    }, 500);
   };
+
+  useEffect(() => {
+    if (startFromCodeTextAnimation) {
+      Animated.timing(fromCodeTextTranslateY, {
+        toValue: 0,
+        duration: totalAnimationDuration ,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [startFromCodeTextAnimation]);
 
   return (
     <View style={styles.container}>
@@ -85,18 +94,20 @@ const Animation = () => {
           },
         ]}
       >
-        <Code8Text />
+        <Code8Text style={styles.centeredText}/>
       </Animated.View>
-      <Animated.View
-        style={[
-          styles.fromCodeTextContainer,
-          {
-            transform: [{ translateY: fromCodeTextTranslateY }],
-          },
-        ]}
-      >
-        <FromCodeText />
-      </Animated.View>
+      {startFromCodeTextAnimation && (
+        <Animated.View
+          style={[
+            styles.fromCodeTextContainer,
+            {
+              transform: [{ translateY: fromCodeTextTranslateY }],
+            },
+          ]}
+        >
+          <FromCodeText style={styles.fromCodeTextContainer  } />
+        </Animated.View>
+      )}
     </View>
   );
 };
@@ -120,7 +131,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    transform: [{ translateX: -12.5 }, { translateY: -5 }],
+    transform: [{ translateX: -12.5 }, { translateY: -2 }],
     width: 144,
     height: 36,
   },
@@ -128,7 +139,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    transform: [{ translateX: -12.5 }, { translateY: -5 }],
+    transform: [{ translateX: -12.5 }, { translateY: -2 }],
     width: 144,
     height: 36,
   },
@@ -136,17 +147,19 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
+    transform: [{ translateX: -2.5 }, { translateY: 0 }],
     width: 117,
     height: 26.28,
   },
   fromCodeTextContainer: {
     position: 'absolute',
+    transform: [{ translateX: -11.5 }, { translateY: 32 }],
     justifyContent: 'center',
     alignItems: 'center',
-    transform: [ { translateY: 50 }],
     width: 136,
     height: 13,
   },
 });
 
 export default Animation;
+
