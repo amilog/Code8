@@ -9,7 +9,9 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import GradientHeader from "../components/GradientHeader";
-import SvgFocusedTab from "../icons/FocusedNavigation";
+import SvgFocusedTab from "../assets/icons/FocusedNavigation";
+import LastHackathon from "./LastHackathon";
+import AdvanceCareer from "./AdvanceCareer";
 
 const Information = () => {
   const [focusedItem, setFocusedItem] = useState("");
@@ -64,31 +66,7 @@ const Information = () => {
           keyExtractor={(item) => item}
         />
       </View>
-      {focusedItem === "Son hackathon" ? (
-        <View style={{ marginTop: 20 }}>
-          <Text style={{ fontSize: 16, fontWeight: "500", color: "#5E5E5E" }}>
-            Son hackathon
-          </Text>
-          <Text style={{ fontSize: 16, fontWeight: "500", color: "#5E5E5E" }}>
-            2021-04-10
-          </Text>
-          <Text style={{ fontSize: 16, fontWeight: "500", color: "#5E5E5E" }}>
-            2021-04-11
-          </Text>
-        </View>
-      ) : (
-        <View style={{ marginTop: 20 }}>
-          <Text style={{ fontSize: 16, fontWeight: "500", color: "#5E5E5E" }}>
-            Karyerani yukselt
-          </Text>
-          <Text style={{ fontSize: 16, fontWeight: "500", color: "#5E5E5E" }}>
-            2021-04-10
-          </Text>
-          <Text style={{ fontSize: 16, fontWeight: "500", color: "#5E5E5E" }}>
-            2021-04-11
-          </Text>
-        </View>
-      )}
+      {focusedItem === "Son hackathon" ? <LastHackathon /> : <AdvanceCareer />}
     </View>
   );
 };

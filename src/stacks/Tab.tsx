@@ -3,13 +3,13 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import Valuation from "../screens/Valuation";
 import Information from "../screens/Information";
-import SvgHomeInactive from "../icons/HomeInactive";
+import SvgHomeInactive from "../assets/icons/HomeInactive";
 import { View, Text, StyleSheet } from "react-native";
-import SvgValutionInactive from "../icons/ValutionInactive";
-import SvgInfoInactive from "../icons/InfoInactive";
-import SvgHomeActive from "../icons/HomeActive";
-import SvgValutionActive from "../icons/ValutionActive";
-import SvgInfoActive from "../icons/InfoActive";
+import SvgValutionInactive from "../assets/icons/ValutionInactive";
+import SvgInfoInactive from "../assets/icons/InfoInactive";
+import SvgHomeActive from "../assets/icons/HomeActive";
+import SvgValutionActive from "../assets/icons/ValutionActive";
+import SvgInfoActive from "../assets/icons/InfoActive";
 
 const Tab = () => {
   const Tab = createBottomTabNavigator();
