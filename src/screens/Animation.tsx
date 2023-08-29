@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Image, Animated, Easing, StyleSheet } from 'react-native';
-import WhiteCodeIcon from '../assets/svgs/WhiteCodeIcon';
-import GradientCodeIcon from '../assets/svgs/GradientCodeIcon';
-import Code8Text from '../assets/svgs/Code8Text';
-import FromCodeText from '../assets/svgs/FromCodeText';
+import WhiteCodeIcon from '../assets/icons/animationSvgs/WhiteCodeIcon';
+import GradientCodeIcon from '../assets/icons/animationSvgs/GradientCodeIcon';
+import Code8Text from '../assets/icons/animationSvgs/Code8Text';
+import FromCodeText from '../assets/icons/animationSvgs/FromCodeText';
 //biraz sağa sürüşdürmək lazım
 const Animation = () => {
   const [fadeAnimation] = useState(new Animated.Value(0));
