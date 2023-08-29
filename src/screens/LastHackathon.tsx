@@ -1,9 +1,65 @@
-import React from "react";
-import { View, Text, ScrollView, Image, StyleSheet } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  StyleSheet,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
 import { Video, ResizeMode } from "expo-av";
+import * as Animatable from "react-native-animatable";
+import SvgPlayButton from "../assets/icons/PlayButton";
 
 const LastHackathon = () => {
-  const video = React.useRef<Video>(null);
+  const video = useRef<Video>(null);
+  const [showController, setShowController] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const handleStatus = (status: any) => {
+    setIsPlaying(status.isPlaying);
+  };
+
+  const toggleVideoPlayback = async () => {
+    if (isPlaying) {
+      await video.current?.pauseAsync();
+    } else {
+      setShowController(false);
+      await video.current?.playAsync();
+      video.current?._setFullscreen(true);
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  useEffect(() => {
+    let controllerTimeout: any;
+
+    if (showController) {
+      controllerTimeout = setTimeout(() => {
+        setShowController(false);
+      }, 3000);
+    }
+
+    return () => {
+      clearTimeout(controllerTimeout);
+    };
+  }, [showController]);
+
+  const renderVideoController = () => {
+    const controllerAnimation = showController ? "fadeIn" : "fadeOut";
+
+    return (
+      <Animatable.View
+        animation={controllerAnimation}
+        style={styles.videoController}
+      >
+        <TouchableOpacity onPress={toggleVideoPlayback}>
+          <SvgPlayButton />
+        </TouchableOpacity>
+      </Animatable.View>
+    );
+  };
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -12,18 +68,28 @@ const LastHackathon = () => {
           Code Academy - Hackathon 2023
         </Text>
       </View>
-      <Video
-        ref={video}
-        source={require("../assets/videos/code8.mp4")}
-        resizeMode={ResizeMode.CONTAIN}
-        useNativeControls
-        onPlaybackStatusUpdate={(status: any) => {
-          if (status.isPlaying && status.isLoaded) {
-            video.current?._setFullscreen(true);
-          }
+      <Pressable
+        onPress={() => {
+          setShowController((prev) => !prev);
         }}
-        style={{ width: "100%", height: 584, marginBottom: 16 }}
-      />
+        style={styles.videoContainer}
+      >
+        <Video
+          ref={video}
+          source={require("../assets/videos/code8.mp4")}
+          resizeMode={ResizeMode.COVER}
+          isLooping
+          onPlaybackStatusUpdate={handleStatus}
+          onFullscreenUpdate={(status: any) => {
+            if (status.fullscreenUpdate === 3 && status.status.isPlaying) {
+              setIsPlaying(false);
+              video.current?.pauseAsync();
+            }
+          }}
+          style={styles.video}
+        />
+        {renderVideoController()}
+      </Pressable>
       <Image
         source={require("../assets/images/LastHackathon1.jpeg")}
         style={styles.image}
@@ -78,6 +144,8 @@ const LastHackathon = () => {
   );
 };
 
+export default LastHackathon;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -118,6 +186,18 @@ const styles = StyleSheet.create({
     textAlign: "center",
     width: "80%",
   },
+  videoContainer: {
+    marginHorizontal: 16,
+    marginBottom: 16,
+  },
+  video: {
+    width: "100%",
+    height: 584,
+  },
+  videoController: {
+    position: "absolute",
+    alignItems: "center",
+    bottom: 10,
+    width: "100%",
+  },
 });
-
-export default LastHackathon;

@@ -20,6 +20,14 @@ const Information = () => {
 
   const isTabFocused = (tab: string) => focusedItem === tab;
 
+  const renderScreen = () => {
+    if (focusedItem === "Son hackathon") {
+      return <LastHackathon />;
+    } else {
+      return <AdvanceCareer />;
+    }
+  };
+
   return (
     <View style={styles.container}>
       <GradientHeader title={"Məlumat"} />
@@ -58,7 +66,7 @@ const Information = () => {
           keyExtractor={(item) => item}
         />
       </View>
-      {focusedItem === "Son hackathon" ? <LastHackathon /> : <AdvanceCareer />}
+      {renderScreen()}
     </View>
   );
 };
@@ -90,6 +98,6 @@ const styles = StyleSheet.create({
   },
   focusedTabIcon: {
     position: "absolute",
-    bottom: -10,
+    bottom: -9,
   },
 });
