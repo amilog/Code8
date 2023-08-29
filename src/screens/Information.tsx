@@ -1,68 +1,60 @@
+import React, { useState } from "react";
 import {
-  FlatList,
-  StatusBar,
-  StyleSheet,
   View,
   Text,
-  Dimensions,
+  FlatList,
   TouchableOpacity,
+  Dimensions,
+  StyleSheet,
+  StatusBar,
 } from "react-native";
-import React, { useEffect, useState } from "react";
 import GradientHeader from "../components/GradientHeader";
 import SvgFocusedTab from "../assets/icons/FocusedNavigation";
 import LastHackathon from "./LastHackathon";
 import AdvanceCareer from "./AdvanceCareer";
 
 const Information = () => {
-  const [focusedItem, setFocusedItem] = useState("");
+  const [focusedItem, setFocusedItem] = useState("Son hackathon");
 
-  useEffect(() => {
-    setFocusedItem("Son hackathon");
-  }, []);
+  const tabs = ["Son hackathon", "Kariyerini yükselt"];
+
+  const isTabFocused = (tab: string) => focusedItem === tab;
 
   return (
     <View style={styles.container}>
-      <GradientHeader title={"Melumat"} />
-      <View
-        style={{
-          borderBottomWidth: 0.5,
-          height: 70,
-          borderBottomColor: "#F3D1FF",
-        }}
-      >
+      <GradientHeader title={"Məlumat"} />
+      <View style={styles.tabContainer}>
         <FlatList
-          style={{ marginTop: 10 }}
+          style={styles.tabList}
           horizontal
-          data={["Son hackathon", "Karyerani yukselt"]}
-          renderItem={({ item }: { item: string }) => {
-            const isFocused = focusedItem === item;
-            return (
-              <TouchableOpacity
-                onPress={() => setFocusedItem(item)}
-                style={{
-                  height: 50,
-                  width: Dimensions.get("window").width / 2,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
+          data={tabs}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => setFocusedItem(item)}
+              style={[
+                styles.tab,
+                {
+                  width: Dimensions.get("window").width / tabs.length,
+                },
+              ]}
+            >
+              <Text
+                style={[
+                  styles.tabText,
+                  {
+                    color: isTabFocused(item) ? "#6750A4" : "#49454F",
+                  },
+                ]}
               >
-                <Text
-                  style={{
-                    fontSize: 18,
-                    fontWeight: "500",
-                    color: isFocused ? "#6750A4" : "#49454F",
-                  }}
-                >
-                  {item}
-                </Text>
-                {isFocused && (
-                  <View style={{ position: "absolute", bottom: -10 }}>
-                    <SvgFocusedTab />
-                  </View>
-                )}
-              </TouchableOpacity>
-            );
-          }}
+                {item}
+              </Text>
+              {isTabFocused(item) && (
+                <View style={styles.focusedTabIcon}>
+                  <SvgFocusedTab />
+                </View>
+              )}
+            </TouchableOpacity>
+          )}
           keyExtractor={(item) => item}
         />
       </View>
@@ -78,5 +70,26 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#ffffff",
     paddingTop: StatusBar.currentHeight! + 20,
+  },
+  tabContainer: {
+    borderBottomWidth: 0.5,
+    height: 70,
+    borderBottomColor: "#F3D1FF",
+  },
+  tabList: {
+    marginTop: 10,
+  },
+  tab: {
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  tabText: {
+    fontSize: 18,
+    fontWeight: "500",
+  },
+  focusedTabIcon: {
+    position: "absolute",
+    bottom: -10,
   },
 });
