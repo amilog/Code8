@@ -16,7 +16,7 @@ import AdvanceCareer from "./AdvanceCareer";
 const Information = () => {
   const [focusedItem, setFocusedItem] = useState("Son hackathon");
 
-  const tabs = ["Son hackathon", "Kariyerini yükselt"];
+  const tabs = ["Son hackathon", "Karyerani yukselt"];
 
   const isTabFocused = (tab: string) => focusedItem === tab;
 
@@ -36,6 +36,7 @@ const Information = () => {
           style={styles.tabList}
           horizontal
           data={tabs}
+          extraData={tabs}
           renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() => setFocusedItem(item)}
