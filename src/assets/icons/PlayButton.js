@@ -1,41 +1,58 @@
-import * as React from "react";
-import Svg, { G, Path } from "react-native-svg";
-const SvgPlayButton = (props) => (
-  <Svg
-    viewBox="0 0 24 24"
-    fill="none"
-    height={80}
-    width={80}
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
-  >
-    <G id="SVGRepo_bgCarrier" strokeWidth={0} />
-    <G
-      id="SVGRepo_tracerCarrier"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <G id="SVGRepo_iconCarrier">
+import * as React from "react"
+import Svg, { Rect, Path, Defs, LinearGradient, Stop } from "react-native-svg"
+
+function SvgPlayButton(props) {
+  return (
+    <Svg
+      width={48}
+      height={48}
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <Rect width={48} height={48} rx={24} fill="#FBF0FF" />
       <Path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM15.224 13.0171C16.011 12.5674 16.011 11.4326 15.224 10.9829L10.7817 8.44446C10.0992 8.05446 9.25 8.54727 9.25 9.33333L9.25 14.6667C9.25 15.4527 10.0992 15.9455 10.7817 15.5555L15.224 13.0171Z"
-        fill="#fff"
+        opacity={0.4}
+        d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4 4 12.954 4 24s8.954 20 20 20z"
+        fill="url(#paint0_linear_956_1145)"
       />
       <Path
-        d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
-        stroke="#323232"
-        strokeWidth={2}
+        d="M18.2 24v-2.96c0-3.82 2.7-5.36 6-3.46l2.56 1.48 2.56 1.48c3.3 1.9 3.3 5.02 0 6.92l-2.56 1.48-2.56 1.48c-3.3 1.9-6 .34-6-3.46V24z"
+        fill="url(#paint1_linear_956_1145)"
       />
-      <Path
-        d="M10.9 8.8L10.6577 8.66152C10.1418 8.36676 9.5 8.73922 9.5 9.33333L9.5 14.6667C9.5 15.2608 10.1418 15.6332 10.6577 15.3385L10.9 15.2L15.1 12.8C15.719 12.4463 15.719 11.5537 15.1 11.2L10.9 8.8Z"
-        stroke="#323232"
-        strokeWidth={2}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="#323232"
-      />
-    </G>
-  </Svg>
-);
-export default SvgPlayButton;
+      <Defs>
+        <LinearGradient
+          id="paint0_linear_956_1145"
+          x1={60.8254}
+          y1={-16}
+          x2={-22.5818}
+          y2={74.0349}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop offset={0.171543} stopColor="#FF3F3C" />
+          <Stop offset={0.256275} stopColor="#FF4279" />
+          <Stop offset={0.377517} stopColor="#DF3A9A" />
+          <Stop offset={0.586152} stopColor="#8D44EB" />
+          <Stop offset={0.722348} stopColor="#2B9FEF" />
+        </LinearGradient>
+        <LinearGradient
+          id="paint1_linear_956_1145"
+          x1={37.5135}
+          y1={9.53501}
+          x2={7.27015}
+          y2={40.2219}
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop offset={0.171543} stopColor="#FF3F3C" />
+          <Stop offset={0.256275} stopColor="#FF4279" />
+          <Stop offset={0.377517} stopColor="#DF3A9A" />
+          <Stop offset={0.586152} stopColor="#8D44EB" />
+          <Stop offset={0.722348} stopColor="#2B9FEF" />
+        </LinearGradient>
+      </Defs>
+    </Svg>
+  )
+}
+
+export default SvgPlayButton

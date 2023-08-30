@@ -52,8 +52,7 @@ const LastHackathon = () => {
     return (
       <Animatable.View
         animation={controllerAnimation}
-        style={styles.videoController}
-      >
+        style={styles.videoController}>
         <TouchableOpacity onPress={toggleVideoPlayback}>
           <SvgPlayButton />
         </TouchableOpacity>
