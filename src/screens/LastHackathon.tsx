@@ -33,7 +33,7 @@ const LastHackathon = () => {
   };
 
   useEffect(() => {
-    let controllerTimeout: any;
+    let controllerTimeout: NodeJS.Timeout;
 
     if (showController) {
       controllerTimeout = setTimeout(() => {
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   },
   section: {
     marginHorizontal: 16,
-    marginBottom: 12,
+    marginBottom: 6,
   },
   sectionHeader: {
     color: "#000",
@@ -161,12 +161,14 @@ const styles = StyleSheet.create({
     fontSize: 22,
     textAlign: "center",
     marginBottom: 12,
+    letterSpacing: 0.15,
   },
   sectionText: {
     color: "#000",
     fontWeight: "400",
     fontSize: 16,
     lineHeight: 24,
+    letterSpacing: 0.5,
   },
   image: {
     width: "100%",
