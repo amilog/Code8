@@ -111,7 +111,7 @@ const LastHackathon = () => {
       <View style={styles.section}>
         <Text style={styles.sectionHeader}>Format</Text>
         <Text style={styles.sectionText}>
-          Hər qrupdan iki nəfər tələbə olmaqla 14 nəfərlik 1 komanda
+         Hər qrupdan iki nəfər tələbə olmaqla 14 nəfərlik 1 komanda
           formalaşdırıldı. 7 komandanın hər birinə təhsil mentorları Team leader
           olaraq təyin olundu.
         </Text>
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
   videoController: {
     position: "absolute",
     alignItems: "center",
-    bottom: 10,
+    transform: [{ translateX: 0 }, { translateY: 250 }],
     width: "100%",
   },
 });
