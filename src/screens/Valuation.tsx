@@ -1,11 +1,20 @@
-import { StatusBar, StyleSheet, Text, View } from "react-native";
+import {
+  Dimensions,
+  KeyboardAvoidingView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React from "react";
-import GradientHeader from "../components/GradientHeader";
 import TextField from "../components/TextField";
+import GradientHeader from "../components/GradientHeader";
+import SvgGraidentButton from "../assets/icons/gradientButton";
 
 const Valuation = () => {
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container} behavior="height">
       <GradientHeader title={"Qiymetlendirme"} />
       <View style={styles.section}>
         <Text style={styles.sectionText}>
@@ -16,9 +25,13 @@ const Valuation = () => {
           </Text>
           istifadə edin.
         </Text>
-        <TextField placeholder="Cardholder name" />
+        <View style={{ height: 24 }} />
+        <TextField label="6 reqemli parol" cursorColor={"#080F9C"} />
+        <TouchableOpacity style={styles.button}>
+          <SvgGraidentButton />
+        </TouchableOpacity>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -43,5 +56,8 @@ const styles = StyleSheet.create({
   },
   textBold: {
     fontWeight: "500",
+  },
+  button: {
+    marginTop: 40,
   },
 });
