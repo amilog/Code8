@@ -1,26 +1,23 @@
+import { StatusBar, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
-import { View, StyleSheet, StatusBar } from "react-native";
 import GradientHeader from "../components/GradientHeader";
-import LastHackathon from "./LastHackathon";
-import AdvanceCareer from "./AdvanceCareer";
 import HorizontalTabBar from "../components/TopNavigation";
 
-const Information = () => {
-  const [focusedItem, setFocusedItem] = useState("Son hackathon");
+const ValutionForm = () => {
+  const [focusedItem, setFocusedItem] = useState("Qiymetlendirme");
 
-  const tabs = ["Son hackathon", "Karyerani yukselt"];
+  const tabs = ["Qiymetlendirme", "Netice"];
 
   const renderScreen = () => {
-    if (focusedItem === "Son hackathon") {
-      return <LastHackathon />;
+    if (focusedItem === "Qiymetlendirme") {
+      return null;
     } else {
-      return <AdvanceCareer />;
+      return null;
     }
   };
-
   return (
     <View style={styles.container}>
-      <GradientHeader title={"Məlumat"} />
+      <GradientHeader title="Qiymetlendirme" />
       <View style={styles.tabContainer}>
         <HorizontalTabBar
           tabs={tabs}
@@ -33,6 +30,8 @@ const Information = () => {
   );
 };
 
+export default ValutionForm;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -44,6 +43,20 @@ const styles = StyleSheet.create({
     height: 70,
     borderBottomColor: "#F3D1FF",
   },
+  tabList: {
+    marginTop: 10,
+  },
+  tab: {
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  tabText: {
+    fontSize: 18,
+    fontWeight: "500",
+  },
+  focusedTabIcon: {
+    position: "absolute",
+    bottom: -9,
+  },
 });
-
-export default Information;
