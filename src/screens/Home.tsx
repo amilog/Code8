@@ -1,57 +1,36 @@
-import {
-  Dimensions,
-  FlatList,
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-} from "react-native";
-import React from "react";
+import { Dimensions, StyleSheet, View } from "react-native";
+import React, { useState } from "react";
 import GradientHeader from "../components/GradientHeader";
 import { StatusBar } from "react-native";
-import { Teams } from "../data/Team";
-import { TeamsModel } from "../models/TeamsModel";
+import TeamList from "./TeamList";
+import HorizontalTabBar from "../components/TopNavigation";
 
-const Home = () => {
-  const renderVerticalItem = ({ item }: { item: TeamsModel }) => {
-    return (
-      <TouchableOpacity style={styles.teamCard}>
-        <Image source={item.teamPic} style={styles.teamPic} />
-        <View style={styles.teamLabel}>
-          <Text style={styles.teamName}>{item.name}</Text>
-          <View style={styles.memberLabel}>
-            {item.members.slice(0, 3).map((member, index) => {
-              if (index === 2) {
-                return (
-                  <Text key={member._id} style={styles.memberName}>
-                    ...
-                  </Text>
-                );
-              }
-              return (
-                <Text key={member._id} style={styles.memberName}>
-                  {member.fullName}
-                  {", "}
-                </Text>
-              );
-            })}
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
+const Home = ({navigation}:any) => {
+  const Tabs = ["Komandalar", "Texniki Tapsiriqlar", "Haqqinda"];
+
+  const [focusedItem, setFocusedItem] = useState("Komandalar");
+
+  const renderScreen = () => {
+    if (focusedItem === "Komandalar") {
+      return <TeamList navigation={navigation}/>;
+    } else if (focusedItem === "Texniki Tapsiriqlar") {
+      return null;
+    } else {
+      return null;
+    }
   };
 
   return (
     <View style={styles.container}>
-      <GradientHeader title={"Layihe"} />
-      <FlatList
-        data={Teams}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={(item) => item._id}
-        contentContainerStyle={styles.contentContainerStyle}
-        renderItem={renderVerticalItem}
-      />
+      <GradientHeader showArrow={false} title={"Layihe"} navigation={navigation}/>
+      <View style={styles.tabContainer}>
+        <HorizontalTabBar
+          tabs={Tabs}
+          focusedItem={focusedItem}
+          setFocusedItem={setFocusedItem}
+        />
+      </View>
+      {renderScreen()}
     </View>
   );
 };
@@ -112,5 +91,10 @@ const styles = StyleSheet.create({
   memberLabel: {
     flexDirection: "row",
     alignItems: "center",
+  },
+  tabContainer: {
+    borderBottomWidth: 0.5,
+    height: 70,
+    borderBottomColor: "#F3D1FF",
   },
 });

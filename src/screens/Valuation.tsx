@@ -1,5 +1,5 @@
 import {
-  Dimensions,
+  Animated,
   KeyboardAvoidingView,
   StatusBar,
   StyleSheet,
@@ -7,12 +7,53 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useCallback, useRef, useState } from "react";
 import TextField from "../components/TextField";
 import GradientHeader from "../components/GradientHeader";
 import SvgGraidentButton from "../assets/icons/gradientButton";
+import { passwords } from "../data/valuationPasspowrds";
 
-const Valuation = () => {
+const Valuation = ({ navigation }: any) => {
+  const [password, setPassword] = useState("");
+  const [isPasswordCorrect, setIsPasswordCorrect] = useState(true);
+
+  const handleSubmit = () => {
+    if (password.length > 0 && passwords.includes(password)) {
+      setIsPasswordCorrect(true);
+      setPassword("");
+      navigation.replace("ValuationForm");
+    } else {
+      setIsPasswordCorrect(false);
+      setPassword("");
+      shake();
+    }
+  };
+
+  const anim = useRef(new Animated.Value(0));
+
+  const shake = useCallback(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(anim.current, {
+          toValue: -4,
+          duration: 50,
+          useNativeDriver: false,
+        }),
+        Animated.timing(anim.current, {
+          toValue: 4,
+          duration: 50,
+          useNativeDriver: false,
+        }),
+        Animated.timing(anim.current, {
+          toValue: 0,
+          duration: 50,
+          useNativeDriver: false,
+        }),
+      ]),
+      { iterations: 2 }
+    ).start();
+  }, []);
+
   return (
     <KeyboardAvoidingView style={styles.container} behavior="height">
       <GradientHeader title={"Qiymetlendirme"} />
@@ -25,9 +66,20 @@ const Valuation = () => {
           </Text>
           istifadə edin.
         </Text>
-        <View style={{ height: 24 }} />
-        <TextField label="6 reqemli parol" cursorColor={"#080F9C"} />
-        <TouchableOpacity style={styles.button}>
+        <View style={styles.spacer} />
+        <Animated.View
+          style={{
+            transform: [{ translateX: anim.current }],
+          }}
+        >
+          <TextField
+            label="6 reqemli parol"
+            inputValue={password}
+            onChangeText={(text) => setPassword(text)}
+            isPasswordCorrect={isPasswordCorrect}
+          />
+        </Animated.View>
+        <TouchableOpacity style={styles.button} onPress={() => handleSubmit()}>
           <SvgGraidentButton />
         </TouchableOpacity>
       </View>
@@ -59,5 +111,8 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 40,
+  },
+  spacer: {
+    height: 24,
   },
 });

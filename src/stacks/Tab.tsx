@@ -1,7 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
-import Valuation from "../screens/Valuation";
 import Information from "../screens/Information";
 import SvgHomeInactive from "../assets/icons/HomeInactive";
 import { View, Text, StyleSheet } from "react-native";
@@ -10,6 +9,8 @@ import SvgInfoInactive from "../assets/icons/InfoInactive";
 import SvgHomeActive from "../assets/icons/HomeActive";
 import SvgValutionActive from "../assets/icons/ValutionActive";
 import SvgInfoActive from "../assets/icons/InfoActive";
+import ValuationStack from "./ValuationStack";
+import HomeStack from "./HomeStack";
 
 const Tab = () => {
   const Tab = createBottomTabNavigator();
@@ -24,8 +25,8 @@ const Tab = () => {
       }}
     >
       <Tab.Screen
-        name="Home"
-        component={Home}
+        name="HomeStack"
+        component={HomeStack}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.tabItem}>
@@ -53,8 +54,8 @@ const Tab = () => {
         }}
       />
       <Tab.Screen
-        name="Valuation"
-        component={Valuation}
+        name="ValuationStack"
+        component={ValuationStack}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.tabItem}>

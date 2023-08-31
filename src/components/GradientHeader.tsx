@@ -1,8 +1,23 @@
-import { StatusBar, StyleSheet, Text, View } from "react-native";
+import {
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
+import SvgBackArrow from "../assets/icons/backArrow";
 
-const GradientHeader = ({ title }:{title:string}) => {
+const GradientHeader = ({
+  title,
+  navigation,
+  showArrow = false,
+}: {
+  title: string;
+  navigation?: any;
+  showArrow?: boolean;
+}) => {
   return (
     <LinearGradient
       colors={[
@@ -16,8 +31,16 @@ const GradientHeader = ({ title }:{title:string}) => {
       end={{ x: 1.0, y: 1.0 }}
       style={styles.grediant}
     >
-      <View style={styles.buttonContainer}>
-        <Text style={styles.buttonText}>{title}</Text>
+      <View style={styles.titleContainer}>
+        {showArrow && (
+          <TouchableOpacity
+            style={{ justifyContent: "center" }}
+            onPress={() => navigation.goBack()}
+          >
+            <SvgBackArrow />
+          </TouchableOpacity>
+        )}
+        <Text style={styles.titleText}>{title}</Text>
       </View>
     </LinearGradient>
   );
@@ -30,17 +53,18 @@ const styles = StyleSheet.create({
     height: 80,
     width: "100%",
   },
-  buttonContainer: {
+  titleContainer: {
+    backgroundColor: "#fff",
     flex: 1.0,
-    backgroundColor: "#ffffff",
     width: "100%",
     marginBottom: 1,
-    justifyContent: "flex-end",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingLeft: 16,
+    gap: 16,
   },
-  buttonText: {
+  titleText: {
     color: "#000",
-    marginLeft: 16,
-    marginBottom: 12,
     fontSize: 28,
   },
 });
