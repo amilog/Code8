@@ -16,7 +16,8 @@ export const Teams: TeamsModel[] = [
         github: "sample",
         behance: "sample",
         cv: "sample",
-      },{
+      },
+      {
         _id: "12312312313",
         fullName: "Amil Khan",
         memberPic: "../assets/images/memberPic.jpg",
@@ -26,7 +27,8 @@ export const Teams: TeamsModel[] = [
         github: "sample",
         behance: "sample",
         cv: "sample",
-      },{
+      },
+      {
         _id: "12312312314",
         fullName: "Amil Khan",
         memberPic: "../assets/images/memberPic.jpg",
@@ -36,7 +38,8 @@ export const Teams: TeamsModel[] = [
         github: "sample",
         behance: "sample",
         cv: "sample",
-      },{
+      },
+      {
         _id: "12312312315",
         fullName: "Amil Khan",
         memberPic: "../assets/images/memberPic.jpg",
@@ -46,7 +49,8 @@ export const Teams: TeamsModel[] = [
         github: "sample",
         behance: "sample",
         cv: "sample",
-      },{
+      },
+      {
         _id: "12312312316",
         fullName: "Amil Khan",
         memberPic: "../assets/images/memberPic.jpg",
@@ -56,7 +60,8 @@ export const Teams: TeamsModel[] = [
         github: "sample",
         behance: "sample",
         cv: "sample",
-      },{
+      },
+      {
         _id: "12312312317",
         fullName: "Amil Khan",
         memberPic: "../assets/images/memberPic.jpg",
@@ -66,7 +71,8 @@ export const Teams: TeamsModel[] = [
         github: "sample",
         behance: "sample",
         cv: "sample",
-      },{
+      },
+      {
         _id: "12312312318",
         fullName: "Amil Khan",
         memberPic: "../assets/images/memberPic.jpg",

@@ -18,7 +18,7 @@ const TeamList = ({ navigation }: any) => {
       <TouchableOpacity
         style={styles.teamCard}
         onPress={() =>
-          navigation.navigate("MemberList", { teamName: item.name})
+          navigation.navigate("MemberList", { teamName: item.name })
         }
       >
         <Image source={item.teamPic} style={styles.teamPic} />

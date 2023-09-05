@@ -5,14 +5,14 @@ import { StatusBar } from "react-native";
 import TeamList from "./TeamList";
 import HorizontalTabBar from "../components/TopNavigation";
 
-const Home = ({navigation}:any) => {
+const Home = ({ navigation }: any) => {
   const Tabs = ["Komandalar", "Texniki Tapsiriqlar", "Haqqinda"];
 
   const [focusedItem, setFocusedItem] = useState("Komandalar");
 
   const renderScreen = () => {
     if (focusedItem === "Komandalar") {
-      return <TeamList navigation={navigation}/>;
+      return <TeamList navigation={navigation} />;
     } else if (focusedItem === "Texniki Tapsiriqlar") {
       return null;
     } else {
@@ -22,7 +22,11 @@ const Home = ({navigation}:any) => {
 
   return (
     <View style={styles.container}>
-      <GradientHeader showArrow={false} title={"Layihe"} navigation={navigation}/>
+      <GradientHeader
+        showArrow={false}
+        title={"Layihe"}
+        navigation={navigation}
+      />
       <View style={styles.tabContainer}>
         <HorizontalTabBar
           tabs={Tabs}

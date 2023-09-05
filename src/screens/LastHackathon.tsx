@@ -52,7 +52,8 @@ const LastHackathon = () => {
     return (
       <Animatable.View
         animation={controllerAnimation}
-        style={styles.videoController}>
+        style={styles.videoController}
+      >
         <TouchableOpacity onPress={toggleVideoPlayback}>
           <SvgPlayButton />
         </TouchableOpacity>
@@ -111,7 +112,7 @@ const LastHackathon = () => {
       <View style={styles.section}>
         <Text style={styles.sectionHeader}>Format</Text>
         <Text style={styles.sectionText}>
-         Hər qrupdan iki nəfər tələbə olmaqla 14 nəfərlik 1 komanda
+          Hər qrupdan iki nəfər tələbə olmaqla 14 nəfərlik 1 komanda
           formalaşdırıldı. 7 komandanın hər birinə təhsil mentorları Team leader
           olaraq təyin olundu.
         </Text>
