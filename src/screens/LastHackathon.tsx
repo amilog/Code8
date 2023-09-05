@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Pressable,
   TouchableOpacity,
+  StatusBar,
 } from "react-native";
 import { Video, ResizeMode } from "expo-av";
 import * as Animatable from "react-native-animatable";
@@ -28,6 +29,7 @@ const LastHackathon = () => {
       setShowController(false);
       await video.current?.playAsync();
       video.current?._setFullscreen(true);
+      StatusBar.setHidden(true);
     }
     setIsPlaying(!isPlaying);
   };
@@ -82,8 +84,9 @@ const LastHackathon = () => {
           onPlaybackStatusUpdate={handleStatus}
           onFullscreenUpdate={(status: any) => {
             if (status.fullscreenUpdate === 3 && status.status.isPlaying) {
+              StatusBar.setHidden(false);
               setIsPlaying(false);
-              video.current?.pauseAsync();
+              video.current?.pauseAsync();  
             }
           }}
           style={styles.video}

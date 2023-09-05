@@ -36,7 +36,7 @@ const Information = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: "#fff",
     paddingTop: StatusBar.currentHeight! + 20,
   },
   tabContainer: {
