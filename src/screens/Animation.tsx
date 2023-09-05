@@ -4,7 +4,9 @@ import WhiteCodeIcon from "../assets/icons/animationSvgs/WhiteCodeIcon";
 import GradientCodeIcon from "../assets/icons/animationSvgs/GradientCodeIcon";
 import Code8Text from "../assets/icons/animationSvgs/Code8Text";
 import FromCodeText from "../assets/icons/animationSvgs/FromCodeText";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../redux/store";
+import { getStatus } from "../redux/onboard/OnboardSlice";
 
 //biraz sağa sürüşdürmək lazım
 const Animation = ({ navigation }: any) => {
@@ -18,8 +20,15 @@ const Animation = ({ navigation }: any) => {
   const totalAnimationDuration = 300;
   const initialImageDuration = 800;
 
+  const dispatch = useDispatch<AppDispatch>();
+  const state = useSelector<
+    RootState,
+    { isOnboarded: boolean; loading: boolean }
+  >((state) => state.onBoard);
+
   useEffect(() => {
     startAnimation();
+    dispatch(getStatus());
   }, []);
 
   const startAnimation = () => {
@@ -65,7 +74,7 @@ const Animation = ({ navigation }: any) => {
       });
     }, 500);
   };
-  const [status, setStatus] = useState("trsaue");
+
   useEffect(() => {
     if (startFromCodeTextAnimation) {
       Animated.timing(fromCodeTextTranslateY, {
@@ -75,13 +84,11 @@ const Animation = ({ navigation }: any) => {
         useNativeDriver: true,
       }).start();
       setTimeout(() => {
-        AsyncStorage.getItem("onboarding").then((status) => {
-          if (status === "true") {
-            navigation.navigate("Tabs");
-          } else {
-            navigation.navigate("OnBoarding");
-          }
-        });
+        if (state.isOnboarded) {
+          navigation.navigate("Tabs");
+        } else {
+          navigation.navigate("OnBoarding");
+        }
       }, 300);
     }
   }, [startFromCodeTextAnimation]);
@@ -140,34 +147,34 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   centeredIcon: {
-    position: 'absolute',
-    justifyContent: 'center',
-    alignItems: 'center',
+    position: "absolute",
+    justifyContent: "center",
+    alignItems: "center",
     transform: [{ translateX: 0 }, { translateY: -2 }],
     width: 144,
     height: 36,
   },
   centeredIcon0: {
-    position: 'absolute',
-    justifyContent: 'center',
-    alignItems: 'center',
+    position: "absolute",
+    justifyContent: "center",
+    alignItems: "center",
     transform: [{ translateX: 0 }, { translateY: -2 }],
     width: 144,
     height: 36,
   },
   centeredText: {
-    position: 'absolute',
-    justifyContent: 'center',
-    alignItems: 'center',
+    position: "absolute",
+    justifyContent: "center",
+    alignItems: "center",
     transform: [{ translateX: 8.5 }, { translateY: 0 }],
     width: 117,
     height: 26.28,
   },
   fromCodeTextContainer: {
-    position: 'absolute',
+    position: "absolute",
     transform: [{ translateX: 1 }, { translateY: 32 }],
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     width: 136,
     height: 13,
   },
