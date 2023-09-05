@@ -9,9 +9,15 @@ import {
 import BackButton from "../assets/icons/onboardingSvgs/BackButton";
 import NextButton from "../assets/icons/onboardingSvgs/NextButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AppDispatch } from "../redux/store";
+import { useDispatch } from "react-redux";
+import { setStatus } from "../redux/onboard/OnboardSlice";
 
 const Onboarding = ({ navigation }: any) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const dispatch = useDispatch<AppDispatch>();
+
   const images = [
     require("../assets/images/onboarding/Onboarding1.jpg"),
     require("../assets/images/onboarding/Onboarding2.jpg"),
@@ -40,7 +46,7 @@ const Onboarding = ({ navigation }: any) => {
       setCurrentIndex(currentIndex + 1);
     }
     if (currentIndex == 2) {
-      AsyncStorage.setItem("onboarding", "true").then(() => {
+      dispatch(setStatus(true)).then(() => {
         navigation.navigate("Tabs");
       });
     }
