@@ -8,6 +8,7 @@ import {
   Pressable,
   TouchableOpacity,
   StatusBar,
+  ActivityIndicator,
 } from "react-native";
 import { Video, ResizeMode } from "expo-av";
 import * as Animatable from "react-native-animatable";
@@ -17,9 +18,13 @@ const LastHackathon = () => {
   const video = useRef<Video>(null);
   const [showController, setShowController] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const handleStatus = (status: any) => {
     setIsPlaying(status.isPlaying);
+    if (status.isLoaded) {
+      setLoading(false);
+    }
   };
 
   const toggleVideoPlayback = async () => {
@@ -57,7 +62,11 @@ const LastHackathon = () => {
         style={styles.videoController}
       >
         <TouchableOpacity onPress={toggleVideoPlayback}>
-          <SvgPlayButton />
+          {loading ? (
+            <ActivityIndicator size="large" color="#000" />
+          ) : (
+            <SvgPlayButton />
+          )}
         </TouchableOpacity>
       </Animatable.View>
     );
@@ -78,7 +87,9 @@ const LastHackathon = () => {
       >
         <Video
           ref={video}
-          source={require("../assets/videos/code8.mp4")}
+          source={{
+            uri: "https://firebasestorage.googleapis.com/v0/b/code-academy-a4b31.appspot.com/o/code8.mp4?alt=media&token=eb2c4135-51ee-4988-8372-2e591c266f37",
+          }}
           resizeMode={ResizeMode.COVER}
           isLooping
           onPlaybackStatusUpdate={handleStatus}
@@ -86,7 +97,7 @@ const LastHackathon = () => {
             if (status.fullscreenUpdate === 3 && status.status.isPlaying) {
               StatusBar.setHidden(false);
               setIsPlaying(false);
-              video.current?.pauseAsync();  
+              video.current?.pauseAsync();
             }
           }}
           style={styles.video}
