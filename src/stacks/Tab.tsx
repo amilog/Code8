@@ -31,9 +31,7 @@ const Tab = () => {
           tabBarIcon: ({ focused }) => (
             <View style={styles.tabItem}>
               {focused ? (
-                <View
-                  style={styles.zoomedTabItem}
-                >
+                <View style={styles.zoomedTabItem}>
                   <SvgHomeActive />
                 </View>
               ) : (
@@ -60,9 +58,7 @@ const Tab = () => {
           tabBarIcon: ({ focused }) => (
             <View style={styles.tabItem}>
               {focused ? (
-                <View
-                  style={styles.zoomedTabItem}
-                >
+                <View style={styles.zoomedTabItem}>
                   <SvgValutionActive />
                 </View>
               ) : (
@@ -89,9 +85,7 @@ const Tab = () => {
           tabBarIcon: ({ focused }) => (
             <View style={styles.tabItem}>
               {focused ? (
-                <View
-                  style={styles.zoomedTabItem}
-                >
+                <View style={styles.zoomedTabItem}>
                   <SvgInfoActive />
                 </View>
               ) : (
