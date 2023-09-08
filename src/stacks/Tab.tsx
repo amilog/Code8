@@ -1,15 +1,11 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Home from "../screens/Home";
 import Information from "../screens/Information";
 import SvgHomeInactive from "../assets/icons/HomeInactive";
 import { View, Text, StyleSheet } from "react-native";
-import SvgValutionInactive from "../assets/icons/ValutionInactive";
 import SvgInfoInactive from "../assets/icons/InfoInactive";
 import SvgHomeActive from "../assets/icons/HomeActive";
-import SvgValutionActive from "../assets/icons/ValutionActive";
 import SvgInfoActive from "../assets/icons/InfoActive";
-import ValuationStack from "./ValuationStack";
 import HomeStack from "./HomeStack";
 
 const Tab = () => {
@@ -45,34 +41,7 @@ const Tab = () => {
                   { color: focused ? "#54226C" : "#5E5E5E" },
                 ]}
               >
-                Lahiye
-              </Text>
-            </View>
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="ValuationStack"
-        component={ValuationStack}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <View style={styles.tabItem}>
-              {focused ? (
-                <View style={styles.zoomedTabItem}>
-                  <SvgValutionActive />
-                </View>
-              ) : (
-                <View style={styles.normalTabItem}>
-                  <SvgValutionInactive />
-                </View>
-              )}
-              <Text
-                style={[
-                  styles.labelText,
-                  { color: focused ? "#54226C" : "#5E5E5E" },
-                ]}
-              >
-                Qiymetlendirme
+                Əsas səhifə
               </Text>
             </View>
           ),
@@ -99,7 +68,7 @@ const Tab = () => {
                   { color: focused ? "#54226C" : "#5E5E5E" },
                 ]}
               >
-                Melumat
+                Məlumatlar
               </Text>
             </View>
           ),

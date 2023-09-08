@@ -24,7 +24,7 @@ const Home = ({ navigation }: any) => {
     <View style={styles.container}>
       <GradientHeader
         showArrow={false}
-        title={"Layihe"}
+        title={"CODE8"}
         navigation={navigation}
       />
       <View style={styles.tabContainer}>
