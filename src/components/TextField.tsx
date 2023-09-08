@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   Animated,
   Easing,
+  Pressable,
   StyleSheet,
   TextInput,
   TouchableOpacity,
@@ -34,7 +35,7 @@ const TextField: React.FC<Props> = (props) => {
 
   const animateEyeIconZoomIn = () => {
     Animated.spring(eyeIconScale, {
-      toValue: 0.5,
+      toValue: 0.8,
       friction: 3,
       useNativeDriver: true,
     }).start();
@@ -42,9 +43,9 @@ const TextField: React.FC<Props> = (props) => {
 
   const animateEyeIconZoomOut = () => {
     Animated.spring(eyeIconScale, {
-      toValue: 1,
       friction: 3,
       useNativeDriver: true,
+      toValue: 1,
     }).start();
   };
 
@@ -59,9 +60,12 @@ const TextField: React.FC<Props> = (props) => {
     }).start();
   }, [focusAnim, isFocused]);
 
+  const inputRef = useRef<TextInput>(null);
+
   return (
     <View style={style}>
       <TextInput
+        ref={inputRef}
         value={inputValue}
         secureTextEntry={secureText}
         cursorColor={
@@ -103,25 +107,27 @@ const TextField: React.FC<Props> = (props) => {
           },
         ]}
       >
-        <Animated.Text
-          style={[
-            styles.label,
-            {
-              fontSize: focusAnim.interpolate({
-                inputRange: [0, 1],
-                outputRange: [16, 12],
-              }),
-              color:
-                isPasswordCorrect === false
-                  ? "#B3261E"
-                  : isFocused
-                  ? "#6750A4"
-                  : "#000",
-            },
-          ]}
-        >
-          {label}
-        </Animated.Text>
+        <Pressable onPress={() => inputRef.current?.focus()}>
+          <Animated.Text
+            style={[
+              styles.label,
+              {
+                fontSize: focusAnim.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [16, 12],
+                }),
+                color:
+                  isPasswordCorrect === false
+                    ? "#B3261E"
+                    : isFocused
+                    ? "#6750A4"
+                    : "#000",
+              },
+            ]}
+          >
+            {label}
+          </Animated.Text>
+        </Pressable>
       </Animated.View>
       <Animated.View
         style={[

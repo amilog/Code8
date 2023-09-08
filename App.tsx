@@ -12,11 +12,11 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <StatusBar style="auto" translucent />
+        <StatusBar translucent style="dark" />
         <Stack.Navigator
           screenOptions={{
             headerShown: false,
-            animation: "slide_from_right",
+            animation: "fade",
           }}
         >
           <Stack.Screen name="Animation" component={Animation} />
