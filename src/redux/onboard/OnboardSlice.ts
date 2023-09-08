@@ -12,6 +12,7 @@ const initialState: OnboardState = {
 };
 
 export const getStatus = createAsyncThunk("onboard/getStatus", async () => {
+  //AsyncStorage.clear()
   const response = await AsyncStorage.getItem("isOnboarded");
   return response;
 });

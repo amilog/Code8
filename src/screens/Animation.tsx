@@ -19,7 +19,6 @@ const Animation = ({ navigation }: any) => {
     useState(false);
   const totalAnimationDuration = 300;
   const initialImageDuration = 800;
-
   const dispatch = useDispatch<AppDispatch>();
   const state = useSelector<
     RootState,
