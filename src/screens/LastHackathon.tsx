@@ -63,7 +63,7 @@ const LastHackathon = () => {
       >
         <TouchableOpacity onPress={toggleVideoPlayback}>
           {loading ? (
-            <ActivityIndicator size="large" color="#000" />
+            <ActivityIndicator size="large" color="#F3D1FF" />
           ) : (
             <SvgPlayButton />
           )}
