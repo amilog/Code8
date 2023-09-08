@@ -8,44 +8,25 @@ import {
 } from "react-native";
 import BackButton from "../assets/icons/onboardingSvgs/BackButton";
 import NextButton from "../assets/icons/onboardingSvgs/NextButton";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AppDispatch } from "../redux/store";
 import { useDispatch } from "react-redux";
 import { setStatus } from "../redux/onboard/OnboardSlice";
+import onboardingImages from "../data/onboardingImages";
+import onboardingTextData from "../data/onboardingTextData";
+import OnboardingIndicator from "../components/OnboardingIndicator";
+
 
 const Onboarding = ({ navigation }: any) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
   const dispatch = useDispatch<AppDispatch>();
-
-  const images = [
-    require("../assets/images/onboarding/Onboarding1.jpg"),
-    require("../assets/images/onboarding/Onboarding2.jpg"),
-    require("../assets/images/onboarding/Onboarding3.jpg"),
-  ];
-
-  const textData = [
-    {
-      title: "Məqsədimiz nədir?",
-      content:
-        "Code8 Career+2 namizədlərinin tədris müddəti ərzində öyrəndikləri bilik və bacarıqlarını nümayiş etdirməsi üçün təşkil olunan tədbirdir.",
-    },
-    {
-      title: "Kimlər yarışacaq?",
-      content:
-        "Hər birində 14 nəfər olmaqla 7 komanda 8 saat ərzində bir-biri ilə yarışaraq verilmiş tətbiqin üzərində çalışacaqlar.",
-    },
-    {
-      title: "Təşəkkür edirik!",
-      content: "Hackathon-a xoş gəldiniz. İştirak edən hər kəsə uğurlar!",
-    },
-  ];
+  const images = onboardingImages;
+  const textData = onboardingTextData;
 
   const handleNext = () => {
     if (currentIndex < images.length - 1) {
       setCurrentIndex(currentIndex + 1);
     }
-    if (currentIndex == 2) {
+    if (currentIndex === 2) {
       dispatch(setStatus(true)).then(() => {
         navigation.navigate("Tabs");
       });
@@ -66,13 +47,22 @@ const Onboarding = ({ navigation }: any) => {
         resizeMode="cover"
       >
         <View style={styles.overlay} />
+        <View style={styles.indicator}>
+          <OnboardingIndicator
+            currentIndex={currentIndex}
+            totalScreens={images.length}
+          />
+        </View>
+
+        <View style={{ flex: 1 }} />
+
         <View style={styles.textContainer}>
           <Text style={styles.title}>{textData[currentIndex].title}</Text>
           <Text style={styles.content}>{textData[currentIndex].content}</Text>
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            style={[{ opacity: currentIndex === 0 ? 0.5 : 1 }]}
+            style={[{ opacity: currentIndex === 0 ? 0 : 1 }]}
             onPress={handlePrev}
             disabled={currentIndex === 0}
           >
@@ -81,7 +71,6 @@ const Onboarding = ({ navigation }: any) => {
           <TouchableOpacity
             style={[{ opacity: currentIndex === images.length - 1 ? 0.5 : 1 }]}
             onPress={handleNext}
-            // disabled={currentIndex === images.length - 1}
           >
             <NextButton style={styles.nextButton} />
           </TouchableOpacity>
@@ -99,7 +88,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     height: "100%",
-    justifyContent: "flex-end",
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
@@ -118,7 +106,7 @@ const styles = StyleSheet.create({
   },
   content: {
     color: "#fff",
-    fontSize: 17,
+    fontSize: 18,
     textAlign: "center",
   },
   buttonContainer: {
@@ -134,6 +122,9 @@ const styles = StyleSheet.create({
   nextButton: {
     width: 60,
     height: 60,
+  },
+  indicator: {
+    marginTop: '10%',
   },
 });
 
