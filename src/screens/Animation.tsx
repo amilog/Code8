@@ -84,9 +84,9 @@ const Animation = ({ navigation }: any) => {
       }).start();
       setTimeout(() => {
         if (state.isOnboarded) {
-          navigation.navigate("Tabs");
+          navigation.replace("Tabs");
         } else {
-          navigation.navigate("OnBoarding");
+          navigation.replace("OnBoarding");
         }
       }, 300);
     }

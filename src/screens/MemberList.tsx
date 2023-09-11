@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import GradientHeader from "../components/GradientHeader";
 import { StatusBar } from "react-native";
@@ -22,6 +22,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingTop: StatusBar.currentHeight! + 20,
+    paddingTop: Platform.OS == "ios" ? 40 : StatusBar.currentHeight! + 20,
   },
 });

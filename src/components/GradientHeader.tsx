@@ -1,22 +1,19 @@
-import {
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import SvgBackArrow from "../assets/icons/backArrow";
+import SvgValutionButton from "../assets/icons/valution";
 
 const GradientHeader = ({
   title,
   navigation,
   showArrow = false,
+  showValution = false,
 }: {
   title: string;
   navigation?: any;
   showArrow?: boolean;
+  showValution?: boolean;
 }) => {
   return (
     <LinearGradient
@@ -32,15 +29,27 @@ const GradientHeader = ({
       style={styles.grediant}
     >
       <View style={styles.titleContainer}>
-        {showArrow && (
+        <View style={{ flexDirection: "row", gap: 16 }}>
+          {showArrow && (
+            <TouchableOpacity
+              style={{ justifyContent: "center" }}
+              onPress={() => navigation.goBack()}
+            >
+              <SvgBackArrow />
+            </TouchableOpacity>
+          )}
+          <Text style={styles.titleText}>{title}</Text>
+        </View>
+        {showValution && (
           <TouchableOpacity
-            style={{ justifyContent: "center" }}
-            onPress={() => navigation.goBack()}
+            style={{ alignItems: "center", marginBottom: 8 }}
+            onPress={() => {
+              navigation.navigate("ValuationStack");
+            }}
           >
-            <SvgBackArrow />
+            <SvgValutionButton />
           </TouchableOpacity>
         )}
-        <Text style={styles.titleText}>{title}</Text>
       </View>
     </LinearGradient>
   );
@@ -61,10 +70,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingLeft: 16,
-    gap: 16,
+    justifyContent: "space-between",
   },
   titleText: {
     color: "#000",
     fontSize: 28,
+    fontWeight: "600",
+    lineHeight: 36,
   },
 });

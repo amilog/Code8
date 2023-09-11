@@ -2,7 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Information from "../screens/Information";
 import SvgHomeInactive from "../assets/icons/HomeInactive";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Platform } from "react-native";
 import SvgInfoInactive from "../assets/icons/InfoInactive";
 import SvgHomeActive from "../assets/icons/HomeActive";
 import SvgInfoActive from "../assets/icons/InfoActive";
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderTopWidth: 0,
     elevation: 0,
-    height: 80,
+    height: Platform.OS === "ios" ? 100 : 80,
   },
   tabItem: {
     justifyContent: "center",

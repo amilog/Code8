@@ -1,6 +1,7 @@
 import {
   Animated,
   KeyboardAvoidingView,
+  Platform,
   StatusBar,
   StyleSheet,
   Text,
@@ -56,7 +57,11 @@ const Valuation = ({ navigation }: any) => {
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="height">
-      <GradientHeader title={"Qiymetlendirme"} />
+      <GradientHeader
+        title={"Qiymetlendirme"}
+        showArrow={true}
+        navigation={navigation}
+      />
       <View style={styles.section}>
         <Text style={styles.sectionText}>
           Bu bölmə <Text style={styles.textBold}>yalnızca</Text> münsiflər və
@@ -93,7 +98,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#ffffff",
-    paddingTop: StatusBar.currentHeight! + 20,
+    paddingTop: Platform.OS == "ios" ? 40 : StatusBar.currentHeight! + 20,
   },
   sectionText: {
     fontSize: 14,
