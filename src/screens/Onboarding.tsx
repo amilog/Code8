@@ -15,7 +15,6 @@ import onboardingImages from "../data/onboardingImages";
 import onboardingTextData from "../data/onboardingTextData";
 import OnboardingIndicator from "../components/OnboardingIndicator";
 
-
 const Onboarding = ({ navigation }: any) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const dispatch = useDispatch<AppDispatch>();
@@ -124,7 +123,7 @@ const styles = StyleSheet.create({
     height: 60,
   },
   indicator: {
-    marginTop: '10%',
+    marginTop: "10%",
   },
 });
 
