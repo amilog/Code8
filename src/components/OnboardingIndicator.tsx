@@ -10,8 +10,7 @@ const OnboardingIndicator = ({ currentIndex, totalScreens }: any) => {
           style={[
             styles.indicator,
             {
-              backgroundColor:
-                currentIndex === index ? "#B464DB" : "#FBF0FF",
+              backgroundColor: currentIndex === index ? "#B464DB" : "#FBF0FF",
               borderRadius: 20,
               width: currentIndex === index ? 28 : 10,
             },

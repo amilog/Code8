@@ -54,7 +54,11 @@ const LastHackathon = () => {
   }, [showController]);
 
   const renderVideoController = () => {
-    const controllerAnimation = showController ? "fadeIn" : "fadeOut";
+    const controllerAnimation = loading
+      ? undefined
+      : showController
+      ? "fadeIn"
+      : "fadeOut";
 
     return (
       <Animatable.View
@@ -88,7 +92,7 @@ const LastHackathon = () => {
         <Video
           ref={video}
           source={{
-            uri: "https://firebasestorage.googleapis.com/v0/b/code-academy-a4b31.appspot.com/o/code8.mp4?alt=media&token=eb2c4135-51ee-4988-8372-2e591c266f37",
+            uri: "https://drive.google.com/uc?id=1RN6mmABw3GiBwpp74zfZFdaDWZ-KWO2D",
           }}
           resizeMode={ResizeMode.COVER}
           isLooping
@@ -98,6 +102,11 @@ const LastHackathon = () => {
               StatusBar.setHidden(false);
               setIsPlaying(false);
               video.current?.pauseAsync();
+            } else if (
+              status.fullscreenUpdate === 3 &&
+              !status.status.isPlaying
+            ) {
+              StatusBar.setHidden(false);
             }
           }}
           style={styles.video}

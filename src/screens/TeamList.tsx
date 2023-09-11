@@ -1,6 +1,7 @@
 import {
   FlatList,
   Image,
+  Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#ffffff",
-    paddingTop: StatusBar.currentHeight! + 20,
+    paddingTop: Platform.OS == "ios" ? 40 : StatusBar.currentHeight! + 20,
   },
   teamCard: {
     width: "95%",
