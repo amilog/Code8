@@ -1,11 +1,22 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useRef, useEffect } from "react";
+import { View, StyleSheet, Animated } from "react-native";
 
 const OnboardingIndicator = ({ currentIndex, totalScreens }: any) => {
+  const indicatorWidth = 0;
+  const animatedValue = useRef(new Animated.Value(currentIndex)).current;
+
+  useEffect(() => {
+    Animated.timing(animatedValue, {
+      toValue: currentIndex,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+  }, [currentIndex]);
+
   return (
     <View style={styles.container}>
       {Array.from({ length: totalScreens }).map((_, index) => (
-        <View
+        <Animated.View
           key={index}
           style={[
             styles.indicator,
@@ -13,6 +24,14 @@ const OnboardingIndicator = ({ currentIndex, totalScreens }: any) => {
               backgroundColor: currentIndex === index ? "#B464DB" : "#FBF0FF",
               borderRadius: 20,
               width: currentIndex === index ? 28 : 10,
+              transform: [
+                {
+                  translateX: animatedValue.interpolate({
+                    inputRange: [index - 1, index, index + 1],
+                    outputRange: [indicatorWidth, 2, -indicatorWidth],
+                  }),
+                },
+              ],
             },
           ]}
         />
