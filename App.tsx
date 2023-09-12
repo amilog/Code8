@@ -14,7 +14,8 @@ const App = () => {
     <Provider store={store}>
       <NavigationContainer>
         <StatusBar translucent style="dark" />
-        <Stack.Navigator
+        <Onboarding/>
+        {/* <Stack.Navigator
           screenOptions={{
             headerShown: false,
             animation: "fade",
@@ -23,7 +24,7 @@ const App = () => {
           <Stack.Screen name="Animation" component={Animation} />
           <Stack.Screen name="OnBoarding" component={Onboarding} />
           <Stack.Screen name="Tabs" component={Tab} />
-        </Stack.Navigator>
+        </Stack.Navigator> */}
       </NavigationContainer>
     </Provider>
   );
