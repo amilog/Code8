@@ -6,7 +6,7 @@ import Onboarding from "./src/screens/Onboarding";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider } from "react-redux";
 import { store } from "./src/redux/store";
-import 'react-native-gesture-handler';
+import "react-native-gesture-handler";
 
 const App = () => {
   const Stack = createNativeStackNavigator();

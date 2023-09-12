@@ -1,31 +1,29 @@
-import React, { useEffect, useState } from "react";
 import {
+  FlatList,
   StyleSheet,
-  View,
-  Text,
-  ImageBackground,
   TouchableOpacity,
+  View,
 } from "react-native";
-import BackButton from "../assets/icons/onboardingSvgs/BackButton";
-import NextButton from "../assets/icons/onboardingSvgs/NextButton";
+import React, { useRef, useState } from "react";
 import { AppDispatch } from "../redux/store";
 import { useDispatch } from "react-redux";
 import { setStatus } from "../redux/onboard/OnboardSlice";
-import onboardingImages from "../data/onboardingImages";
-import onboardingTextData from "../data/onboardingTextData";
-import OnboardingIndicator from "../components/OnboardingIndicator";
+import OnboardingItem from "../components/OnboardingItem";
+import BackButton from "../assets/icons/onboardingSvgs/BackButton";
+import NextButton from "../assets/icons/onboardingSvgs/NextButton";
+import { OnboardingData } from "../data/Onboarding";
 
 const Onboarding = ({ navigation }: any) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const dispatch = useDispatch<AppDispatch>();
-  const images = onboardingImages;
-  const textData = onboardingTextData;
+  const slidersRef = useRef<FlatList>(null);
 
   const handleNext = () => {
-    if (currentIndex < images.length - 1) {
+    if (currentIndex < OnboardingData.length - 1) {
+      slidersRef.current?.scrollToIndex({ index: currentIndex + 1 });
       setCurrentIndex(currentIndex + 1);
     }
-    if (currentIndex === 2) {
+    if (currentIndex === OnboardingData.length - 1) {
       dispatch(setStatus(true)).then(() => {
         navigation.navigate("Tabs");
       });
@@ -34,47 +32,40 @@ const Onboarding = ({ navigation }: any) => {
 
   const handlePrev = () => {
     if (currentIndex > 0) {
+      slidersRef.current?.scrollToIndex({ index: currentIndex - 1 });
       setCurrentIndex(currentIndex - 1);
     }
   };
 
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={images[currentIndex]}
-        style={styles.imageBackground}
-        resizeMode="cover"
-      >
-        <View style={styles.overlay} />
-        <View style={styles.indicator}>
-          <OnboardingIndicator
-            currentIndex={currentIndex}
-            totalScreens={images.length}
-          />
-        </View>
-
-        <View style={{ flex: 1 }} />
-
-        <View style={styles.textContainer}>
-          <Text style={styles.title}>{textData[currentIndex].title}</Text>
-          <Text style={styles.content}>{textData[currentIndex].content}</Text>
-        </View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={[{ opacity: currentIndex === 0 ? 0 : 1 }]}
-            onPress={handlePrev}
-            disabled={currentIndex === 0}
-          >
-            <BackButton style={styles.backButton} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[{ opacity: currentIndex === images.length - 1 ? 0.5 : 1 }]}
-            onPress={handleNext}
-          >
-            <NextButton style={styles.nextButton} />
-          </TouchableOpacity>
-        </View>
-      </ImageBackground>
+      <FlatList
+        data={OnboardingData}
+        ref={slidersRef}
+        renderItem={OnboardingItem}
+        horizontal
+        scrollEnabled={false}
+        showsHorizontalScrollIndicator={false}
+        pagingEnabled
+      />
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={[styles.backButton, { opacity: currentIndex === 0 ? 0 : 1 }]}
+          onPress={handlePrev}
+          disabled={currentIndex === 0}
+        >
+          <BackButton style={styles.backButton} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.nextButton,
+            { opacity: currentIndex === OnboardingData.length - 1 ? 0.5 : 1 },
+          ]}
+          onPress={handleNext}
+        >
+          <NextButton style={styles.nextButton} />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -111,8 +102,12 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     marginBottom: "12%",
-    marginHorizontal: "11%",
     justifyContent: "space-between",
+    alignItems: "center",
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    paddingHorizontal: "11%",
   },
   backButton: {
     width: 60,

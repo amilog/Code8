@@ -1,19 +1,22 @@
-export const Onboarding = [
+export const OnboardingData = [
   {
+    id: 1,
     title: "Məqsədimiz nədir?",
-    description:
+    content:
       "Code8 Career+2 namizədlərinin tədris müddəti ərzində öyrəndikləri bilik və bacarıqlarını nümayiş etdirməsi üçün təşkil olunan tədbirdir.",
-    image: require("../assets/images/Onboarding1.png"),
+    image: require("../assets/images/onboarding/Onboarding1.jpg"),
   },
   {
-    title: "Welcome to the Onboarding",
-    description:
+    id: 2,
+    title: "Kimlər yarışacaq?",
+    content:
       "Hər birində 14 nəfər olmaqla 7 komanda 8 saat ərzində bir-biri ilə yarışaraq verilmiş tətbiqin üzərində çalışacaqlar.",
-    image: require("../assets/images/Onboarding2.png"),
+    image: require("../assets/images/onboarding/Onboarding2.jpg"),
   },
   {
-    title: "Welcome to the Onboarding",
-    description: "Hackathon-a xoş gəldiniz. İştirak edən hər kəsə uğurlar!",
-    image: require("../assets/images/Onboarding3.png"),
+    id: 3,
+    title: "Təşəkkür edirik!",
+    content: "Hackathon-a xoş gəldiniz. İştirak edən hər kəsə uğurlar!",
+    image: require("../assets/images/onboarding/Onboarding3.jpg"),
   },
 ];
