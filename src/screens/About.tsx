@@ -9,10 +9,10 @@ import {
   SectionList,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { AboutTeam, DeveloperType, StuffType } from "../data/About";
+import { AboutTeam, MemberType } from "../data/About";
 
 const About = () => {
-  const renderItem = ({ item }: { item: DeveloperType | StuffType }) => {
+  const renderItem = ({ item }: { item: MemberType }) => {
     if (item.position === "Developer (Proqramçı)") {
       return <RenderStudent item={item} />;
     } else {
@@ -20,7 +20,7 @@ const About = () => {
     }
   };
 
-  const RenderStuff = ({ item }: { item: StuffType }) => {
+  const RenderStuff = ({ item }: { item: MemberType }) => {
     return (
       <View
         style={[
@@ -51,7 +51,7 @@ const About = () => {
     );
   };
 
-  const RenderStudent = ({ item }: { item: DeveloperType }) => {
+  const RenderStudent = ({ item }: { item: MemberType }) => {
     return (
       <LinearGradient
         colors={[
