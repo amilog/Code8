@@ -1,7 +1,8 @@
 import React, { useRef, useEffect } from "react";
-import { View, StyleSheet, Animated } from "react-native";
+import { View, StyleSheet, Animated, TouchableOpacity } from "react-native";
+import SkipButton from "../assets/icons/onboardingSvgs/SkipButton";
 
-const OnboardingIndicator = ({ currentIndex, totalScreens }: any) => {
+const OnboardingIndicator = ({ currentIndex, totalScreens, press }: any) => {
   const indicatorWidth = 0;
   const animatedValue = useRef(new Animated.Value(currentIndex)).current;
 
@@ -36,20 +37,37 @@ const OnboardingIndicator = ({ currentIndex, totalScreens }: any) => {
           ]}
         />
       ))}
+      <View style={styles.view} />
+      <TouchableOpacity
+        style={{ opacity: currentIndex === 1 ? 1 : 0 }}
+        disabled={currentIndex !== 1}
+        onPress={press}
+      >
+        <SkipButton style={styles.skipButton} />
+      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: "row",
-    justifyContent: "center",
-    marginTop: 20,
+    alignItems: "center",
+    width: "60%",
+    alignSelf:  "flex-end",
   },
   indicator: {
     height: 10,
     borderRadius: 5,
     marginHorizontal: 5,
+  },
+  skipButton: {
+    width: 45,
+    height: 24,
+  },
+  view: {
+    width: "30%",
   },
 });
 
