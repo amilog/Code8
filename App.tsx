@@ -7,9 +7,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider } from "react-redux";
 import { store } from "./src/redux/store";
 import "react-native-gesture-handler";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const App = () => {
   const Stack = createNativeStackNavigator();
+  // AsyncStorage.clear();
   return (
     <Provider store={store}>
       <NavigationContainer>

@@ -4,15 +4,23 @@ import {
   Text,
   View,
   ScrollView,
-  FlatList,
   Image,
   Platform,
+  SectionList,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { AboutTeam, AboutTeamType } from "../data/About";
+import { AboutTeam, DeveloperType, StuffType } from "../data/About";
 
 const About = () => {
-  const renderItem = ({ item }: { item: AboutTeamType }) => {
+  const renderItem = ({ item }: { item: DeveloperType | StuffType }) => {
+    if (item.position === "Developer (Proqramçı)") {
+      return <RenderStudent item={item} />;
+    } else {
+      return <RenderStuff item={item} />;
+    }
+  };
+
+  const RenderStuff = ({ item }: { item: StuffType }) => {
     return (
       <View
         style={[
@@ -43,19 +51,61 @@ const About = () => {
     );
   };
 
+  const RenderStudent = ({ item }: { item: DeveloperType }) => {
+    return (
+      <LinearGradient
+        colors={[
+          "rgba(255, 63, 60, 1)",
+          "rgba(223, 58, 154, 1)",
+          "rgba(141, 68, 235, 1)",
+          "rgba(43, 159, 239, 1)",
+        ]}
+        end={{ x: 1, y: 0.5 }}
+        start={{ x: 0, y: 0.9 }}
+        locations={[0.2, 0.6, 0.9, 1]}
+        style={[
+          styles.itemContainer,
+          Platform.OS === "android" && styles.androidShadow,
+          Platform.OS === "ios" && styles.iosShadow,
+        ]}
+      >
+        <Image
+          source={{ uri: item.image }}
+          style={[
+            styles.image,
+            { width: 50, height: 50, borderWidth: 1, borderColor: "#000" },
+          ]}
+        />
+        <View style={styles.textContainer}>
+          <Text style={[styles.nameText, { color: "#fff" }]}>{item.name}</Text>
+          <Text style={[styles.positionText, { color: "#dddddd" }]}>
+            {item.position}
+          </Text>
+        </View>
+      </LinearGradient>
+    );
+  };
+
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Text style={styles.header}>
         Bu tətbiq aşağıdakı <Text style={styles.boldText}>Code Academy</Text>{" "}
         əməkdaşları və tələbələri tərəfindən hazırlanmışdır.
       </Text>
-      <FlatList
+      <SectionList
         scrollEnabled={false}
-        ListFooterComponent={<View style={{ height: 50 }} />}
-        ListHeaderComponent={<View style={{ height: 10 }} />}
-        data={AboutTeam}
-        keyExtractor={(item) => item.id.toString()}
+        ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
+        SectionSeparatorComponent={() => <View style={{ height: 12 }} />}
+        ListFooterComponent={() => <View style={{ height: 50 }} />}
+        sections={[
+          { title: "Tələbələr (Students)", data: AboutTeam.Students },
+          { title: "Əməkdaşlar (Stuff)", data: AboutTeam.Stuff },
+        ]}
+        keyExtractor={(item, index) => `${item.name}-${index}`}
         renderItem={renderItem}
+        renderSectionHeader={({ section: { title } }) => (
+          <Text style={styles.sectionHeader}>{title}</Text>
+        )}
       />
     </ScrollView>
   );
@@ -82,7 +132,6 @@ const styles = StyleSheet.create({
   itemContainer: {
     flexDirection: "row",
     borderWidth: 0.5,
-    marginVertical: 6,
     borderColor: "#C2C2C2",
     padding: 16,
     borderRadius: 16,
@@ -134,6 +183,15 @@ const styles = StyleSheet.create({
       width: 0,
       height: 15,
     },
+  },
+  sectionHeader: {
+    color: "#4B4B4B",
+    fontWeight: "600",
+    fontSize: 13,
+    lineHeight: 20,
+    letterSpacing: 0.25,
+    marginTop: 24,
+    marginLeft: 16,
   },
 });
 
