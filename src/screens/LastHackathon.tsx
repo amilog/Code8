@@ -65,7 +65,7 @@ const LastHackathon = () => {
         animation={controllerAnimation}
         style={styles.videoController}
       >
-        <TouchableOpacity onPress={toggleVideoPlayback}>
+        <TouchableOpacity disabled={loading} onPress={toggleVideoPlayback}>
           {loading ? (
             <ActivityIndicator size="large" color="#F3D1FF" />
           ) : (
