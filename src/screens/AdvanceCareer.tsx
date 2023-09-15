@@ -20,7 +20,7 @@ const AdvanceCareer = () => {
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Image
-        source={require("../assets/images/keryeraniYukselt.jpeg")}
+        source={require("../assets/images/KaryeranıYüksəlt.jpg")}
         style={styles.image}
       />
       <View style={styles.section}>
