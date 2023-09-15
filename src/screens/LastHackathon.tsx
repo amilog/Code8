@@ -65,7 +65,10 @@ const LastHackathon = () => {
         animation={controllerAnimation}
         style={styles.videoController}
       >
-        <TouchableOpacity disabled={loading||!showController} onPress={toggleVideoPlayback}>
+        <TouchableOpacity
+          disabled={loading || !showController}
+          onPress={toggleVideoPlayback}
+        >
           {loading ? (
             <ActivityIndicator size="large" color="#F3D1FF" />
           ) : (
@@ -78,11 +81,6 @@ const LastHackathon = () => {
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <View style={styles.section}>
-        <Text style={[styles.sectionHeader, { marginTop: 12 }]}>
-          Code Academy - Hackathon 2023
-        </Text>
-      </View>
       <Pressable
         onPress={() => {
           setShowController((prev) => !prev);
@@ -113,19 +111,24 @@ const LastHackathon = () => {
         />
         {renderVideoController()}
       </Pressable>
+      <View style={styles.section}>
+        <Text style={[styles.sectionHeader, { marginTop: 12 }]}>
+          Code Academy - Hackathon 2023
+        </Text>
+      </View>
       <Image
         source={require("../assets/images/LastHackathon1.jpeg")}
         style={styles.image}
       />
       <View style={styles.section}>
         <Text style={styles.sectionText}>
-          6 may 2023-cü ildə baş tutan ilk Hackathon - Code8 tədbirində
+          8 may 2023-cü ildə baş tutan ilk Hackathon - Code8 tədbirində
           komandalar maliyyə sahəsində bir problemin həlli üzərində işlədilər.
           {"\n\n"}
           Data Science, Cyber Security, BackEnd, FrontEnd, UX/UI, Mobile App
           sahələrində layihənin fərqli sahələrini həyata keçirdilər və komanda
           işinin nəticəsi olaraq layihələrini münsiflər qarşısında təqdim
-          etdilər.
+          etdilər. etdilər.
         </Text>
       </View>
       <Image
