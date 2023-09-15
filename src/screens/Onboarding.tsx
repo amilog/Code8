@@ -8,7 +8,7 @@ import BackButton from "../assets/icons/onboardingSvgs/BackButton";
 import NextButton from "../assets/icons/onboardingSvgs/NextButton";
 import { OnboardingData } from "../data/Onboarding";
 import OnboardingIndicator from "../components/OnboardingIndicator";
-import SkipButton from "../assets/icons/onboardingSvgs/SkipButton";
+import StartedButton from "../assets/icons/onboardingSvgs/StartedButton";
 
 const Onboarding = ({ navigation }: any) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -22,7 +22,7 @@ const Onboarding = ({ navigation }: any) => {
     }
     if (currentIndex === OnboardingData.length - 1) {
       dispatch(setStatus(true)).then(() => {
-        navigation.navigate("Tabs");
+        navigation.replace("Tabs");
       });
     }
   };
@@ -60,14 +60,15 @@ const Onboarding = ({ navigation }: any) => {
         >
           <BackButton style={styles.backButton} />
         </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            opacity: currentIndex === OnboardingData.length - 1 ? 0.5 : 1,
-          }}
-          onPress={handleNext}
-        >
-          <NextButton style={styles.nextButton} />
-        </TouchableOpacity>
+        {currentIndex === 2 ? (
+          <TouchableOpacity onPress={handleNext}>
+            <StartedButton style={styles.startedButton} />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity onPress={handleNext}>
+            <NextButton style={styles.nextButton} />
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
@@ -94,29 +95,16 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
   },
-  skipButton: {
-    width: 45,
-    height: 24,
-    position: "absolute",
-    transform: [{ translateY: -6 }],
-    right: 0,
-  },
-  indicatorView: {
-    flexDirection: "row",
-    position: "absolute",
-    top: "10%",
-    paddingHorizontal: "50%",
-    backgroundColor: "red",
-    justifyContent: "center",
-  },
   indicator: {
     position: "absolute",
     top: "8%",
     right: 0,
     left: 0,
   },
+  startedButton: {
+    width: 158,
+    height: 60,
+  },
 });
 
 export default Onboarding;
-
-
