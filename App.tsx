@@ -26,7 +26,9 @@ const App = () => {
           <Stack.Screen name="Animation" component={Animation} />
           <Stack.Screen name="OnBoarding" component={Onboarding} />
           <Stack.Screen name="Tabs" component={Tab} />
-          <Stack.Screen name="ValuationStack" component={ValutionStack} />
+          <Stack.Screen name="ValuationStack" component={ValutionStack} options={{
+            animation: "slide_from_right"
+          }}/>
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

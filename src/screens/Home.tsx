@@ -2,9 +2,8 @@ import {
   StyleSheet,
   View,
   Platform,
-  Text,
-  SectionList,
   Button,
+  Pressable,
 } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
 import GradientHeader from "../components/GradientHeader";
@@ -38,15 +37,14 @@ const Home = ({ navigation }: any) => {
         navigation={navigation}
         showValution={true}
       />
-      
       <AnimationCard />
-      <View style={styles.card}>
+      <Pressable style={styles.card} onPress={()=>navigation.navigate("HomeCard",{routeName:"Agenda"})}>
         <AgendaSection />
         <TimeContainer time={time} />
-      </View>
+      </Pressable>
       <Button
         title="Go to Teams"
-        onPress={() => navigation.navigate("MemberList")}
+        onPress={() => navigation.navigate("HomeCard",{routeName:"Teams"})}
       />
     </View>
   );
