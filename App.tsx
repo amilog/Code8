@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { store } from "./src/redux/store";
 import "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ValutionStack from "./src/stacks/ValuationStack";
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -25,6 +26,7 @@ const App = () => {
           <Stack.Screen name="Animation" component={Animation} />
           <Stack.Screen name="OnBoarding" component={Onboarding} />
           <Stack.Screen name="Tabs" component={Tab} />
+          <Stack.Screen name="ValuationStack" component={ValutionStack} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

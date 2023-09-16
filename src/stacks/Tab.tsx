@@ -13,6 +13,12 @@ const Tab = () => {
 
   return (
     <Tab.Navigator
+      sceneContainerStyle={{
+        backgroundColor: "#fff",
+        borderTopWidth: 0,
+        elevation: 0,
+        height: Platform.OS === "ios" ? 100 : 80,
+      }}
       screenOptions={{
         tabBarHideOnKeyboard: true,
         headerShown: false,
