@@ -12,12 +12,17 @@ import { Teams } from "../data/Team";
 import { TeamsModel } from "../models/TeamsModel";
 import { StatusBar } from "react-native";
 import { Dimensions } from "react-native";
+import GradientHeader from "../components/GradientHeader";
 
 const TeamList = ({ navigation }: any) => {
   const renderVerticalItem = ({ item }: { item: TeamsModel }) => {
     return (
       <TouchableOpacity
-        style={styles.teamCard}
+        style={[
+          styles.teamCard,
+          Platform.OS === "android" && styles.androidShadow,
+          Platform.OS === "ios" && styles.iosShadow,
+        ]}
         onPress={() =>
           navigation.navigate("MemberList", { teamName: item.name })
         }
@@ -47,13 +52,17 @@ const TeamList = ({ navigation }: any) => {
     );
   };
   return (
-    <FlatList
-      data={Teams}
-      showsVerticalScrollIndicator={false}
-      keyExtractor={(item) => item._id}
-      contentContainerStyle={styles.contentContainerStyle}
-      renderItem={renderVerticalItem}
-    />
+    <View style={styles.container}>
+      <FlatList
+        data={Teams}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item) => item._id}
+        renderItem={renderVerticalItem}
+        ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
+        ListHeaderComponent={() => <View style={{ height: 32 }} />}
+        ListFooterComponent={() => <View style={{ height: 50 }} />}
+      />
+    </View>
   );
 };
 
@@ -62,56 +71,55 @@ export default TeamList;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ffffff",
-    paddingTop: Platform.OS == "ios" ? 40 : StatusBar.currentHeight! + 20,
+    backgroundColor: "#fff",
   },
   teamCard: {
-    width: "95%",
-    height: Dimensions.get("window").height / 7,
-    backgroundColor: "#fff",
-    borderRadius: 16,
-    alignSelf: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 10,
     flexDirection: "row",
-    marginBottom: 10,
-    alignItems: "center",
+    borderWidth: 0.5,
+    borderColor: "#C2C2C2",
     padding: 16,
+    borderRadius: 16,
+    width: "95%",
+    backgroundColor: "#fff",
+    alignSelf: "center",
   },
-
   teamName: {
-    fontSize: 22,
-    fontWeight: "bold",
+    fontSize: 16,
+    fontWeight: "500",
     color: "#000",
+    lineHeight: 24,
+    letterSpacing: 0.15,
   },
   memberName: {
     fontSize: 16,
     color: "#868686",
   },
   teamPic: {
-    width: 75,
-    height: 75,
+    width: 64,
+    height: 64,
     resizeMode: "contain",
-    borderRadius: 38,
+    borderRadius: 32,
   },
   teamLabel: {
-    height: 69,
     marginLeft: 16,
     gap: 6,
-  },
-  contentContainerStyle: {
-    paddingBottom: 20,
-    paddingTop: 20,
-    flexGrow: 1,
   },
   memberLabel: {
     flexDirection: "row",
     alignItems: "center",
+  },
+  androidShadow: {
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    elevation: 15,
+  },
+  iosShadow: {
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 20,
+    shadowOffset: {
+      width: 0,
+      height: 15,
+    },
   },
 });

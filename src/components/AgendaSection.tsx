@@ -10,7 +10,7 @@ const samm = () => {
       setCurrentSectionIndex((prevIndex) => (prevIndex === 0 ? 1 : 0));
       sectionRef.current?.scrollToLocation({
         sectionIndex: currentSectionIndex,
-        itemIndex: 0,
+        itemIndex: currentSectionIndex,
         viewOffset: 0,
         animated: true,
       });
@@ -44,18 +44,17 @@ const samm = () => {
       ]}
       keyExtractor={(item, index) => `${item.title}-${index}`}
       renderItem={({ item }) => <Text style={styles.text}>{item.title}</Text>}
+      style={{ height: 80 }}
       renderSectionHeader={({ section: { title } }) => (
-        <Text
-          style={[
-            styles.sectionHeader,
-            {
-              backgroundColor: title === "indi:" ? "#228E09" : "#EC7F00",
-              width: title === "indi:" ? 50 : 100,
-            },
-          ]}
+        <View
+          style={{
+            backgroundColor: title === "indi:" ? "#228E09" : "#EC7F00",
+            width: title === "indi:" ? 50 : 100,
+            borderRadius: 6,
+          }}
         >
-          {title}
-        </Text>
+          <Text style={[styles.sectionHeader]}>{title}</Text>
+        </View>
       )}
     />
   );
@@ -70,9 +69,10 @@ const styles = StyleSheet.create({
     color: "#000",
     lineHeight: 20,
     letterSpacing: 0.1,
-    width: "80%"
+    width: "80%",
   },
   sectionHeader: {
+    borderRadius: 6,
     fontSize: 14,
     fontWeight: "400",
     color: "#fff",
@@ -80,6 +80,5 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     paddingHorizontal: 8,
     paddingVertical: 2,
-    borderRadius: 6,
   },
 });
