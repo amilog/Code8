@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { Platform, StyleSheet, Text, View } from "react-native";
+import React, { useCallback } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Valuation from "../screens/Valuation";
 import ValutionForm from "../screens/ValuationForm";
@@ -22,4 +22,11 @@ const ValutionStack = () => {
 
 export default ValutionStack;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  tabBar: {
+    backgroundColor: "#fff",
+    borderTopWidth: 0,
+    elevation: 0,
+    height: Platform.OS === "ios" ? 100 : 80,
+  },
+});

@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { AboutTeam, MemberType } from "../data/About";
+import DevCard from "../components/DevCard";
 
 const About = () => {
   const renderItem = ({ item }: { item: MemberType }) => {
@@ -53,36 +54,16 @@ const About = () => {
 
   const RenderStudent = ({ item }: { item: MemberType }) => {
     return (
-      <LinearGradient
-        colors={[
-          "rgba(255, 63, 60, 1)",
-          "rgba(223, 58, 154, 1)",
-          "rgba(141, 68, 235, 1)",
-          "rgba(43, 159, 239, 1)",
-        ]}
-        end={{ x: 1, y: 0.5 }}
-        start={{ x: 0, y: 0.9 }}
-        locations={[0.2, 0.6, 0.9, 1]}
+      <View
         style={[
           styles.itemContainer,
           Platform.OS === "android" && styles.androidShadow,
           Platform.OS === "ios" && styles.iosShadow,
+          { padding: 0 },
         ]}
       >
-        <Image
-          source={{ uri: item.image }}
-          style={[
-            styles.image,
-            { width: 50, height: 50, borderWidth: 1, borderColor: "#000" },
-          ]}
-        />
-        <View style={styles.textContainer}>
-          <Text style={[styles.nameText, { color: "#fff" }]}>{item.name}</Text>
-          <Text style={[styles.positionText, { color: "#dddddd" }]}>
-            {item.position}
-          </Text>
-        </View>
-      </LinearGradient>
+        <DevCard item={item} />
+      </View>
     );
   };
 
