@@ -1,14 +1,16 @@
 import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import LastHackathon from "../screens/LastHackathon";
-import AdvanceCareer from "../screens/AdvanceCareer";
-import Sample from "../screens/Sample";
+import TeamList from "../screens/TeamList";
+import Assignments from "../screens/Assignments";
+import Agenda from "../screens/Agenda";
+import Rules from "../screens/Rules";
 
 const Tab = createMaterialTopTabNavigator();
 
-const ValuationTopNavigation = () => {
+const HomeTabNav = ({routeName}: {routeName:string}) => {
   return (
     <Tab.Navigator
+      initialRouteName={routeName ? routeName : "Teams"}
       screenOptions={{
         swipeEnabled: false,
         tabBarStyle: {
@@ -16,6 +18,8 @@ const ValuationTopNavigation = () => {
           paddingTop: 10,
           elevation: 0,
           shadowOpacity: 0,
+          borderBottomWidth: 1,
+          borderBottomColor: "#F3D1FF",
         },
         tabBarIndicatorStyle: {
           backgroundColor: "#863BAC",
@@ -30,24 +34,39 @@ const ValuationTopNavigation = () => {
           textTransform: "none",
           fontSize: 14,
         },
+        tabBarScrollEnabled: true,
       }}
     >
       <Tab.Screen
-        name="Sample"
-        component={Sample}
+        name="Teams"
+        component={TeamList}
         options={{
-          title: "Karyeranı yüksəlt",
+          title: "Komandalar",
         }}
       />
       <Tab.Screen
-        name="Sample2"
-        component={Sample}
+        name="Assignments"
+        component={Assignments}
         options={{
-      title: "Öncəki hackathon",
+          title: "Texniki tapşırıqlar",
+        }}
+      />
+      <Tab.Screen
+        name="Agenda"
+        component={Agenda}
+        options={{
+          title: "Agenda",
+        }}
+      />
+      <Tab.Screen
+        name="Rules"
+        component={Rules}
+        options={{
+          title: "Qaydalar",
         }}
       />
     </Tab.Navigator>
   );
 };
 
-export default ValuationTopNavigation;
+export default HomeTabNav;

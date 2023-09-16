@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, StatusBar, Platform } from "react-native";
 import GradientHeader from "../components/GradientHeader";
-import InfoTopNavigation from "../stacks/InfoTopNavigaiton";
+import InfoTopNavigation from "../stacks/InfoTopNav";
 
 const Information = () => {
   return (
