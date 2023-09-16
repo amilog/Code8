@@ -12,7 +12,7 @@ import ValutionStack from "./src/stacks/ValuationStack";
 
 const App = () => {
   const Stack = createNativeStackNavigator();
-  // AsyncStorage.clear();
+   AsyncStorage.clear();
   return (
     <Provider store={store}>
       <NavigationContainer>
