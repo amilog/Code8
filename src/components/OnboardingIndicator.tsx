@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     width: "60%",
-    alignSelf:  "flex-end",
+    alignSelf: "flex-end",
   },
   indicator: {
     height: 10,

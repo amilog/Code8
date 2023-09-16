@@ -11,6 +11,7 @@ import { StatusBar } from "react-native";
 import moment from "moment";
 import AgendaSection from "../components/AgendaSection";
 import TimeContainer from "../components/TimeContainer";
+import AnimationCard from "../components/AnimationCard";
 
 const Home = ({ navigation }: any) => {
   const [time, setTime] = useState(
@@ -36,6 +37,7 @@ const Home = ({ navigation }: any) => {
         navigation={navigation}
         showValution={true}
       />
+      <AnimationCard />
       <Pressable style={styles.card} onPress={()=>navigation.navigate("HomeCard",{routeName:"Agenda"})}>
         <AgendaSection />
         <TimeContainer time={time} />
