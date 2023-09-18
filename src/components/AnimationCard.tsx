@@ -6,14 +6,29 @@ import {
   ImageBackground,
   Text,
 } from "react-native";
-import React from "react";
-import { BlurView } from "expo-blur";
+import React, { useEffect } from "react";
 import CircleIcon from "../assets/icons/animationCardSvgs/circleIcon";
 import Code8Text from "../assets/icons/animationSvgs/Code8Text";
 import SentyabrText from "../assets/icons/animationCardSvgs/sentyabrText";
 import ArrowRightIcon from "../assets/icons/animationCardSvgs/arrowRightIcon";
+import Animated, { useAnimatedStyle, useSharedValue, withSpring, withTiming } from "react-native-reanimated";
 
 const AnimationCard = () => {
+
+  const scale = useSharedValue(0)
+  const progress = useSharedValue(0)
+
+  const rStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: scale.value }],
+    };
+  });
+
+  useEffect(() => {
+    scale.value = withTiming(1, { duration: 500 });
+  }, []);
+
+
   return (
     <View style={styles.view}>
       <ImageBackground
@@ -21,7 +36,10 @@ const AnimationCard = () => {
         source={require("../assets/images/AnimationCard.gif")}
       >
         <View style={styles.cardView}>
-          <CircleIcon style={styles.circleIcon} />
+          <View style={{ position: "relative" }}>
+            <CircleIcon style={styles.circleIcon} />
+            <Animated.View style={[styles.circle , rStyle]} />
+          </View>
           {/* <Code8Text style={styles.codeText} /> */}
           <SentyabrText style={styles.sentyabrText} />
           <CircleIcon style={styles.circleIcon} />
@@ -38,13 +56,15 @@ const AnimationCard = () => {
             </View>
             <View style={styles.subtitles3}>
               <ArrowRightIcon style={styles.arrowIcon3} />
-              <Text style={styles.subtitleText}>{`Hər komandada 13 \nüzv`}</Text>
+              <Text
+                style={styles.subtitleText}
+              >{`Hər komandada 13 \nüzv`}</Text>
             </View>
           </View>
           <Image
-        source={require("../assets/images/exampleImg1.png")}
-        style={styles.image}
-      />
+            source={require("../assets/images/exampleImg1.png")}
+            style={styles.image}
+          />
         </View>
       </ImageBackground>
     </View>
@@ -66,6 +86,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     overlayColor: "white",
     overflow: "hidden",
+    justifyContent: "space-between",
   },
   cardView: {
     flexDirection: "row",
@@ -90,7 +111,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginHorizontal: 16,
-    alignItems:"flex-end"
+    alignItems: "center",
+    bottom: 20,
   },
   arrowIcon: {
     width: 24,
@@ -119,9 +141,19 @@ const styles = StyleSheet.create({
     height: 24,
     marginTop: 5,
   },
-  image:{
-    width: 110,
-    height: 110,
+  image: {
+    width: 120,
+    height: 120,
     borderRadius: 11,
+  },
+  circle: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: 36,
+    height: 36,
+    borderRadius: 8,
+    opacity: 0.2,
+    backgroundColor: "white",
   },
 });
