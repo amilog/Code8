@@ -3,12 +3,26 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import LastHackathon from "../screens/LastHackathon";
 import AdvanceCareer from "../screens/AdvanceCareer";
 import About from "../screens/About";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 const Tab = createMaterialTopTabNavigator();
+const InfoTopNavigation = ({navigation,routeName}:any,  ) => {
+  
+  useFocusEffect(
+    React.useCallback(() => {
+      
+      console.log('getdiy',routeName);
+      if(routeName=="About")
+      navigation.navigate('About');
+      return () => {
+        routeName=undefined
+      };
+    }, [])
+  );
 
-const InfoTopNavigation = () => {
   return (
     <Tab.Navigator
+      initialRouteName={"AdvanceCareer"}
       screenOptions={{
         swipeEnabled: false,
         tabBarStyle: {
