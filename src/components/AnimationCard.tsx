@@ -11,12 +11,16 @@ import CircleIcon from "../assets/icons/animationCardSvgs/circleIcon";
 import Code8Text from "../assets/icons/animationSvgs/Code8Text";
 import SentyabrText from "../assets/icons/animationCardSvgs/sentyabrText";
 import ArrowRightIcon from "../assets/icons/animationCardSvgs/arrowRightIcon";
-import Animated, { useAnimatedStyle, useSharedValue, withSpring, withTiming } from "react-native-reanimated";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+  withTiming,
+} from "react-native-reanimated";
 
 const AnimationCard = () => {
-
-  const scale = useSharedValue(0)
-  const progress = useSharedValue(0)
+  const scale = useSharedValue(0);
+  const progress = useSharedValue(0);
 
   const rStyle = useAnimatedStyle(() => {
     return {
@@ -28,7 +32,6 @@ const AnimationCard = () => {
     scale.value = withTiming(1, { duration: 500 });
   }, []);
 
-
   return (
     <View style={styles.view}>
       <ImageBackground
@@ -38,7 +41,7 @@ const AnimationCard = () => {
         <View style={styles.cardView}>
           <View style={{ position: "relative" }}>
             <CircleIcon style={styles.circleIcon} />
-            <Animated.View style={[styles.circle , rStyle]} />
+            <Animated.View style={[styles.circle, rStyle]} />
           </View>
           {/* <Code8Text style={styles.codeText} /> */}
           <SentyabrText style={styles.sentyabrText} />
@@ -82,7 +85,10 @@ const styles = StyleSheet.create({
   },
   gif: {
     width: "100%",
-    height: Dimensions.get("window").height / 4,
+    height:
+      Dimensions.get("window").height / 4 > 200
+        ? Dimensions.get("window").height / 4
+        : Dimensions.get("window").height / 3.25,
     borderRadius: 16,
     overlayColor: "white",
     overflow: "hidden",

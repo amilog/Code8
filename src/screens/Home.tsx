@@ -7,6 +7,7 @@ import {
   Text,
   Image,
   Dimensions,
+  ScrollView,
 } from "react-native";
 import moment from "moment";
 import { LinearGradient } from "expo-linear-gradient";
@@ -19,6 +20,7 @@ import { AboutTeam } from "../data/About";
 import SvgArrow from "../assets/icons/arrow";
 import SvgRules from "../assets/icons/rules";
 import SvgCareer from "../assets/icons/career";
+import Metrics from "../styling/Metrics";
 
 const Home = ({ navigation }: any) => {
   const [time, setTime] = useState(
@@ -70,56 +72,67 @@ const Home = ({ navigation }: any) => {
         navigation={navigation}
         showValution={true}
       />
-      <Pressable
-        onPress={() => navigation.navigate("HomeCard", { routeName: "Teams" })}
-      >
-        <AnimationCard />
-      </Pressable>
-      <Pressable
-        style={styles.card}
-        onPress={() => navigation.navigate("HomeCard", { routeName: "Agenda" })}
-      >
-        <AgendaSection />
-        <TimeContainer time={time} />
-      </Pressable>
-      <View style={styles.row}>
-        <Pressable style={styles.button} onPress={()=>navigation.navigate("HomeCard",{routeName:"Rules"})}>
-          <View style={styles.buttonContent}>
-            <SvgRules />
-            <Text style={styles.buttonText}>Qaydalar</Text>
-          </View>
-          <View style={styles.buttonTextContainer}>
-            <Text style={styles.buttonTextContent}>
-              Komandadaxili hansı qaydaları bilməliyəm?
-            </Text>
-          </View>
-          <SvgArrow />
+      <ScrollView>
+        <Pressable
+          onPress={() =>
+            navigation.navigate("HomeCard", { routeName: "Teams" })
+          }
+        >
+          <AnimationCard />
         </Pressable>
-        <Pressable style={styles.button}>
-          <View style={styles.buttonContent}>
-            <SvgCareer />
-            <Text style={styles.buttonText}>Karyeranı Yüksəlt</Text>
-          </View>
-          <View style={styles.buttonTextContainer}>
-            <Text style={styles.buttonTextContent}>
-              Karyeranı Yüksəlt Təqaüd Proqramı
-            </Text>
-          </View>
-          <SvgArrow />
+        <Pressable
+          style={styles.card}
+          onPress={() =>
+            navigation.navigate("HomeCard", { routeName: "Agenda" })
+          }
+        >
+          <AgendaSection />
+          <TimeContainer time={time} />
         </Pressable>
-      </View>
-      <Pressable
-        style={styles.teamContainer}
-        onPress={() =>
-          navigation.navigate("Information", { routeName: "About" })
-        }
-      >
-        <View style={styles.teamMembers}>{renderTeamMembers()}</View>
-        <View style={styles.teamInfo}>
-          <Text style={styles.teamInfoText}>Tətbiqdə əməyi keçənlər...</Text>
-          <SvgArrow />
+        <View style={styles.row}>
+          <Pressable
+            style={styles.button}
+            onPress={() =>
+              navigation.navigate("HomeCard", { routeName: "Rules" })
+            }
+          >
+            <View style={styles.buttonContent}>
+              <SvgRules />
+              <Text style={styles.buttonText}>Qaydalar</Text>
+            </View>
+            <View style={styles.buttonTextContainer}>
+              <Text style={styles.buttonTextContent}>
+                Komandadaxili hansı qaydaları bilməliyəm?
+              </Text>
+            </View>
+            <SvgArrow />
+          </Pressable>
+          <Pressable style={styles.button}>
+            <View style={styles.buttonContent}>
+              <SvgCareer />
+              <Text style={styles.buttonText}>Karyeranı Yüksəlt</Text>
+            </View>
+            <View style={styles.buttonTextContainer}>
+              <Text style={styles.buttonTextContent}>
+                Karyeranı Yüksəlt Təqaüd Proqramı
+              </Text>
+            </View>
+            <SvgArrow />
+          </Pressable>
         </View>
-      </Pressable>
+        <Pressable
+          style={styles.teamContainer}
+          onPress={() =>
+            navigation.navigate("Information", { routeName: "About" })
+          }
+        >
+          <View style={styles.teamMembers}>{renderTeamMembers()}</View>
+          <View style={styles.teamInfo}>
+            <Text style={styles.teamInfoText}>Tətbiqdə əməyi keçənlər...</Text>
+            <SvgArrow />
+          </View>
+        </Pressable>
+      </ScrollView>
     </View>
   );
 };
@@ -216,7 +229,7 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   teamInfoText: {
-    fontSize: 14,
+    fontSize: 14 * Metrics.rem,
     fontWeight: "600",
     color: "#000",
     lineHeight: 16,
