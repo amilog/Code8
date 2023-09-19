@@ -7,6 +7,7 @@ import SvgInfoInactive from "../assets/icons/InfoInactive";
 import SvgHomeActive from "../assets/icons/HomeActive";
 import SvgInfoActive from "../assets/icons/InfoActive";
 import HomeStack from "./HomeStack";
+import Metrics from "../styling/Metrics";
 
 const Tab = () => {
   const Tab = createBottomTabNavigator();
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderTopWidth: 0,
     elevation: 0,
-    height: Platform.OS === "ios" ? 100 : 80,
+    height: Platform.OS === "ios" ? 100 * Metrics.rem : 80 * Metrics.rem,
   },
   tabItem: {
     justifyContent: "center",
