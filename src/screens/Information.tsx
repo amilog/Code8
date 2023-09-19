@@ -3,11 +3,13 @@ import { View, StyleSheet, StatusBar, Platform } from "react-native";
 import GradientHeader from "../components/GradientHeader";
 import InfoTopNavigation from "../stacks/InfoTopNav";
 
-const Information = () => {
+const Information = ({ route,navigation }: any) => {
+  const routeName = route?.params?.routeName;
+
   return (
     <View style={styles.container}>
       <GradientHeader title={"Məlumatlar"} />
-      <InfoTopNavigation />
+      <InfoTopNavigation navigation={navigation} routeName={routeName} />
     </View>
   );
 };
