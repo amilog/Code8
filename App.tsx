@@ -18,7 +18,11 @@ const App = () => {
     <Provider store={store}>
       <NavigationContainer>
         <StatusBar translucent style="dark" />
+<<<<<<< Updated upstream
           <Home/>
+=======
+         <Home/>
+>>>>>>> Stashed changes
         {/* <Stack.Navigator
           screenOptions={{
             headerShown: false,

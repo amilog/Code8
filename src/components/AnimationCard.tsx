@@ -11,6 +11,7 @@ import CircleIcon from "../assets/icons/animationCardSvgs/circleIcon";
 import Code8Text from "../assets/icons/animationSvgs/Code8Text";
 import SentyabrText from "../assets/icons/animationCardSvgs/sentyabrText";
 import ArrowRightIcon from "../assets/icons/animationCardSvgs/arrowRightIcon";
+<<<<<<< Updated upstream
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -22,6 +23,14 @@ import Animated, {
 const AnimationCard = () => {
   const scale = useSharedValue(0);
   const progress = useSharedValue(0.7);
+=======
+import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withSpring, withTiming } from "react-native-reanimated";
+
+const AnimationCard = () => {
+
+  const scale = useSharedValue(0)
+  const progress = useSharedValue(0.5)
+>>>>>>> Stashed changes
 
   const rStyle = useAnimatedStyle(() => {
     return {
@@ -31,7 +40,11 @@ const AnimationCard = () => {
   });
 
   useEffect(() => {
+<<<<<<< Updated upstream
     scale.value = withRepeat(withTiming(3, { duration: 1000 }), -1);
+=======
+    scale.value = withRepeat(withTiming(5, { duration: 500 }));
+>>>>>>> Stashed changes
   }, []);
 
   return (
