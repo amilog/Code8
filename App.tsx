@@ -9,6 +9,7 @@ import { store } from "./src/redux/store";
 import "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ValutionStack from "./src/stacks/ValuationStack";
+import Home from "./src/screens/Home";
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -17,7 +18,8 @@ const App = () => {
     <Provider store={store}>
       <NavigationContainer>
         <StatusBar translucent style="dark" />
-        <Stack.Navigator
+          <Home/>
+        {/* <Stack.Navigator
           screenOptions={{
             headerShown: false,
             animation: "fade",
@@ -33,7 +35,7 @@ const App = () => {
               animation: "slide_from_right",
             }}
           />
-        </Stack.Navigator>
+        </Stack.Navigator> */}
       </NavigationContainer>
     </Provider>
   );
