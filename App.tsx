@@ -13,16 +13,12 @@ import Home from "./src/screens/Home";
 
 const App = () => {
   const Stack = createNativeStackNavigator();
-  // AsyncStorage.clear();s
+  //AsyncStorage.clear();
   return (
     <Provider store={store}>
       <NavigationContainer>
         <StatusBar translucent style="dark" />
-<<<<<<< Updated upstream
-          <Home/>
-=======
-         <Home/>
->>>>>>> Stashed changes
+        <Home />
         {/* <Stack.Navigator
           screenOptions={{
             headerShown: false,

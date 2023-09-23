@@ -11,26 +11,20 @@ import CircleIcon from "../assets/icons/animationCardSvgs/circleIcon";
 import Code8Text from "../assets/icons/animationSvgs/Code8Text";
 import SentyabrText from "../assets/icons/animationCardSvgs/sentyabrText";
 import ArrowRightIcon from "../assets/icons/animationCardSvgs/arrowRightIcon";
-<<<<<<< Updated upstream
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withRepeat,
   withSpring,
   withTiming,
+  Easing,
+  runOnJS,
 } from "react-native-reanimated";
 
 const AnimationCard = () => {
   const scale = useSharedValue(0);
   const progress = useSharedValue(0.7);
-=======
-import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withSpring, withTiming } from "react-native-reanimated";
-
-const AnimationCard = () => {
-
-  const scale = useSharedValue(0)
-  const progress = useSharedValue(0.5)
->>>>>>> Stashed changes
+  const textTranslation = useSharedValue(0);
 
   const rStyle = useAnimatedStyle(() => {
     return {
@@ -39,12 +33,36 @@ const AnimationCard = () => {
     };
   });
 
+  const textTranslateX = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateX: textTranslation.value }],
+    };
+  });
+
   useEffect(() => {
-<<<<<<< Updated upstream
     scale.value = withRepeat(withTiming(3, { duration: 1000 }), -1);
-=======
-    scale.value = withRepeat(withTiming(5, { duration: 500 }));
->>>>>>> Stashed changes
+  }, []);
+
+  useEffect(() => {
+    const animateText = () => {
+      const screenWidth = Dimensions.get("window").width;
+      const textWidth = 140; // 140 piksel genişlik
+      const duration = (screenWidth + textWidth) * 10; // 10 saniye boyunca kaydırın
+      
+      textTranslation.value = withTiming(
+        -screenWidth - textWidth, // Sola kaydırın
+        {
+          duration: duration,
+          easing: Easing.linear,
+        },
+        () => {
+          textTranslation.value = screenWidth; // Sağa kaydırın
+          runOnJS(animateText)(); // Tekrar animasyonu başlat
+        }
+      );
+    };
+
+    animateText();
   }, []);
 
   return (
@@ -58,9 +76,16 @@ const AnimationCard = () => {
             <CircleIcon style={styles.circleIcon} />
             <Animated.View style={[styles.circle, rStyle]} />
           </View>
-          {/* <Code8Text style={styles.codeText} /> */}
-          <SentyabrText style={styles.sentyabrText} />
-          <CircleIcon style={styles.circleIcon} />
+          <Animated.View
+            style={[styles.codeTextContainer, textTranslateX]}
+          >
+            <Code8Text style={styles.codeText} />
+            <SentyabrText style={styles.sentyabrText} />
+          </Animated.View>
+          <View style={{ position: "relative" }}>
+            <CircleIcon style={styles.circleIcon} />
+            <Animated.View style={[styles.circle, rStyle]} />
+          </View>
         </View>
         <View style={styles.infoView}>
           <View style={styles.subtitleView}>
@@ -74,9 +99,7 @@ const AnimationCard = () => {
             </View>
             <View style={styles.subtitles3}>
               <ArrowRightIcon style={styles.arrowIcon3} />
-              <Text
-                style={styles.subtitleText}
-              >{`Hər komandada 13 \nüzv`}</Text>
+              <Text style={styles.subtitleText}>{`Hər komandada 13 \nüzv`}</Text>
             </View>
           </View>
           <Image
@@ -117,13 +140,23 @@ const styles = StyleSheet.create({
     width: 16,
     height: 16,
   },
-  codeText: {
-    width: 120,
+  codeTextContainer: {
+
     height: 30,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  sentyabrTextContainer: {
+
+    height: 22,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  codeText: {
+    flex: 1,
   },
   sentyabrText: {
-    width: 180,
-    height: 22,
+    flex: 1,
   },
   infoView: {
     flexDirection: "row",
