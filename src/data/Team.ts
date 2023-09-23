@@ -1,4 +1,4 @@
-import { TeamsModel } from "../models/TeamsModel";
+import { TeamsModel } from "../models/dataModels";
 
 export const Teams: TeamsModel[] = [
   {

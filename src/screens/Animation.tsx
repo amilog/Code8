@@ -7,6 +7,11 @@ import FromCodeText from "../assets/icons/animationSvgs/FromCodeText";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../redux/store";
 import { getStatus } from "../redux/onboard/OnboardSlice";
+import { getTeamState } from "../redux/data/TeamSlice";
+import {
+  getResultState,
+  startHackathonState,
+} from "../redux/data/ValuationSlice";
 
 //biraz sağa sürüşdürmək lazım
 const Animation = ({ navigation }: any) => {
@@ -28,6 +33,9 @@ const Animation = ({ navigation }: any) => {
   useEffect(() => {
     startAnimation();
     dispatch(getStatus());
+    dispatch(getTeamState());
+    dispatch(startHackathonState());
+    dispatch(getResultState());
   }, []);
 
   const startAnimation = () => {

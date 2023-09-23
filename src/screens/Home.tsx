@@ -6,7 +6,6 @@ import {
   Pressable,
   Text,
   Image,
-  Dimensions,
   ScrollView,
 } from "react-native";
 import moment from "moment";
@@ -72,7 +71,7 @@ const Home = ({ navigation }: any) => {
         navigation={navigation}
         showValution={true}
       />
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <Pressable
           onPress={() =>
             navigation.navigate("HomeCard", { routeName: "Teams" })
@@ -90,35 +89,37 @@ const Home = ({ navigation }: any) => {
           <TimeContainer time={time} />
         </Pressable>
         <View style={styles.row}>
-          <Pressable
-            style={styles.button}
-            onPress={() =>
-              navigation.navigate("HomeCard", { routeName: "Rules" })
-            }
-          >
-            <View style={styles.buttonContent}>
-              <SvgRules />
-              <Text style={styles.buttonText}>Qaydalar</Text>
-            </View>
-            <View style={styles.buttonTextContainer}>
-              <Text style={styles.buttonTextContent}>
-                Komandadaxili hansı qaydaları bilməliyəm?
-              </Text>
-            </View>
-            <SvgArrow />
-          </Pressable>
-          <Pressable style={styles.button}>
-            <View style={styles.buttonContent}>
-              <SvgCareer />
-              <Text style={styles.buttonText}>Karyeranı Yüksəlt</Text>
-            </View>
-            <View style={styles.buttonTextContainer}>
-              <Text style={styles.buttonTextContent}>
-                Karyeranı Yüksəlt Təqaüd Proqramı
-              </Text>
-            </View>
-            <SvgArrow />
-          </Pressable>
+          {[
+            {
+              header: "Qaydalar",
+              title: "Komandadaxili hansı qaydaları bilməliyəm?",
+            },
+            {
+              header: "Karyeranı Yüksəlt",
+              title: "Karyeranı Yüksəlt Təqaüd Proqramı",
+            },
+          ].map((item, index) => (
+            <Pressable
+              key={index}
+              style={styles.button}
+              onPress={() =>
+                index === 0
+                  ? navigation.navigate("HomeCard", { routeName: "Rules" })
+                  : navigation.navigate("Information", {
+                      routeName: "AdvanceCareer",
+                    })
+              }
+            >
+              <View style={styles.buttonContent}>
+                {item.title === "Qaydalar" ? <SvgRules /> : <SvgCareer />}
+                <Text style={styles.buttonText}>{item.header}</Text>
+              </View>
+              <View style={styles.buttonTextContainer}>
+                <Text style={styles.buttonTextContent}>{item.title}</Text>
+              </View>
+              <SvgArrow />
+            </Pressable>
+          ))}
         </View>
         <Pressable
           style={styles.teamContainer}
@@ -132,6 +133,7 @@ const Home = ({ navigation }: any) => {
             <SvgArrow />
           </View>
         </Pressable>
+        <View style={{ height: 24 }} />
       </ScrollView>
     </View>
   );
@@ -215,14 +217,14 @@ const styles = StyleSheet.create({
     marginRight: 16,
   },
   teamMemberImage: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 42 * Metrics.rem - 2,
+    height: 42 * Metrics.rem - 2,
+    borderRadius: 100,
   },
   gradient: {
-    width: 42,
-    height: 42,
-    borderRadius: 25,
+    width: 42 * Metrics.rem,
+    height: 42 * Metrics.rem,
+    borderRadius: 100,
     justifyContent: "center",
     alignItems: "center",
     marginLeft: 10,

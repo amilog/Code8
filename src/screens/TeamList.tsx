@@ -1,6 +1,6 @@
 import {
+  ActivityIndicator,
   FlatList,
-  Image,
   Platform,
   StyleSheet,
   Text,
@@ -8,13 +8,17 @@ import {
   View,
 } from "react-native";
 import React from "react";
-import { Teams } from "../data/Team";
-import { TeamsModel } from "../models/TeamsModel";
-import { StatusBar } from "react-native";
-import { Dimensions } from "react-native";
-import GradientHeader from "../components/GradientHeader";
+import { TeamsModel } from "../models/dataModels";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../redux/store";
+import { TeamState, getTeamState } from "../redux/data/TeamSlice";
+import SvgTeamIcon from "../assets/icons/teamColorIcon";
+import Metrics from "../styling/Metrics";
 
 const TeamList = ({ navigation }: any) => {
+  const teamState = useSelector<RootState, TeamState>((state) => state.team);
+  const dispatch = useDispatch<AppDispatch>();
+
   const renderVerticalItem = ({ item }: { item: TeamsModel }) => {
     return (
       <TouchableOpacity
@@ -27,7 +31,7 @@ const TeamList = ({ navigation }: any) => {
           navigation.navigate("MemberList", { teamName: item.name })
         }
       >
-        <Image source={item.teamPic} style={styles.teamPic} />
+        <SvgTeamIcon fill={item.color} />
         <View style={styles.teamLabel}>
           <Text style={styles.teamName}>{item.name}</Text>
           <View style={styles.memberLabel}>
@@ -41,8 +45,8 @@ const TeamList = ({ navigation }: any) => {
               }
               return (
                 <Text key={member._id} style={styles.memberName}>
-                  {member.fullName}
-                  {", "}
+                  {member.name}
+                  {index < 30 ? ", " : ""}
                 </Text>
               );
             })}
@@ -52,17 +56,34 @@ const TeamList = ({ navigation }: any) => {
     );
   };
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={Teams}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={(item) => item._id}
-        renderItem={renderVerticalItem}
-        ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
-        ListHeaderComponent={() => <View style={{ height: 32 }} />}
-        ListFooterComponent={() => <View style={{ height: 50 }} />}
-      />
-    </View>
+    <>
+      {teamState.loading ? (
+        <View
+          style={[
+            styles.container,
+            { justifyContent: "center", alignItems: "center" },
+          ]}
+        >
+          <ActivityIndicator size="large" color="gray" />
+        </View>
+      ) : (
+        <View style={styles.container}>
+          <FlatList
+            refreshing={false}
+            onRefresh={() => {
+              dispatch(getTeamState());
+            }}
+            data={teamState.team}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={(item) => item._id}
+            renderItem={renderVerticalItem}
+            ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
+            ListHeaderComponent={() => <View style={{ height: 32 }} />}
+            ListFooterComponent={() => <View style={{ height: 50 }} />}
+          />
+        </View>
+      )}
+    </>
   );
 };
 
@@ -82,16 +103,17 @@ const styles = StyleSheet.create({
     width: "95%",
     backgroundColor: "#fff",
     alignSelf: "center",
+    alignItems: 'center',
   },
   teamName: {
-    fontSize: 16,
+    fontSize: 16 * Metrics.rem,
     fontWeight: "500",
     color: "#000",
     lineHeight: 24,
     letterSpacing: 0.15,
   },
   memberName: {
-    fontSize: 16,
+    fontSize: 14 * Metrics.rem,
     color: "#868686",
   },
   teamPic: {
