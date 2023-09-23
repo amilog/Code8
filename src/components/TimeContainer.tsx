@@ -19,14 +19,7 @@ const TimeContainer = ({ time }: { time: string }) => {
         <Stop offset={0.377517} stopColor="#DF3A9A" />
         <Stop offset={0.586152} stopColor="#8D44EB" />
         <Stop offset={0.722348} stopColor="#2B9FEF" />
-        <View
-          style={{
-            width: "100%",
-            height: "100%",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <View style={styles.timeContainer}>
           <Text style={styles.timeText}>{time}</Text>
         </View>
       </LinearGradient>
@@ -42,5 +35,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "700",
     lineHeight: 32,
+  },
+  timeContainer: {
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

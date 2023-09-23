@@ -28,7 +28,10 @@ const TeamList = ({ navigation }: any) => {
           Platform.OS === "ios" && styles.iosShadow,
         ]}
         onPress={() =>
-          navigation.navigate("MemberList", { teamName: item.name })
+          navigation.navigate("MemberList", {
+            teamName: item.name,
+            teamId: item._id,
+          })
         }
       >
         <SvgTeamIcon fill={item.color} />
@@ -73,7 +76,7 @@ const TeamList = ({ navigation }: any) => {
             onRefresh={() => {
               dispatch(getTeamState());
             }}
-            data={teamState.team}
+            data={teamState.teams}
             showsVerticalScrollIndicator={false}
             keyExtractor={(item) => item._id}
             renderItem={renderVerticalItem}
@@ -103,7 +106,7 @@ const styles = StyleSheet.create({
     width: "95%",
     backgroundColor: "#fff",
     alignSelf: "center",
-    alignItems: 'center',
+    alignItems: "center",
   },
   teamName: {
     fontSize: 16 * Metrics.rem,

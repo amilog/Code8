@@ -7,6 +7,7 @@ import {
   Text,
   Image,
   ScrollView,
+  Dimensions,
 } from "react-native";
 import moment from "moment";
 import { LinearGradient } from "expo-linear-gradient";
@@ -81,9 +82,10 @@ const Home = ({ navigation }: any) => {
         </Pressable>
         <Pressable
           style={styles.card}
-          onPress={() =>
-            navigation.navigate("HomeCard", { routeName: "Agenda" })
-          }
+          onPress={() => {
+            navigation.navigate("HomeCard", { routeName: "Agenda" });
+            console.log(Dimensions.get("window").width);
+          }}
         >
           <AgendaSection />
           <TimeContainer time={time} />
@@ -213,7 +215,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     flex: 1,
     alignItems: "center",
-    gap: 30,
     marginRight: 16,
   },
   teamMemberImage: {
@@ -236,6 +237,8 @@ const styles = StyleSheet.create({
     color: "#000",
     lineHeight: 16,
     letterSpacing: 0.5,
+    // backgroundColor: "red",
+    marginRight: Dimensions.get("window").width / 13,
   },
 });
 

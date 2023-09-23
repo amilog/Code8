@@ -3,15 +3,19 @@ import { TeamsModel } from "../../models/dataModels";
 import api from "../../network/api";
 
 export interface TeamState {
+  teams: TeamsModel[];
   team: TeamsModel[];
   loading: boolean;
+  byIdLoading: boolean;
   error: string | null;
 }
 
 const initialState: TeamState = {
-  team: [],
+  teams: [],
   loading: false,
+  byIdLoading: false,
   error: null,
+  team: [],
 };
 
 export const getTeamState = createAsyncThunk("team/getAllPlants", async () => {
@@ -39,23 +43,23 @@ export const TeamSlice = createSlice({
     builder.addCase(getTeamState.fulfilled, (state, action) => {
       state.loading = false;
       state.error = null;
-      state.team = action.payload;
+      state.teams = action.payload;
     });
     builder.addCase(getTeamState.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message || null;
     });
     builder.addCase(getTeamByIdState.pending, (state, action) => {
-      state.loading = true;
+      state.byIdLoading = true;
       state.error = null;
     });
     builder.addCase(getTeamByIdState.fulfilled, (state, action) => {
-      state.loading = false;
+      state.byIdLoading = false;
       state.error = null;
       state.team = action.payload;
     });
     builder.addCase(getTeamByIdState.rejected, (state, action) => {
-      state.loading = false;
+      state.byIdLoading = false;
       state.error = action.error.message || null;
     });
   },
