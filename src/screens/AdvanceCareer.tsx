@@ -5,15 +5,21 @@ import SvgTechnest from "../assets/icons/TechnesLogo";
 import SvgCodeAcademy from "../assets/icons/codeAcademyLogo";
 import SvgInksaf from "../assets/icons/inksafAgentliyi";
 import { codeFields } from "../data/codeFields";
+import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 
 const AdvanceCareer = () => {
   const renderFields = (data: string[]) => {
     return data.map((field, index) => (
-      <View key={index} style={styles.fieldContainer}>
+      <Animated.View
+        entering={FadeIn.duration(400)}
+        exiting={FadeOut.duration(500)}
+        key={index}
+        style={styles.fieldContainer}
+      >
         <Text style={[styles.sectionText, { fontWeight: "500" }]}>
           {index + 1}. {field}
         </Text>
-      </View>
+      </Animated.View>
     ));
   };
 
