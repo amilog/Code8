@@ -2,14 +2,15 @@ import React from "react";
 import { View, StyleSheet, StatusBar, Platform } from "react-native";
 import GradientHeader from "../components/GradientHeader";
 import InfoTopNavigation from "../stacks/InfoTopNav";
+import { useFocusEffect } from "@react-navigation/native";
 
-const Information = ({ route,navigation }: any) => {
-  const routeName = route?.params?.routeName;
+const Information = ({ route, navigation }: any) => {
+  const name = route?.params;
 
   return (
     <View style={styles.container}>
       <GradientHeader title={"Məlumatlar"} />
-      <InfoTopNavigation navigation={navigation} routeName={routeName} />
+      <InfoTopNavigation navigation={navigation} routeName={name} />
     </View>
   );
 };
