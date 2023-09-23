@@ -1,7 +1,6 @@
 import { Platform, StatusBar, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import GradientHeader from "../components/GradientHeader";
-import ValuationTopNavigation from "../stacks/ValuationTopNavigation";
 
 const ValutionForm = () => {
   return (

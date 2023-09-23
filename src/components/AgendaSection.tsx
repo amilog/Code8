@@ -67,7 +67,7 @@ const AgendaData = [
 ];
 
 const getCurrentAgendaItem = () => {
-  const currentTimeUTC4 = moment().utcOffset(600).format("HH:mm");
+  const currentTimeUTC4 = moment().utcOffset(240).format("HH:mm");
 
   for (const item of AgendaData) {
     const [start, end] = item.time.split(" - ");
@@ -122,7 +122,7 @@ const Samm = () => {
 
   const getTitleById = (id: number | null) => {
     const item = AgendaData.find((item) => item.id === id);
-    return item ? item.title : "No agenda item currently";
+    return item ? item.title : "Hər kəsə uğurlar!";
   };
 
   return (

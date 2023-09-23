@@ -2,7 +2,6 @@ import React from "react";
 import { View, StyleSheet, StatusBar, Platform } from "react-native";
 import GradientHeader from "../components/GradientHeader";
 import InfoTopNavigation from "../stacks/InfoTopNav";
-import { useFocusEffect } from "@react-navigation/native";
 
 const Information = ({ route, navigation }: any) => {
   const name = route?.params;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import LastHackathon from "../screens/LastHackathon";
 import AdvanceCareer from "../screens/AdvanceCareer";
@@ -9,7 +9,7 @@ const Tab = createMaterialTopTabNavigator();
 
 const InfoTopNavigation = ({ navigation, routeName }: any) => {
   useFocusEffect(
-    React.useCallback(() => {
+    useCallback(() => {
       if (routeName?.routeName == "About") {
         navigation.navigate("About");
       } else if (routeName?.routeName == "LastHackathon") {

@@ -14,11 +14,7 @@ const width = Dimensions.get("window").width;
 
 const DevCard = ({ item }: { item: MemberType }) => {
   return (
-    <Svg
-      width={"100%"}
-      height={80}
-      fill="none"
-    >
+    <Svg width={"100%"} height={80} fill="none">
       <G filter="url(#filter0_dd_1791_2298)">
         <Rect
           width={"100%"}
@@ -47,7 +43,7 @@ const DevCard = ({ item }: { item: MemberType }) => {
             source={{ uri: item.image }}
             style={[
               styles.image,
-              { width: 50, height: 50, borderWidth: 1, borderColor: "green" },
+              { width: 50, height: 50, borderWidth: 1, borderColor: "#fff" },
             ]}
           />
           <View style={styles.textContainer}>
