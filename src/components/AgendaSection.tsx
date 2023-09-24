@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { SectionList, StyleSheet, Text, View } from "react-native";
 import Metrics from "../styling/Metrics";
 import { heightPercentageToDP } from "react-native-responsive-screen";
+import { Dimensions } from "react-native";
 
 const AgendaData = [
   {
@@ -67,6 +68,9 @@ const AgendaData = [
   },
 ];
 
+const SCREEN_HEIGHT = Dimensions.get("window").height;
+const viewHeight = SCREEN_HEIGHT < 840 ? 10.5 : 8;
+
 const getCurrentAgendaItem = () => {
   const currentTimeUTC4 = moment().utcOffset(240).format("HH:mm");
 
@@ -95,6 +99,7 @@ const Samm = () => {
   const [currentId, setCurrentId] = useState<number | null>(null);
   const [nextId, setNextId] = useState<number | null>(null);
   const sectionRef = useRef<SectionList>(null);
+
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -131,7 +136,7 @@ const Samm = () => {
       showsVerticalScrollIndicator={false}
       scrollEnabled={false}
       ref={sectionRef}
-      SectionSeparatorComponent={() => <View style={{ height: 8 }} />}
+      SectionSeparatorComponent={() => <View style={{ height: viewHeight }} />}
       sections={[
         {
           title: "indi:",
