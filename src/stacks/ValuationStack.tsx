@@ -2,7 +2,9 @@ import { Platform, StyleSheet, Text, View } from "react-native";
 import React, { useCallback } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Valuation from "../screens/Valuation";
-import ValutionForm from "../screens/ValuationForm";
+import Result from "../screens/Result";
+import CoachValuation from "../screens/CoachValuation";
+import JuryValuation from "../screens/JuryValuation";
 
 const ValutionStack = () => {
   const Stack = createNativeStackNavigator();
@@ -11,11 +13,13 @@ const ValutionStack = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-        animation: "slide_from_bottom",
+        animation: "fade",
       }}
     >
       <Stack.Screen name="Valuation" component={Valuation} />
-      <Stack.Screen name="ValuationForm" component={ValutionForm} />
+      <Stack.Screen name="JuryValuation" component={JuryValuation} />
+      <Stack.Screen name="CoachValuation" component={CoachValuation} />
+      <Stack.Screen name="Result" component={Result} />
     </Stack.Navigator>
   );
 };

@@ -166,7 +166,7 @@ const Samm = () => {
         </View>
       )}
       style={{
-        height: heightPercentageToDP("6.93%"),
+        height: 60,
       }}
       renderSectionHeader={({ section: { title } }) => (
         <View

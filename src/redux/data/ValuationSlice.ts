@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../../network/api";
 import { ResultModel } from "../../models/dataModels";
 
-interface ValuationState {
+export interface ValuationState {
   result: ResultModel[];
   isStarted: boolean;
   loading: boolean;

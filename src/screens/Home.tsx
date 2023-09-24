@@ -84,7 +84,6 @@ const Home = ({ navigation }: any) => {
           style={styles.card}
           onPress={() => {
             navigation.navigate("HomeCard", { routeName: "Agenda" });
-            console.log(Dimensions.get("window").width);
           }}
         >
           <AgendaSection />
