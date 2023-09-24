@@ -39,6 +39,7 @@ const Animation = ({ navigation }: any) => {
     dispatch(getTeamState());
     dispatch(startHackathonState());
     dispatch(getResultState());
+    dispatch(getResultState());
   }, []);
 
   const startAnimation = () => {

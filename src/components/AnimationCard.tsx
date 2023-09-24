@@ -122,7 +122,8 @@ const styles = StyleSheet.create({
   },
   gif: {
     width: "100%",
-    height: heightPercentageToDP("24%"),
+    height:
+      heightPercentageToDP("24%") < 200 ? 200 : heightPercentageToDP("24%"),
     borderRadius: 16,
     overlayColor: "white",
     overflow: "hidden",

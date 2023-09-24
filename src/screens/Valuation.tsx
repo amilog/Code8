@@ -1,3 +1,4 @@
+import React, { useCallback, useRef, useState } from "react";
 import {
   Animated,
   KeyboardAvoidingView,
@@ -8,10 +9,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useCallback, useRef, useState } from "react";
-import TextField from "../components/TextField";
 import GradientHeader from "../components/GradientHeader";
 import SvgGraidentButton from "../assets/icons/gradientButton";
+import TextField from "../components/TextField";
 import { passwords } from "../data/valuationPasspowrds";
 
 const Valuation = ({ navigation }: any) => {
@@ -19,14 +19,10 @@ const Valuation = ({ navigation }: any) => {
   const [isPasswordCorrect, setIsPasswordCorrect] = useState(true);
 
   const handleSubmit = () => {
-    if (password.length > 0 && passwords.includes(password)) {
-      setIsPasswordCorrect(true);
-      setPassword("");
-      navigation.replace("ValuationForm");
+    if (passwordIsValid(password)) {
+      navigateToCorrectScreen();
     } else {
-      setIsPasswordCorrect(false);
-      setPassword("");
-      shake();
+      handleIncorrectPassword();
     }
   };
 
@@ -54,6 +50,45 @@ const Valuation = ({ navigation }: any) => {
       { iterations: 2 }
     ).start();
   }, []);
+
+  const passwordIsValid = (pass: string) => {
+    return pass.length > 0 && passwords.includes(pass);
+  };
+
+  const navigateToCorrectScreen = () => {
+    const screenMappings: any = {
+      admin: "Result",
+      mobile2023: "CoachValuation",
+      front2023: "CoachValuation",
+      back2023: "CoachValuation",
+      data2023: "CoachValuation",
+      cyber2023: "CoachValuation",
+      uiux2023: "CoachValuation",
+      jury2023: "JuryValuation",
+    };
+
+    const screenName = screenMappings[password];
+    navigation.replace(screenName, { type: getTypeFromPassword(password) });
+  };
+
+  const getTypeFromPassword = (pass: string) => {
+    const typeMappings: any = {
+      mobile2023: "Mobile",
+      front2023: "FrontEnd",
+      back2023: "BackEnd",
+      data2023: "Data Science",
+      cyber2023: "Cyber Security",
+      uiux2023: "UX/UI",
+    };
+
+    return typeMappings[pass];
+  };
+
+  const handleIncorrectPassword = () => {
+    setIsPasswordCorrect(false);
+    setPassword("");
+    shake();
+  };
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="height">

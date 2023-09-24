@@ -9,34 +9,36 @@ import { store } from "./src/redux/store";
 import "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ValutionStack from "./src/stacks/ValuationStack";
-import Home from "./src/screens/Home";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const App = () => {
   const Stack = createNativeStackNavigator();
   // AsyncStorage.clear();
   return (
-    <Provider store={store}>
-      <NavigationContainer>
-        <StatusBar translucent style="dark" />
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-            animation: "fade",
-          }}
-        >
-          <Stack.Screen name="Animation" component={Animation} />
-          <Stack.Screen name="OnBoarding" component={Onboarding} />
-          <Stack.Screen name="Tabs" component={Tab} />
-          <Stack.Screen
-            name="ValuationStack"
-            component={ValutionStack}
-            options={{
-              animation: "slide_from_right",
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Provider store={store}>
+        <NavigationContainer>
+          <StatusBar translucent style="dark" />
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false,
+              animation: "fade",
             }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </Provider>
+          >
+            <Stack.Screen name="Animation" component={Animation} />
+            <Stack.Screen name="OnBoarding" component={Onboarding} />
+            <Stack.Screen name="Tabs" component={Tab} />
+            <Stack.Screen
+              name="ValuationStack"
+              component={ValutionStack}
+              options={{
+                animation: "slide_from_right",
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
+    </GestureHandlerRootView>
   );
 };
 
