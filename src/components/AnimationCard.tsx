@@ -14,6 +14,7 @@ import ArrowRightIcon from "../assets/icons/animationCardSvgs/arrowRightIcon";
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
+  withRepeat,
   withSpring,
   withTiming,
 } from "react-native-reanimated";
@@ -21,16 +22,18 @@ import Metrics from "../styling/Metrics";
 
 const AnimationCard = () => {
   const scale = useSharedValue(0);
-  const progress = useSharedValue(0);
+  const progress = useSharedValue(0.7);
+  
 
   const rStyle = useAnimatedStyle(() => {
     return {
       transform: [{ scale: scale.value }],
+      opacity: progress.value,
     };
   });
 
   useEffect(() => {
-    scale.value = withTiming(1, { duration: 500 });
+    scale.value = withRepeat(withTiming(3, { duration: 1000 }), -1);
   }, []);
 
   return (
@@ -44,9 +47,12 @@ const AnimationCard = () => {
             <CircleIcon style={styles.circleIcon} />
             <Animated.View style={[styles.circle, rStyle]} />
           </View>
-          {/* <Code8Text style={styles.codeText} /> */}
-          <SentyabrText style={styles.sentyabrText} />
-          <CircleIcon style={styles.circleIcon} />
+          <Code8Text style={styles.codeText} />
+          {/* <SentyabrText style={styles.sentyabrText} /> */}
+          <View style={{ position: "relative" }}>
+            <CircleIcon style={styles.circleIcon} />
+            <Animated.View style={[styles.circle, rStyle]} />
+          </View>
         </View>
         <View style={styles.infoView}>
           <View style={styles.subtitleView}>
@@ -154,10 +160,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     left: 0,
-    width: 36,
-    height: 36,
+    width: 16,
+    height: 16,
     borderRadius: 8,
-    opacity: 0.2,
     backgroundColor: "white",
   },
 });
