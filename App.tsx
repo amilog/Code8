@@ -9,10 +9,11 @@ import { store } from "./src/redux/store";
 import "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ValutionStack from "./src/stacks/ValuationStack";
+import Home from "./src/screens/Home";
 
 const App = () => {
   const Stack = createNativeStackNavigator();
-  // AsyncStorage.clear();s
+  //AsyncStorage.clear();
   return (
     <Provider store={store}>
       <NavigationContainer>

@@ -3,7 +3,7 @@ export const OnboardingData = [
     id: 1,
     title: "Məqsədimiz nədir?",
     content:
-      "Code8 Career+2 namizədlərinin tədris müddəti ərzində öyrəndikləri bilik və bacarıqlarını nümayiş etdirməsi üçün təşkil olunan tədbirdir.",
+      "Code8 Career+ namizədlərinin tədris müddəti ərzində öyrəndikləri bilik və bacarıqlarını nümayiş etdirməsi üçün təşkil olunan tədbirdir.",
     image: require("../assets/images/onboarding/Onboarding1.jpg"),
   },
   {
