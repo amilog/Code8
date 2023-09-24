@@ -2,28 +2,25 @@ import {
   StyleSheet,
   View,
   Image,
-  Dimensions,
   ImageBackground,
   Text,
+  FlatList,
 } from "react-native";
 import React, { useEffect } from "react";
 import CircleIcon from "../assets/icons/animationCardSvgs/circleIcon";
-import Code8Text from "../assets/icons/animationSvgs/Code8Text";
-import SentyabrText from "../assets/icons/animationCardSvgs/sentyabrText";
 import ArrowRightIcon from "../assets/icons/animationCardSvgs/arrowRightIcon";
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withRepeat,
-  withSpring,
   withTiming,
 } from "react-native-reanimated";
 import Metrics from "../styling/Metrics";
+import { heightPercentageToDP } from "react-native-responsive-screen";
 
 const AnimationCard = () => {
   const scale = useSharedValue(0);
   const progress = useSharedValue(0.7);
-  
 
   const rStyle = useAnimatedStyle(() => {
     return {
@@ -47,8 +44,41 @@ const AnimationCard = () => {
             <CircleIcon style={styles.circleIcon} />
             <Animated.View style={[styles.circle, rStyle]} />
           </View>
-          <Code8Text style={styles.codeText} />
-          {/* <SentyabrText style={styles.sentyabrText} /> */}
+          <FlatList
+            data={[
+              {
+                id: 1,
+                text: "CODE8",
+              },
+              {
+                id: 2,
+                text: "30 SENTYABR",
+              },
+            ]}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            renderItem={({ item }) => (
+              <View
+                style={{
+                  width: "100%",
+                }}
+              >
+                <Text
+                  style={{
+                    fontWeight: "900",
+                    fontSize: 28,
+                    lineHeight: 36,
+                    textAlign: "center",
+                    color: "#fff",
+                  }}
+                >
+                  {item.text}
+                </Text>
+              </View>
+            )}
+            keyExtractor={(item) => item.id.toString()}
+          />
+
           <View style={{ position: "relative" }}>
             <CircleIcon style={styles.circleIcon} />
             <Animated.View style={[styles.circle, rStyle]} />
@@ -92,7 +122,7 @@ const styles = StyleSheet.create({
   },
   gif: {
     width: "100%",
-    height: 215,
+    height: heightPercentageToDP("24%"),
     borderRadius: 16,
     overlayColor: "white",
     overflow: "hidden",

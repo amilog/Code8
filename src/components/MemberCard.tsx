@@ -177,7 +177,8 @@ const styles = StyleSheet.create({
     letterSpacing: 0.1,
   },
   socialIconsContainer: {
-    marginVertical: 8,
+    marginTop: 20,
+    marginBottom: 8,
     flexDirection: "row",
     justifyContent: "space-evenly",
     width: "100%",
