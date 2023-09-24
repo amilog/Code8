@@ -13,7 +13,7 @@ import Home from "./src/screens/Home";
 
 const App = () => {
   const Stack = createNativeStackNavigator();
-  //AsyncStorage.clear();
+  // AsyncStorage.clear();
   return (
     <Provider store={store}>
       <NavigationContainer>

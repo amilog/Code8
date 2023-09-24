@@ -18,6 +18,7 @@ import Animated, {
   withSpring,
   withTiming,
 } from "react-native-reanimated";
+import Metrics from "../styling/Metrics";
 
 const AnimationCard = () => {
   const scale = useSharedValue(0);
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
   },
   gif: {
     width: "100%",
-    height: Dimensions.get("window").height / 4,
+    height: 215,
     borderRadius: 16,
     overlayColor: "white",
     overflow: "hidden",
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   subtitleText: {
-    fontSize: 22,
+    fontSize: 18 * Metrics.rem,
     fontWeight: "600",
     color: "#ffffff",
   },
@@ -151,9 +152,9 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   image: {
-    width: 120,
-    height: 120,
-    borderRadius: 11,
+    width: 100,
+    height: 100,
+    borderRadius: 12,
   },
   circle: {
     position: "absolute",
