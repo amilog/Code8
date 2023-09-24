@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { View, Image, Animated, Easing, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
+import Animated, {
+  Easing,
+  withTiming,
+  useSharedValue,
+  useAnimatedStyle,
+} from "react-native-reanimated";
 import WhiteCodeIcon from "../assets/icons/animationSvgs/WhiteCodeIcon";
 import GradientCodeIcon from "../assets/icons/animationSvgs/GradientCodeIcon";
 import Code8Text from "../assets/icons/animationSvgs/Code8Text";
@@ -13,17 +19,14 @@ import {
   startHackathonState,
 } from "../redux/data/ValuationSlice";
 
-//biraz sağa sürüşdürmək lazım
 const Animation = ({ navigation }: any) => {
-  const [fadeAnimation] = useState(new Animated.Value(0));
-  const [iconOpacity] = useState(new Animated.Value(0));
-  const [textTranslateX] = useState(new Animated.Value(-300));
-  const [textOpacity] = useState(new Animated.Value(0));
-  const [fromCodeTextTranslateY] = useState(new Animated.Value(-30));
-  const [startFromCodeTextAnimation, setStartFromCodeTextAnimation] =
-    useState(false);
+  const fadeAnimation = useSharedValue(0);
+  const iconOpacity = useSharedValue(0);
+  const textTranslateX = useSharedValue(-300);
+  const textOpacity = useSharedValue(0);
+  const fromCodeTextTranslateY = useSharedValue(-30);
+  const startFromCodeTextAnimation = useState(false);
   const totalAnimationDuration = 300;
-  const initialImageDuration = 800;
   const dispatch = useDispatch<AppDispatch>();
   const state = useSelector<
     RootState,
@@ -40,65 +43,74 @@ const Animation = ({ navigation }: any) => {
 
   const startAnimation = () => {
     setTimeout(() => {
-      Animated.timing(fadeAnimation, {
-        toValue: 1,
+      fadeAnimation.value = withTiming(1, {
         duration: totalAnimationDuration,
-        easing: Easing.linear,
-        useNativeDriver: true,
-      }).start(() => {
-        fadeAnimation.setValue(1);
-
-        // Icon animation
-        Animated.timing(iconOpacity, {
-          toValue: 1,
-          duration: totalAnimationDuration,
-          easing: Easing.linear,
-          useNativeDriver: true,
-        }).start();
-
-        // Text animation
-        setTimeout(() => {
-          Animated.timing(textTranslateX, {
-            toValue: 1,
-            duration: totalAnimationDuration * 1.6,
-            easing: Easing.linear,
-            useNativeDriver: true,
-          }).start();
-
-          // Text opacity animation
-          Animated.timing(textOpacity, {
-            toValue: 1,
-            duration: totalAnimationDuration * 5,
-            easing: Easing.linear,
-            useNativeDriver: true,
-          }).start();
-        }, 500);
-
-        // FromCodeText animation
-        setTimeout(() => {
-          setStartFromCodeTextAnimation(true);
-        }, totalAnimationDuration * 4.5);
+        easing: Easing.ease,
       });
+
+      iconOpacity.value = withTiming(1, {
+        duration: totalAnimationDuration,
+        easing: Easing.ease,
+      });
+
+      setTimeout(() => {
+        textTranslateX.value = withTiming(1, {
+          duration: totalAnimationDuration * 1.6,
+          easing: Easing.ease,
+        });
+
+        textOpacity.value = withTiming(1, {
+          duration: totalAnimationDuration * 5,
+          easing: Easing.ease,
+        });
+      }, 500);
+
+      setTimeout(() => {
+        startFromCodeTextAnimation[1](true);
+      }, totalAnimationDuration * 4.5);
     }, 500);
   };
 
   useEffect(() => {
-    if (startFromCodeTextAnimation) {
-      Animated.timing(fromCodeTextTranslateY, {
-        toValue: 0,
+    if (startFromCodeTextAnimation[0]) {
+      fromCodeTextTranslateY.value = withTiming(0, {
         duration: totalAnimationDuration,
-        easing: Easing.linear,
-        useNativeDriver: true,
-      }).start();
+        easing: Easing.ease,
+      });
       setTimeout(() => {
         if (state.isOnboarded) {
           navigation.replace("Tabs");
         } else {
           navigation.replace("OnBoarding");
         }
-      }, 300);
+      }, 400);
     }
-  }, [startFromCodeTextAnimation]);
+  }, [startFromCodeTextAnimation[0]]);
+
+  const animatedImageStyle = useAnimatedStyle(() => {
+    return {
+      opacity: fadeAnimation.value,
+    };
+  });
+
+  const animatedIconStyle = useAnimatedStyle(() => {
+    return {
+      opacity: iconOpacity.value,
+    };
+  });
+
+  const animatedTextStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateX: textTranslateX.value }],
+      opacity: textOpacity.value,
+    };
+  });
+
+  const animatedFromCodeTextStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateY: fromCodeTextTranslateY.value }],
+    };
+  });
 
   return (
     <View style={styles.container}>
@@ -106,30 +118,17 @@ const Animation = ({ navigation }: any) => {
       <GradientCodeIcon style={styles.centeredIcon0} />
       <Animated.Image
         source={require("../assets/images/Gradient.jpg")}
-        style={[styles.backgroundImage, { opacity: fadeAnimation }]}
+        style={[styles.backgroundImage, animatedImageStyle]}
       />
-      <Animated.View style={[styles.centeredIcon, { opacity: iconOpacity }]}>
+      <Animated.View style={[styles.centeredIcon, animatedIconStyle]}>
         <WhiteCodeIcon />
       </Animated.View>
-      <Animated.View
-        style={[
-          styles.centeredText,
-          {
-            transform: [{ translateX: textTranslateX }],
-            opacity: textOpacity,
-          },
-        ]}
-      >
+      <Animated.View style={[styles.centeredText, animatedTextStyle]}>
         <Code8Text style={styles.centeredText} />
       </Animated.View>
-      {startFromCodeTextAnimation && (
+      {startFromCodeTextAnimation[0] && (
         <Animated.View
-          style={[
-            styles.fromCodeTextContainer,
-            {
-              transform: [{ translateY: fromCodeTextTranslateY }],
-            },
-          ]}
+          style={[styles.fromCodeTextContainer, animatedFromCodeTextStyle]}
         >
           <FromCodeText style={styles.fromCodeTextContainer} />
         </Animated.View>
@@ -137,6 +136,8 @@ const Animation = ({ navigation }: any) => {
     </View>
   );
 };
+
+export default Animation;
 
 const styles = StyleSheet.create({
   container: {
@@ -186,5 +187,3 @@ const styles = StyleSheet.create({
     height: 13,
   },
 });
-
-export default Animation;
