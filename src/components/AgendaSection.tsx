@@ -67,7 +67,7 @@ const AgendaData = [
 ];
 
 const getCurrentAgendaItem = () => {
-  const currentTimeUTC4 = moment().utcOffset(600).format("HH:mm");
+  const currentTimeUTC4 = moment().utcOffset(240).format("HH:mm");
 
   for (const item of AgendaData) {
     const [start, end] = item.time.split(" - ");

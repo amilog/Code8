@@ -18,8 +18,7 @@ const App = () => {
     <Provider store={store}>
       <NavigationContainer>
         <StatusBar translucent style="dark" />
-        <Home />
-        {/* <Stack.Navigator
+        <Stack.Navigator
           screenOptions={{
             headerShown: false,
             animation: "fade",
@@ -35,7 +34,7 @@ const App = () => {
               animation: "slide_from_right",
             }}
           />
-        </Stack.Navigator> */}
+        </Stack.Navigator>
       </NavigationContainer>
     </Provider>
   );
