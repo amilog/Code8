@@ -2,6 +2,7 @@ import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
 import { SectionList, StyleSheet, Text, View } from "react-native";
 import Metrics from "../styling/Metrics";
+import { heightPercentageToDP } from "react-native-responsive-screen";
 
 const AgendaData = [
   {
@@ -150,14 +151,25 @@ const Samm = () => {
         },
       ]}
       keyExtractor={(item, index) => `${item.title}-${index}`}
-      renderItem={({ item }) => <Text style={styles.text}>{item.title}</Text>}
-      style={{ height: 60 }}
+      renderItem={({ item }) => (
+        <View
+          style={{
+            justifyContent: "center",
+          }}
+        >
+          <Text style={styles.text}>{item.title}</Text>
+        </View>
+      )}
+      style={{
+        height: heightPercentageToDP("6.93%"),
+      }}
       renderSectionHeader={({ section: { title } }) => (
         <View
           style={{
             backgroundColor: title === "indi:" ? "#228E09" : "#EC7F00",
             width: title === "indi:" ? 50 : 100,
             borderRadius: 6,
+            justifyContent: "center",
           }}
         >
           <Text style={[styles.sectionHeader]}>{title}</Text>
