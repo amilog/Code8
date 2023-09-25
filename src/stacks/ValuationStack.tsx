@@ -1,5 +1,4 @@
-import { Platform, StyleSheet, Text, View } from "react-native";
-import React, { useCallback } from "react";
+import { Platform, StyleSheet} from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Valuation from "../screens/Valuation";
 import Result from "../screens/Result";

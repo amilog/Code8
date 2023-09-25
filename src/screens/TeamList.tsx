@@ -119,12 +119,6 @@ const styles = StyleSheet.create({
     fontSize: 14 * Metrics.rem,
     color: "#868686",
   },
-  teamPic: {
-    width: 64,
-    height: 64,
-    resizeMode: "contain",
-    borderRadius: 32,
-  },
   teamLabel: {
     marginLeft: 16,
     gap: 6,
