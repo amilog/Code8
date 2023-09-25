@@ -97,6 +97,7 @@ const CoachValuateCard: React.FC<CoachValuateCardProps> = ({ item, type }) => {
                 <TextInput
                   inputMode="numeric"
                   keyboardType="numeric"
+                  cursorColor={"rgba(255, 63, 60, 1)"}
                   onChangeText={(text) => {
                     const numericValue = Math.min(
                       100,

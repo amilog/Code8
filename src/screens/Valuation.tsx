@@ -15,7 +15,7 @@ import TextField from "../components/TextField";
 import { passwords } from "../data/valuationPasspowrds";
 
 const Valuation = ({ navigation }: any) => {
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("jury2023");
   const [isPasswordCorrect, setIsPasswordCorrect] = useState(true);
 
   const handleSubmit = () => {
@@ -93,7 +93,7 @@ const Valuation = ({ navigation }: any) => {
   return (
     <KeyboardAvoidingView style={styles.container} behavior="height">
       <GradientHeader
-        title={"Qiymetlendirme"}
+        title={"Qiymətləndirmə"}
         showArrow={true}
         navigation={navigation}
       />
