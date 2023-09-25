@@ -34,18 +34,25 @@ export const postCoachValuate = async (
   score: number,
   type: string
 ) => {
-  const response = await api.post(`valuation/${id}/coach`, {
+  const response = await api.post(`valuation/team/${id}/coach`, {
     givenScore: score,
     coachType: type,
   });
   return response.data;
 };
 
-export const postJuryValuate = async (id: string, score: number) => {
-  const response = await api.post(`valuation/${id}/jury`, {
-    givenScore: score,
-  });
-  return response.data;
+export const postJuryValuate = async (
+  id: string,
+  score: number,
+) => {
+  try {
+    const response = await api.post(`valuation/team/${id}/jury`, {
+      givenScore: score,
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const resetValuation = async (password: string) => {

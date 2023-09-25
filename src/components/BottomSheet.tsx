@@ -55,7 +55,7 @@ const BottomSheet = React.forwardRef<BottomSheetRefProps, BottomSheetProps>(
         translateY.value = Math.max(translateY.value, MAX_TRANSLATE_Y);
       })
       .onEnd(() => {
-        if (translateY.value > -SCREEN_HEIGHT / 3) {
+        if (translateY.value > -SCREEN_HEIGHT / 1.5) {
           scrollTo(0);
         } else if (translateY.value < -SCREEN_HEIGHT / 1.5) {
           scrollTo(MAX_TRANSLATE_Y);
@@ -92,7 +92,6 @@ const BottomSheet = React.forwardRef<BottomSheetRefProps, BottomSheetProps>(
       <>
         <Animated.View
           onTouchStart={() => {
-            // Dismiss the BottomSheet
             scrollTo(0);
           }}
           animatedProps={rBackdropProps}
@@ -127,7 +126,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   line: {
-    width: 75,
+    width: 32,
     height: 4,
     backgroundColor: "grey",
     alignSelf: "center",

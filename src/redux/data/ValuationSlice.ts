@@ -34,7 +34,7 @@ export const postCoachValuateState = createAsyncThunk(
 
 export const postJuryValuateState = createAsyncThunk(
   "team/postJuryValuate",
-  async (data: { id: string; score: number }) => {
+  async (data: { id: string; score: number}) => {
     const response = await api.postJuryValuate(data.id, data.score);
     return response;
   }

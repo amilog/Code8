@@ -3,6 +3,7 @@ import {
   FlatList,
   KeyboardAvoidingView,
   Platform,
+  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
@@ -21,22 +22,32 @@ const CoachValuation = ({ navigation, route }: any) => {
   const type: string = route.params.type;
 
   return (
-    <KeyboardAvoidingView style={styles.container}>
-      <GradientHeader
-        title="Qiymətləndirmə"
-        navigation={navigation}
-        showArrow={true}
-      />
-      <FlatList
-        data={teams.teams}
-        ListHeaderComponent={renderListHeader}
-        ListFooterComponent={renderListFooter}
-        ItemSeparatorComponent={() => <View style={styles.separator} />}
-        renderItem={({ item }: any) => (
-          <CoachValuateCard item={item} type={type} />
-        )}
-        keyExtractor={(item) => item._id.toString()}
-      />
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : undefined}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 40 : 0}
+    >
+      <ScrollView style={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
+        <GradientHeader
+          title="Qiymətləndirmə"
+          navigation={navigation}
+          showArrow={true}
+        />
+        <FlatList
+          data={teams.teams}
+          scrollEnabled={false}
+          ListHeaderComponent={renderListHeader}
+          ListFooterComponent={() => <View style={{ height: 80 }} />}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
+          renderItem={({ item }: any) => (
+            <CoachValuateCard item={item} type={type} />
+          )}
+          keyExtractor={(item) => item._id.toString()}
+        />
+      </ScrollView>
+      <TouchableOpacity style={styles.saveButtonContainer}>
+        <SvgSaveButton />
+      </TouchableOpacity>
     </KeyboardAvoidingView>
   );
 };
@@ -49,12 +60,6 @@ const renderListHeader = () => (
     saxla” düyməsinə klik etdikdən sonra seçiminizi{" "}
     <Text style={styles.boldText}>dəyişə bilməyəcəksiniz.</Text>
   </Text>
-);
-
-const renderListFooter = () => (
-  <TouchableOpacity style={styles.saveButtonContainer}>
-    <SvgSaveButton />
-  </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({
@@ -78,7 +83,8 @@ const styles = StyleSheet.create({
   },
   saveButtonContainer: {
     alignSelf: "center",
-    marginVertical: 16,
+    bottom:Platform.OS==='ios'? undefined:10,
+    position:Platform.OS==='android'?"absolute":"relative"
   },
 });
 
