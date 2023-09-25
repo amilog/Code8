@@ -1,23 +1,20 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import UiUxIcon from "../assets/icons/taskCardIcons/UiUxIcon";
 import CircleArrow from "../assets/icons/circleArrow";
 import { Dimensions } from "react-native";
 
 interface TaskCardProps {
   title: string;
-  onPress: () => void;
+  icon: JSX.Element;
 }
-
-const SCREEN_WIDTH = Dimensions.get("window").width;
 const SCREEN_HEIGHT = Dimensions.get("window").height;
-const textContainerHeight = SCREEN_HEIGHT < 800 ? "85%" : "66%";
+const textContainerHeight = SCREEN_HEIGHT < 840 ? "70%" : "75%";
 
-const TaskCard = ({ title, onPress }: TaskCardProps) => {
+const TaskCard =({ title, icon }: TaskCardProps) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity style={styles.container} onPress={() => {}}>
       <View style={styles.view}>
-        <UiUxIcon style={styles.iconStyle} />
+      <View style={styles.iconStyle}>{icon}</View>
         <Text style={styles.title}>{title}</Text>
       </View>
       <CircleArrow style={styles.arrowIconStyle} />
@@ -29,12 +26,13 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
+    alignSelf: "center",
     justifyContent: "space-between",
-    padding: 16,
+    padding: 18,
     width: "95%",
-    height: 80,
+    height: 90,
     backgroundColor: "#fff",
-    borderRadius: 8,
+    borderRadius: 16,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
