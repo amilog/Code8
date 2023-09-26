@@ -15,9 +15,12 @@ import { AppDispatch, RootState } from "../redux/store";
 import { getStatus } from "../redux/onboard/OnboardSlice";
 import { getTeamState } from "../redux/data/TeamSlice";
 import {
+  getJuryValuationState,
   getResultState,
   startHackathonState,
 } from "../redux/data/ValuationSlice";
+import uuid from "react-native-uuid";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Animation = ({ navigation }: any) => {
   const fadeAnimation = useSharedValue(0);
@@ -34,12 +37,22 @@ const Animation = ({ navigation }: any) => {
   >((state) => state.onBoard);
 
   useEffect(() => {
-    startAnimation();
-    dispatch(getStatus());
-    dispatch(getTeamState());
-    dispatch(startHackathonState());
-    dispatch(getResultState());
-    dispatch(getResultState());
+    let deviceId: any = uuid.v4();
+    AsyncStorage.getItem("secure_deviceid")
+      .then((fetchUUID) => {
+        if (fetchUUID) {
+          deviceId = fetchUUID;
+        }
+        AsyncStorage.setItem("secure_deviceid", deviceId.toString());
+      })
+      .then(() => {
+        startAnimation();
+        dispatch(getStatus());
+        dispatch(getTeamState());
+        dispatch(startHackathonState());
+        dispatch(getResultState());
+        dispatch(getJuryValuationState(deviceId));
+      });
   }, []);
 
   const startAnimation = () => {

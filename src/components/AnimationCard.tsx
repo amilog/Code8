@@ -5,6 +5,8 @@ import {
   ImageBackground,
   Text,
   FlatList,
+  ActivityIndicator,
+  Dimensions,
 } from "react-native";
 import React, { useEffect } from "react";
 import CircleIcon from "../assets/icons/animationCardSvgs/circleIcon";
@@ -17,8 +19,18 @@ import Animated, {
 } from "react-native-reanimated";
 import Metrics from "../styling/Metrics";
 import { heightPercentageToDP } from "react-native-responsive-screen";
+import Carousel from "react-native-reanimated-carousel";
+import { TeamState } from "../redux/data/TeamSlice";
+import { RootState } from "../redux/store";
+import { useSelector } from "react-redux";
 
 const AnimationCard = () => {
+  const teams = useSelector<RootState, TeamState>((state) => state.team);
+  const getRandomTeam = () => {
+    const randomIndex = Math.floor(Math.random() * teams.teams.length);
+    return teams.teams[randomIndex];
+  };
+  const randomTeam = getRandomTeam();
   const scale = useSharedValue(0);
   const progress = useSharedValue(0.7);
 
@@ -44,7 +56,12 @@ const AnimationCard = () => {
             <CircleIcon style={styles.circleIcon} />
             <Animated.View style={[styles.circle, rStyle]} />
           </View>
-          <FlatList
+          <Carousel
+            loop
+            pagingEnabled={false}
+            width={Dimensions.get("window").width / 1.8}
+            height={30}
+            autoPlay={true}
             data={[
               {
                 id: 1,
@@ -55,28 +72,24 @@ const AnimationCard = () => {
                 text: "30 SENTYABR",
               },
             ]}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => (
-              <View
-                style={{
-                  width: "100%",
-                }}
-              >
-                <Text
-                  style={{
-                    fontWeight: "900",
-                    fontSize: 28,
-                    lineHeight: 36,
-                    textAlign: "center",
-                    color: "#fff",
-                  }}
-                >
-                  {item.text}
-                </Text>
-              </View>
-            )}
-            keyExtractor={(item) => item.id.toString()}
+            scrollAnimationDuration={1000}
+            renderItem={({ item }) => {
+              return (
+                <>
+                  <Text
+                    style={{
+                      fontWeight: "900",
+                      fontSize: 28 * Metrics.rem,
+                      lineHeight: 36,
+                      textAlign: "center",
+                      color: "#fff",
+                    }}
+                  >
+                    {item.text}
+                  </Text>
+                </>
+              );
+            }}
           />
 
           <View style={{ position: "relative" }}>
@@ -101,6 +114,40 @@ const AnimationCard = () => {
               >{`Hər komandada 13 \nüzv`}</Text>
             </View>
           </View>
+          <Carousel
+            loop
+            vertical
+            pagingEnabled={false}
+            width={100}
+            height={100}
+            autoPlay={true}
+            data={randomTeam.members}
+            scrollAnimationDuration={1000}
+            panGestureHandlerProps={{
+              activeOffsetX: [-10, 10],
+            }}
+            renderItem={({ item }) => {
+              return (
+                <>
+                  <Image
+                    style={styles.image}
+                    source={{
+                      uri: item.image,
+                    }}
+                  />
+                  <View
+                    style={{
+                      position: "absolute",
+                      top: 40,
+                      left: 30,
+                    }}
+                  >
+                    <ActivityIndicator size="large" color="#fff" />
+                  </View>
+                </>
+              );
+            }}
+          />
         </View>
       </ImageBackground>
     </View>
@@ -182,6 +229,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 12,
+    zIndex: 900,
   },
   circle: {
     position: "absolute",

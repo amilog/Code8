@@ -23,11 +23,14 @@ import Rate from "../components/Rate";
 import SvgOldu from "../assets/icons/postButton";
 import FlashMessage, { showMessage } from "react-native-flash-message";
 import { postJuryValuateState } from "../redux/data/ValuationSlice";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const { height } = Dimensions.get("window");
 const JuryValuation = ({ navigation }: any) => {
   const dispatch = useDispatch<AppDispatch>();
   const ref = useRef<BottomSheetRefProps>(null);
   const teams = useSelector<RootState, TeamState>((state) => state.team);
+  const state = useSelector<RootState, any>((state) => state.valuation);
+
   const [rating, setRating] = useState<{
     teamId: string;
     rating: number[];
@@ -51,10 +54,22 @@ const JuryValuation = ({ navigation }: any) => {
       ref?.current?.scrollTo(-height + 50);
     };
 
+    const juryValuationItem = state.juryValuation.find(
+      (rating: any) => rating.toTeam._id === item._id
+    );
+
+    const averageScore = juryValuationItem
+      ? Number(juryValuationItem.givenScore) / 5
+      : "(təyin olunmayıb)";
+
     return (
       <TouchableOpacity
+        disabled={juryValuationItem}
         style={[
           styles.teamCard,
+          {
+            backgroundColor: juryValuationItem ? "#F3F3F3" : "#fff",
+          },
           Platform.OS === "android" && styles.androidShadow,
           Platform.OS === "ios" && styles.iosShadow,
         ]}
@@ -66,7 +81,17 @@ const JuryValuation = ({ navigation }: any) => {
         <SvgTeamIcon fill={item.color} />
         <View style={styles.teamLabel}>
           <Text style={styles.teamName}>{item.name}</Text>
-          <Text style={styles.altLine}>Ortalama: </Text>
+          <Text style={styles.altLine}>
+            Ortalama:{" "}
+            <Text
+              style={{
+                fontWeight: "500",
+                color: "#393939",
+              }}
+            >
+              {averageScore}
+            </Text>
+          </Text>
         </View>
       </TouchableOpacity>
     );
@@ -86,7 +111,7 @@ const JuryValuation = ({ navigation }: any) => {
     <View style={styles.container}>
       <FlashMessage />
       <GradientHeader
-        title="Qiymetlendirmə"
+        title="Qiymətləndirmə"
         navigation={navigation}
         showArrow={true}
       />
@@ -209,10 +234,18 @@ const JuryValuation = ({ navigation }: any) => {
                   icon: "success",
                 });
                 const sum = rating.rating.reduce((a, b) => a + b, 0);
-                dispatch(
-                  postJuryValuateState({ id: rating.teamId, score: sum })
-                );
-                ref?.current?.scrollTo(0);
+                AsyncStorage.getItem("secure_deviceid").then((deviceId) => {
+                  if (deviceId) {
+                    dispatch(
+                      postJuryValuateState({
+                        id: rating.teamId,
+                        score: sum,
+                        deviceId: deviceId,
+                      })
+                    );
+                    ref?.current?.scrollTo(0);
+                  }
+                });
               }
             }}
           >
