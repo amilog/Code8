@@ -101,10 +101,6 @@ const AnimationCard = () => {
               >{`Hər komandada 13 \nüzv`}</Text>
             </View>
           </View>
-          <Image
-            source={require("../assets/images/exampleImg1.png")}
-            style={styles.image}
-          />
         </View>
       </ImageBackground>
     </View>

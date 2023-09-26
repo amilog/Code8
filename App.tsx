@@ -11,6 +11,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import ValutionStack from "./src/stacks/ValuationStack";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { LogBox } from "react-native";
+import DataScience from "./src/screens/task/DataScience";
+import UiUx from "./src/screens/task/UiUx";
+import Frontend from "./src/screens/task/Frontend";
+import Backend from "./src/screens/task/Backend";
+import Mobile from "./src/screens/task/Mobile";
+import CyberSec from "./src/screens/task/CyberSec";
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -33,6 +39,48 @@ const App = () => {
             <Stack.Screen
               name="ValuationStack"
               component={ValutionStack}
+              options={{
+                animation: "slide_from_right",
+              }}
+            />
+            <Stack.Screen
+              name="UiUx"
+              component={UiUx}
+              options={{
+                animation: "slide_from_right",
+              }}
+            />
+            <Stack.Screen
+              name="Frontend"
+              component={Frontend}
+              options={{
+                animation: "slide_from_right",
+              }}
+            />
+            <Stack.Screen
+              name="Backend"
+              component={Backend}
+              options={{
+                animation: "slide_from_right",
+              }}
+            />
+            <Stack.Screen
+              name="Mobile"
+              component={Mobile}
+              options={{
+                animation: "slide_from_right",
+              }}
+            />
+            <Stack.Screen
+              name="DataScience"
+              component={DataScience}
+              options={{
+                animation: "slide_from_right",
+              }}
+            />
+            <Stack.Screen
+              name="CyberSec"
+              component={CyberSec}
               options={{
                 animation: "slide_from_right",
               }}

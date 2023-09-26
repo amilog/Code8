@@ -1,7 +1,6 @@
 import {
   Dimensions,
   Image,
-  Platform,
   StyleSheet,
   Text,
   View,

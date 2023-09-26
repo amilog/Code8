@@ -1,18 +1,29 @@
-import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import CircleArrow from "../assets/icons/circleArrow";
 import { Dimensions } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 interface TaskCardProps {
   title: string;
   icon: JSX.Element;
+  screen: string;
 }
+
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const textContainerHeight = SCREEN_HEIGHT < 840 ? "70%" : "75%";
 
-const TaskCard =({ title, icon }: TaskCardProps) => {
+const TaskCard: React.FC<TaskCardProps> = ({ title, icon, screen }) => {
+  
+  const navigation = useNavigation<any>();
+
+  const handlePress = () => {
+    navigation.navigate(screen);
+  };
+  
+
+
   return (
-    <TouchableOpacity style={styles.container} onPress={() => {}}>
+    <TouchableOpacity style={styles.container} onPress={handlePress}>
       <View style={styles.view}>
       <View style={styles.iconStyle}>{icon}</View>
         <Text style={styles.title}>{title}</Text>
