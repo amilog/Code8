@@ -1,13 +1,18 @@
-import React from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
-import { StatusBar } from "react-native";
-import GradientHeader from "../components/GradientHeader";
+import React, { useEffect } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  StatusBar,
+  Platform,
+} from "react-native";
 import { FlatList } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../redux/store";
 import { ValuationState, getResultState } from "../redux/data/ValuationSlice";
 import SvgTeamIcon from "../assets/icons/teamColorIcon";
 import { TeamsModel } from "../models/dataModels";
+import GradientHeader from "../components/GradientHeader";
 
 const Result = ({ navigation }: any) => {
   const dispatch = useDispatch<AppDispatch>();
@@ -17,10 +22,21 @@ const Result = ({ navigation }: any) => {
 
   const team = useSelector<RootState, any>((state) => state.team).teams;
 
+  useEffect(() => {
+    dispatch(getResultState());
+  }, [dispatch]);
+
   const getTeamColorById = (teamId: string) => {
     const foundTeam = team.find((item: TeamsModel) => item._id === teamId);
     return foundTeam ? foundTeam.color : "#000";
   };
+
+  const sortedData = [...state.result].sort((a, b) => {
+    return (
+      (b.juryAverage * 20 + b.coachAverage) / 2 -
+      (a.juryAverage * 20 + a.coachAverage) / 2
+    );
+  });
 
   const renderItem = ({ item }: { item: any }) => (
     <View
@@ -58,11 +74,7 @@ const Result = ({ navigation }: any) => {
 
   return (
     <View style={styles.container}>
-      <GradientHeader
-        showArrow={true}
-        navigation={navigation}
-        title="Nətcilər"
-      />
+      <GradientHeader title="Nəticələr" showArrow navigation={navigation} />
       <FlatList
         refreshing={false}
         onRefresh={() => dispatch(getResultState())}
@@ -75,7 +87,7 @@ const Result = ({ navigation }: any) => {
             görə bilərsiniz.
           </Text>
         )}
-        data={state.result}
+        data={sortedData}
         renderItem={renderItem}
       />
     </View>
@@ -128,6 +140,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     lineHeight: 20,
     letterSpacing: 0.1,
+    paddingRight: 8,
   },
   nameText: {
     color: "#000",

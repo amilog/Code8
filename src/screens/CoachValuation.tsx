@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   FlatList,
   KeyboardAvoidingView,
@@ -7,32 +7,44 @@ import {
   StatusBar,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from "react-native";
 import GradientHeader from "../components/GradientHeader";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../redux/store";
 import { TeamState } from "../redux/data/TeamSlice";
 import CoachValuateCard from "../components/CoachValuateCard";
-import SvgSaveButton from "../assets/icons/saveButton";
+import {
+  ValuationState,
+  getCoachValuationState,
+} from "../redux/data/ValuationSlice";
+import FlashMessage, { showMessage } from "react-native-flash-message";
 
 const CoachValuation = ({ navigation, route }: any) => {
   const teams = useSelector<RootState, TeamState>((state) => state.team);
+  const state = useSelector<RootState, ValuationState>(
+    (state) => state.valuation
+  );
+
   const type: string = route.params.type;
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(getCoachValuationState(type));
+  }, []);
 
   return (
     <KeyboardAvoidingView
       style={styles.container}
       behavior={Platform.OS === "ios" ? "padding" : undefined}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 40 : 0}
     >
+      <FlashMessage />
+      <GradientHeader
+        title="Qiymətləndirmə"
+        navigation={navigation}
+        showArrow={true}
+      />
       <ScrollView style={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
-        <GradientHeader
-          title="Qiymətləndirmə"
-          navigation={navigation}
-          showArrow={true}
-        />
         <FlatList
           data={teams.teams}
           scrollEnabled={false}
@@ -40,14 +52,32 @@ const CoachValuation = ({ navigation, route }: any) => {
           ListFooterComponent={() => <View style={{ height: 80 }} />}
           ItemSeparatorComponent={() => <View style={styles.separator} />}
           renderItem={({ item }: any) => (
-            <CoachValuateCard item={item} type={type} />
+            <CoachValuateCard
+              showSucessMessage={() => {
+                showMessage({
+                  message: "Qiymətləndirməniz uğurla qeydə alındı",
+                  type: "success",
+                  icon: "success",
+                });
+              }}
+              showFailureMessage={() => {
+                showMessage({
+                  message: "Qiymətləndirmənin doğru olduğundan əmin olun",
+                  type: "danger",
+                  icon: "danger",
+                });
+              }}
+              givenScore={
+                state.coachValuation.find((x) => x.toTeam._id === item._id)
+                  ?.givenScore
+              }
+              item={item}
+              type={type}
+            />
           )}
           keyExtractor={(item) => item._id.toString()}
         />
       </ScrollView>
-      <TouchableOpacity style={styles.saveButtonContainer}>
-        <SvgSaveButton />
-      </TouchableOpacity>
     </KeyboardAvoidingView>
   );
 };
@@ -80,11 +110,6 @@ const styles = StyleSheet.create({
   },
   boldText: {
     fontWeight: "500",
-  },
-  saveButtonContainer: {
-    alignSelf: "center",
-    bottom:Platform.OS==='ios'? undefined:10,
-    position:Platform.OS==='android'?"absolute":"relative"
   },
 });
 

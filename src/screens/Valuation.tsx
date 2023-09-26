@@ -15,7 +15,7 @@ import TextField from "../components/TextField";
 import { passwords } from "../data/valuationPasspowrds";
 
 const Valuation = ({ navigation }: any) => {
-  const [password, setPassword] = useState("jury2023");
+  const [password, setPassword] = useState("");
   const [isPasswordCorrect, setIsPasswordCorrect] = useState(true);
 
   const handleSubmit = () => {
@@ -113,7 +113,7 @@ const Valuation = ({ navigation }: any) => {
           }}
         >
           <TextField
-            label="6 reqemli parol"
+            label="6 rəqəmli parol"
             inputValue={password}
             onChangeText={(text) => setPassword(text)}
             isPasswordCorrect={isPasswordCorrect}
