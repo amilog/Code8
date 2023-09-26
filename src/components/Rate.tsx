@@ -9,7 +9,7 @@ import {
 import PointItem from "./PointItem";
 
 type RateProps = {
-  value: number; // Initial rating value
+  value: number;
   onChange: (rating: number) => void;
 };
 
@@ -22,7 +22,7 @@ const Rate: React.FC<RateProps> = ({ value, onChange }) => {
 
   const handleStarPress = (rating: number) => {
     setStarRating(rating);
-    onChange(rating); // Call the onChange prop with the selected rating
+    onChange(rating);
   };
 
   return (
