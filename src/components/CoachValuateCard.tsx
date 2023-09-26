@@ -6,6 +6,7 @@ import {
   View,
   Pressable,
   TextInput,
+  TouchableOpacity,
 } from "react-native";
 import Animated, {
   withSpring,
@@ -21,20 +22,34 @@ import { TeamsModel } from "../models/dataModels";
 import Metrics from "../styling/Metrics";
 import SvgTeamIcon from "../assets/icons/teamColorIcon";
 import { LinearGradient } from "expo-linear-gradient";
+import SvgSaveButton from "./SaveButton";
+import { AppDispatch } from "../redux/store";
+import { useDispatch } from "react-redux";
+import { postCoachValuateState } from "../redux/data/ValuationSlice";
 
 interface CoachValuateCardProps {
   item: TeamsModel;
   type: string;
+  showSucessMessage?: () => void;
+  showFailureMessage?: () => void;
+  givenScore?: number;
 }
 
-const CoachValuateCard: React.FC<CoachValuateCardProps> = ({ item, type }) => {
+const CoachValuateCard: React.FC<CoachValuateCardProps> = ({
+  item,
+  type,
+  showSucessMessage,
+  showFailureMessage,
+  givenScore,
+}) => {
   const [expanded, setExpanded] = useState(false);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(givenScore ? givenScore.toString() : "");
 
+  const dispatch = useDispatch<AppDispatch>();
   const cardHeight = useSharedValue(70);
 
   const toggleCardHeight = () => {
-    cardHeight.value = withSpring(expanded ? 70 : 200, {
+    cardHeight.value = withSpring(expanded ? 70 : 260, {
       damping: 10,
     });
 
@@ -51,68 +66,95 @@ const CoachValuateCard: React.FC<CoachValuateCardProps> = ({ item, type }) => {
     <Pressable
       style={[
         styles.teamCard,
+        { backgroundColor: givenScore ? "#F2F2F2" : "#fff" },
         Platform.OS === "android" && styles.androidShadow,
         Platform.OS === "ios" && styles.iosShadow,
       ]}
-      onPress={toggleCardHeight}
+      onPress={() => (givenScore ? {} : toggleCardHeight())}
     >
       <Animated.View style={[cardStyle, styles.cardContainer]}>
         <View style={styles.contentContainer}>
           <SvgTeamIcon fill={item.color} />
           <View style={styles.textContainer}>
             <Text style={styles.nameText}>{item.name}</Text>
-            <Text style={styles.roleText}>Qiymət: </Text>
+            <Text style={styles.roleText}>
+              Qiymət: {givenScore ? `${givenScore}/100` : "(Təyin olunmayıb)"}
+            </Text>
           </View>
         </View>
-        {expanded && (
-          <Animated.View
-            entering={FadeIn.duration(800)}
-            exiting={FadeOut.duration(200)}
-            style={styles.socialIconsContainer}
-          >
-            <Text style={styles.infoText}>
-              Zəhmət olmasa, komandanı hazırladığınız texniki tapşırıq üzrə 100
-              bal üzərindən qiymətləndirin{" "}
-              <Text style={styles.boldText}>
-                (Yadda saxla düyməsinə klik etdikdən sonra qiymətləndirməni
-                dəyişə bilmərsiniz)
-              </Text>
-            </Text>
-            <View style={styles.ratingContainer}>
-              <Text style={styles.ratingText}>
-                {type} üzrə texniki tapşırıq
-              </Text>
-              <LinearGradient
-                colors={[
-                  "rgba(255, 63, 60, 1)",
-                  "rgba(255, 66, 121, 1)",
-                  "rgba(223, 58, 154, 1)",
-                  "rgba(141, 68, 235, 1)",
-                  "rgba(43, 159, 239, 1)",
-                ]}
-                start={{ x: 0.0, y: 1.0 }}
-                end={{ x: 1.0, y: 1.0 }}
-                style={styles.gradient}
+        {givenScore
+          ? null
+          : expanded && (
+              <Animated.View
+                entering={FadeIn.duration(800)}
+                exiting={FadeOut.duration(200)}
+                style={styles.socialIconsContainer}
               >
-                <TextInput
-                  inputMode="numeric"
-                  keyboardType="numeric"
-                  cursorColor={"rgba(255, 63, 60, 1)"}
-                  onChangeText={(text) => {
-                    const numericValue = Math.min(
-                      100,
-                      Math.max(0, parseInt(text) || 0)
-                    );
-                    setValue(numericValue.toString());
+                <Text style={styles.infoText}>
+                  Zəhmət olmasa, komandanı hazırladığınız texniki tapşırıq üzrə
+                  100 bal üzərindən qiymətləndirin{" "}
+                  <Text style={styles.boldText}>
+                    (Yadda saxla düyməsinə klik etdikdən sonra qiymətləndirməni
+                    dəyişə bilmərsiniz)
+                  </Text>
+                </Text>
+                <View style={styles.ratingContainer}>
+                  <Text style={styles.ratingText}>
+                    {type} üzrə texniki tapşırıq
+                  </Text>
+                  <LinearGradient
+                    colors={[
+                      "rgba(255, 63, 60, 1)",
+                      "rgba(255, 66, 121, 1)",
+                      "rgba(223, 58, 154, 1)",
+                      "rgba(141, 68, 235, 1)",
+                      "rgba(43, 159, 239, 1)",
+                    ]}
+                    start={{ x: 0.0, y: 1.0 }}
+                    end={{ x: 1.0, y: 1.0 }}
+                    style={styles.gradient}
+                  >
+                    <TextInput
+                      inputMode="numeric"
+                      editable={givenScore ? false : true}
+                      keyboardType="numeric"
+                      cursorColor={"rgba(255, 63, 60, 1)"}
+                      onChangeText={(text) => {
+                        const numericValue = Math.min(
+                          100,
+                          Math.max(0, parseInt(text) || 0)
+                        );
+                        setValue(numericValue.toString());
+                      }}
+                      value={value}
+                      style={styles.ratingInput}
+                    />
+                    <Text style={styles.ratingScale}>/100</Text>
+                  </LinearGradient>
+                </View>
+                <TouchableOpacity
+                  style={styles.saveButtonContainer}
+                  onPress={() => {
+                    if (value.length > 0) {
+                      dispatch(
+                        postCoachValuateState({
+                          id: item._id,
+                          type: type,
+                          score: parseInt(value),
+                        })
+                      );
+                      toggleCardHeight();
+                      showSucessMessage && runOnJS(showSucessMessage)();
+                    }
+                    if (value.length === 0 || value === "0") {
+                      showFailureMessage && runOnJS(showFailureMessage)();
+                    }
                   }}
-                  value={value}
-                  style={styles.ratingInput}
-                />
-                <Text style={styles.ratingScale}>/100</Text>
-              </LinearGradient>
-            </View>
-          </Animated.View>
-        )}
+                >
+                  <SvgSaveButton />
+                </TouchableOpacity>
+              </Animated.View>
+            )}
       </Animated.View>
       <View style={styles.triangleContainer}>
         {expanded ? <SvgTopTriangle /> : <SvgTriangle />}
@@ -129,9 +171,13 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 16,
     width: "95%",
-    backgroundColor: "#fff",
     alignSelf: "center",
     justifyContent: "space-between",
+  },
+  saveButtonContainer: {
+    alignSelf: "center",
+    marginTop: 24,
+    marginLeft: 16,
   },
   gradient: {
     height: 41,
@@ -220,10 +266,9 @@ const styles = StyleSheet.create({
     width: 89,
     borderRadius: 3,
     backgroundColor: "#fff",
-    paddingHorizontal: 12,
-    paddingBottom: 6,
+    paddingLeft: 12,
+    paddingBottom: Platform.OS === "ios" ? 6 : 0,
     fontSize: 17,
-    justifyContent: "center",
     fontWeight: "500",
     lineHeight: 24,
     letterSpacing: 0.15,
