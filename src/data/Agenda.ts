@@ -30,11 +30,6 @@ export const AgendaData = [
     time: "18:00 - 19:00",
   },
   {
-    id: 7,
-    title: "Gerisayım dayanır",
-    time: "19:00",
-  },
-  {
     id: 8,
     title: "Təqdimat",
     time: "19:00 - 20:30",

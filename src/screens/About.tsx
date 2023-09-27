@@ -7,10 +7,13 @@ import {
   Image,
   Platform,
   SectionList,
+  Alert,
+  TouchableOpacity,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { AboutTeam, MemberType } from "../data/About";
 import DevCard from "../components/DevCard";
+import * as WebBrowser from "expo-web-browser";
 
 const About = () => {
   const renderItem = ({ item }: { item: MemberType }) => {
@@ -21,9 +24,21 @@ const About = () => {
     }
   };
 
+  const openLinkInBrowser = async (url: string) => {
+    try {
+      const supported = await WebBrowser.openBrowserAsync(url);
+      if (supported) {
+        await WebBrowser.openBrowserAsync(url);
+      }
+    } catch (error) {
+      Alert.alert("Link açılmadı");
+    }
+  };
+
   const RenderStuff = ({ item }: { item: MemberType }) => {
     return (
-      <View
+      <TouchableOpacity
+        onPress={() => openLinkInBrowser(item.linkedIn)}
         style={[
           styles.itemContainer,
           Platform.OS === "android" && styles.androidShadow,
@@ -48,13 +63,14 @@ const About = () => {
           <Text style={styles.nameText}>{item.name}</Text>
           <Text style={styles.positionText}>{item.position}</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
   const RenderStudent = ({ item }: { item: MemberType }) => {
     return (
-      <View
+      <TouchableOpacity
+        onPress={() => openLinkInBrowser(item.linkedIn)}
         style={[
           styles.itemContainer,
           Platform.OS === "android" && styles.androidShadow,
@@ -63,7 +79,7 @@ const About = () => {
         ]}
       >
         <DevCard item={item} />
-      </View>
+      </TouchableOpacity>
     );
   };
 
@@ -80,7 +96,7 @@ const About = () => {
         ListFooterComponent={() => <View style={{ height: 50 }} />}
         sections={[
           { title: "Tələbələr (Students)", data: AboutTeam.Students },
-          { title: "Əməkdaşlar (Stuff)", data: AboutTeam.Stuff },
+          { title: "Əməkdaşlar (Staff)", data: AboutTeam.Stuff },
         ]}
         keyExtractor={(item, index) => `${item.name}-${index}`}
         renderItem={renderItem}

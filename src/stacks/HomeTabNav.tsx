@@ -12,7 +12,7 @@ const HomeTabNav = ({routeName}: {routeName:string}) => {
     <Tab.Navigator
       initialRouteName={routeName ? routeName : "Teams"}
       screenOptions={{
-        swipeEnabled: false,
+        swipeEnabled: true,
         tabBarStyle: {
           backgroundColor: "#fff",
           paddingTop: 10,
