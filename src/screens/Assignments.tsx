@@ -7,6 +7,9 @@ import DataScienceIcon from "../assets/icons/taskCardIcons/DataScienceIcon";
 import FrontIcon from "../assets/icons/taskCardIcons/FrontIcon";
 import MobileIcon from "../assets/icons/taskCardIcons/MobileIcon";
 import TaskCard from "../components/TaskCard";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import { Text } from "react-native";
 
 interface TaskData {
   title: string;
@@ -16,30 +19,66 @@ interface TaskData {
 
 const taskData: TaskData[] = [
   { title: "UX/UI üzrə texniki tapşırıq", icon: <UiUxIcon />, screen: "UiUx" },
-  { title: "Front-End üzrə texniki tapşırıq", icon: <FrontIcon />, screen: "Frontend" },
-  { title: "Back-End üzrə texniki tapşırıq", icon: <BackendIcon />, screen: "Backend" },
-  { title: "Mobile Development üzrə texniki tapşırıq", icon: <MobileIcon />, screen: "Mobile" },
-  { title: "Data Science üzrə texniki tapşırıq", icon: <DataScienceIcon />, screen: "DataScience" },
-  { title: "Cyber Security üzrə texniki tapşırıq", icon: <CyberSecIcon />, screen: "CyberSec" },
+  {
+    title: "Front-End üzrə texniki tapşırıq",
+    icon: <FrontIcon />,
+    screen: "Frontend",
+  },
+  {
+    title: "Back-End üzrə texniki tapşırıq",
+    icon: <BackendIcon />,
+    screen: "Backend",
+  },
+  {
+    title: "Mobile Development üzrə texniki tapşırıq",
+    icon: <MobileIcon />,
+    screen: "Mobile",
+  },
+  {
+    title: "Data Science üzrə texniki tapşırıq",
+    icon: <DataScienceIcon />,
+    screen: "DataScience",
+  },
+  {
+    title: "Cyber Security üzrə texniki tapşırıq",
+    icon: <CyberSecIcon />,
+    screen: "CyberSec",
+  },
 ];
 
-  const Assignments = () => {
-    return (
-      <View style={styles.container}>
+const Assignments = () => {
+  const state = useSelector<RootState, any>((state: any) => state.valuation);
+
+  return (
+    <View style={styles.container}>
+      {state.isStarted.start ? (
         <FlatList
-        showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
           data={taskData}
           keyExtractor={(item, index) => index.toString()}
           ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
           ListHeaderComponent={() => <View style={{ height: 32 }} />}
           ListFooterComponent={() => <View style={{ height: 50 }} />}
           renderItem={({ item, index }) => (
-            <TaskCard title={item.title} icon={item.icon} screen={item.screen} />
+            <TaskCard
+              title={item.title}
+              icon={item.icon}
+              screen={item.screen}
+            />
           )}
         />
-      </View>
-    );
-  };
+      ) : (
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <Text style={{ fontSize: 18, fontWeight: "500", color: "#000" }}>
+            Yarışmanın başlamasını gözləyin...
+          </Text>
+        </View>
+      )}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

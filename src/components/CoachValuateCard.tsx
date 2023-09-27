@@ -44,7 +44,6 @@ const CoachValuateCard: React.FC<CoachValuateCardProps> = ({
 }) => {
   const [expanded, setExpanded] = useState(false);
   const [value, setValue] = useState(givenScore ? givenScore.toString() : "");
-
   const dispatch = useDispatch<AppDispatch>();
   const cardHeight = useSharedValue(70);
 
@@ -116,6 +115,7 @@ const CoachValuateCard: React.FC<CoachValuateCardProps> = ({
                   >
                     <TextInput
                       inputMode="numeric"
+                      defaultValue={givenScore ? givenScore.toString() : ""}
                       editable={givenScore ? false : true}
                       keyboardType="numeric"
                       cursorColor={"rgba(255, 63, 60, 1)"}
@@ -135,7 +135,9 @@ const CoachValuateCard: React.FC<CoachValuateCardProps> = ({
                 <TouchableOpacity
                   style={styles.saveButtonContainer}
                   onPress={() => {
-                    if (value.length > 0) {
+                    if (value.length === 0 || value === "0") {
+                      showFailureMessage && runOnJS(showFailureMessage)();
+                    } else {
                       dispatch(
                         postCoachValuateState({
                           id: item._id,
@@ -144,10 +146,8 @@ const CoachValuateCard: React.FC<CoachValuateCardProps> = ({
                         })
                       );
                       toggleCardHeight();
+                      setValue("");
                       showSucessMessage && runOnJS(showSucessMessage)();
-                    }
-                    if (value.length === 0 || value === "0") {
-                      showFailureMessage && runOnJS(showFailureMessage)();
                     }
                   }}
                 >
