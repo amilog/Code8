@@ -136,6 +136,10 @@ export const ValuationSlice = createSlice({
       };
       state.juryValuation = [...state.juryValuation, data];
     });
+    builder.addCase(getCoachValuationState.pending, (state, action) => {
+      state.loading = true;
+      state.error = null;
+    });
     builder.addCase(getCoachValuationState.fulfilled, (state, action) => {
       state.loading = false;
       state.error = null;

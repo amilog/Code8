@@ -7,7 +7,6 @@ import {
   View,
   Pressable,
   TouchableOpacity,
-  Linking,
   Alert,
 } from "react-native";
 import Animated, {
@@ -25,6 +24,7 @@ import SvgBehance from "../assets/icons/behance";
 import SvgGithub from "../assets/icons/github";
 import { MembersModel } from "../models/dataModels";
 import Metrics from "../styling/Metrics";
+import * as WebBrowser from "expo-web-browser";
 
 const MemberCard = ({ item }: { item: MembersModel }) => {
   const [expanded, setExpanded] = useState(false);
@@ -47,12 +47,9 @@ const MemberCard = ({ item }: { item: MembersModel }) => {
 
   const openLinkInBrowser = async (url: string) => {
     try {
-      const supported = await Linking.canOpenURL(url);
-
+      const supported = await WebBrowser.openBrowserAsync(url);
       if (supported) {
-        await Linking.openURL(url);
-      } else {
-        showErrorAlert("Link açılmadı");
+        await WebBrowser.openBrowserAsync(url);
       }
     } catch (error) {
       showErrorAlert("Link açılmadı");
@@ -79,7 +76,14 @@ const MemberCard = ({ item }: { item: MembersModel }) => {
     >
       <Animated.View style={[cardStyle, styles.cardContainer]}>
         <View style={styles.contentContainer}>
-          <Image source={{ uri: item.image }} style={styles.profileImage} />
+          {item.image.length > 0 ? (
+            <Image source={{ uri: item.image }} style={styles.profileImage} />
+          ) : (
+            <Image
+              source={require("../assets/images/noProfile.jpeg")}
+              style={styles.profileImage}
+            />
+          )}
           <View style={styles.textContainer}>
             <Text style={styles.nameText}>{item.name}</Text>
             <Text style={styles.roleText}>{item.role}</Text>
@@ -94,15 +98,23 @@ const MemberCard = ({ item }: { item: MembersModel }) => {
             exiting={FadeOut.duration(200)}
             style={styles.socialIconsContainer}
           >
-            <TouchableOpacity onPress={() => openLinkInBrowser(item.linkedIn)}>
-              <SvgLinkedIn />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => openLinkInBrowser(item.behance)}>
-              <SvgBehance />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => openLinkInBrowser(item.github)}>
-              <SvgGithub />
-            </TouchableOpacity>
+            {item.linkedIn.length > 0 && (
+              <TouchableOpacity
+                onPress={() => openLinkInBrowser(item.linkedIn)}
+              >
+                <SvgLinkedIn />
+              </TouchableOpacity>
+            )}
+            {item.behance.length > 0 && (
+              <TouchableOpacity onPress={() => openLinkInBrowser(item.behance)}>
+                <SvgBehance />
+              </TouchableOpacity>
+            )}
+            {item.github.length > 0 && (
+              <TouchableOpacity onPress={() => openLinkInBrowser(item.github)}>
+                <SvgGithub />
+              </TouchableOpacity>
+            )}
           </Animated.View>
         )}
       </Animated.View>

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import {
+  ActivityIndicator,
   FlatList,
   KeyboardAvoidingView,
   Platform,
@@ -25,13 +26,27 @@ const CoachValuation = ({ navigation, route }: any) => {
   const state = useSelector<RootState, ValuationState>(
     (state) => state.valuation
   );
-
   const type: string = route.params.type;
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     dispatch(getCoachValuationState(type));
   }, []);
+
+  if (state.loading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "#fff",
+        }}
+      >
+        <ActivityIndicator size="small" color="#FF647C" />
+      </View>
+    );
+  }
 
   return (
     <KeyboardAvoidingView

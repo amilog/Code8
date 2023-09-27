@@ -28,7 +28,7 @@ const InfoTopNavigation = ({ navigation, routeName }: any) => {
     <Tab.Navigator
       initialRouteName={routeName || "AdvanceCareer"}
       screenOptions={{
-        swipeEnabled: false,
+        swipeEnabled: true,
         animationEnabled: true,
         tabBarStyle: {
           backgroundColor: "#fff",

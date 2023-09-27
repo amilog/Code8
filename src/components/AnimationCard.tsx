@@ -4,11 +4,10 @@ import {
   Image,
   ImageBackground,
   Text,
-  FlatList,
   ActivityIndicator,
   Dimensions,
 } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import CircleIcon from "../assets/icons/animationCardSvgs/circleIcon";
 import ArrowRightIcon from "../assets/icons/animationCardSvgs/arrowRightIcon";
 import Animated, {
@@ -26,6 +25,7 @@ import { useSelector } from "react-redux";
 
 const AnimationCard = () => {
   const teams = useSelector<RootState, TeamState>((state) => state.team);
+  const imageRef = useRef<Image>(null);
   const getRandomTeam = () => {
     const randomIndex = Math.floor(Math.random() * teams.teams.length);
     return teams.teams[randomIndex];
@@ -117,7 +117,7 @@ const AnimationCard = () => {
           <Carousel
             loop
             vertical
-            pagingEnabled={false}
+            enabled={false}
             width={100}
             height={100}
             autoPlay={true}
@@ -129,12 +129,25 @@ const AnimationCard = () => {
             renderItem={({ item }) => {
               return (
                 <>
-                  <Image
-                    style={styles.image}
-                    source={{
-                      uri: item.image,
-                    }}
-                  />
+                  {item.image === "" ? (
+                    <View
+                      style={{
+                        position: "absolute",
+                        top: 40,
+                        left: 30,
+                      }}
+                    >
+                      <ActivityIndicator size="large" color="#fff" />
+                    </View>
+                  ) : (
+                    <Image
+                      ref={imageRef}
+                      style={styles.image}
+                      source={{
+                        uri: item.image,
+                      }}
+                    />
+                  )}
                   <View
                     style={{
                       position: "absolute",
