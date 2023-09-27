@@ -47,10 +47,7 @@ const MemberCard = ({ item }: { item: MembersModel }) => {
 
   const openLinkInBrowser = async (url: string) => {
     try {
-      const supported = await WebBrowser.openBrowserAsync(url);
-      if (supported) {
-        await WebBrowser.openBrowserAsync(url);
-      }
+      await WebBrowser.openBrowserAsync(url);
     } catch (error) {
       showErrorAlert("Link açılmadı");
     }
