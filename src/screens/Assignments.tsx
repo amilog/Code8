@@ -9,7 +9,6 @@ import MobileIcon from "../assets/icons/taskCardIcons/MobileIcon";
 import TaskCard from "../components/TaskCard";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-import { ValuationState } from "../redux/data/ValuationSlice";
 import { Text } from "react-native";
 
 interface TaskData {

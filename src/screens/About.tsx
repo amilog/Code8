@@ -26,10 +26,7 @@ const About = () => {
 
   const openLinkInBrowser = async (url: string) => {
     try {
-      const supported = await WebBrowser.openBrowserAsync(url);
-      if (supported) {
-        await WebBrowser.openBrowserAsync(url);
-      }
+      await WebBrowser.openBrowserAsync(url);
     } catch (error) {
       Alert.alert("Link açılmadı");
     }
