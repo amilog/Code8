@@ -72,8 +72,8 @@ const Assignments = () => {
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
-          <Text style={{ fontSize: 18, fontWeight: "bold", color: "#000" }}>
-            Yarışmanın başlamasını gözləyin
+          <Text style={{ fontSize: 18, fontWeight: "500", color: "#000" }}>
+            Yarışmanın başlamasını gözləyin...
           </Text>
         </View>
       )}
