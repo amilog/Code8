@@ -46,7 +46,7 @@ const DataScience = ({ navigation }: any) => {
           <Text style={styles.text}>I. Data Understanding(15 bal)</Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
-              <Text style={styles.text}>Adımlar</Text>
+              <Text style={styles.text}>Addımlar</Text>
             </Unorderedlist>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
@@ -78,7 +78,7 @@ const DataScience = ({ navigation }: any) => {
           <Text style={styles.text}>II. Data Preparation(30 bal)Izahat</Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
-              <Text style={styles.text}>Adımlar</Text>
+              <Text style={styles.text}>Addımlar</Text>
             </Unorderedlist>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
@@ -107,7 +107,7 @@ const DataScience = ({ navigation }: any) => {
           <Text style={styles.text}>III. Modeling.(15 bal)</Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
-              <Text style={styles.text}>Adımlar</Text>
+              <Text style={styles.text}>Addımlar</Text>
             </Unorderedlist>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>Modelləşdirmə üsullarını seçin</Text>
@@ -128,7 +128,7 @@ const DataScience = ({ navigation }: any) => {
           <Text style={styles.text}>IV. Evaluation(15)</Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
-              <Text style={styles.text}>Adımlar</Text>
+              <Text style={styles.text}>Addımlar</Text>
             </Unorderedlist>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>Modelin qiymətləndirilməsi:</Text>
