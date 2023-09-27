@@ -72,7 +72,11 @@ const Home = ({ navigation }: any) => {
         navigation={navigation}
         showValution={true}
       />
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        bounces={false}
+        bouncesZoom={false}
+      >
         <Pressable
           onPress={() =>
             navigation.navigate("HomeCard", { routeName: "Teams" })
@@ -236,7 +240,6 @@ const styles = StyleSheet.create({
     color: "#000",
     lineHeight: 16,
     letterSpacing: 0.5,
-    // backgroundColor: "red",
     marginRight: Dimensions.get("window").width / 13,
   },
 });
