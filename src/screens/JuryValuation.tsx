@@ -64,7 +64,7 @@ const JuryValuation = ({ navigation }: any) => {
 
     return (
       <TouchableOpacity
-        disabled={juryValuationItem}
+        disabled={juryValuationItem ? true : false}
         style={[
           styles.teamCard,
           {
