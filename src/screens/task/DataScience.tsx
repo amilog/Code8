@@ -18,9 +18,17 @@ import CircleArrow from "../../assets/icons/circleArrow";
 const DataScience = ({ navigation }: any) => {
   const openLinkInBrowser = async () => {
     try {
-      await WebBrowser.openBrowserAsync(
-        "https://st2.depositphotos.com/1823785/7833/i/950/depositphotos_78333908-stock-photo-many-people-hands-hlding-red.jpg"
+      const supported = await Linking.canOpenURL(
+        "https://drive.google.com/drive/folders/18YYcZV4YOr0iEXA_XwvSB8i_DRuQF6tK"
       );
+
+      if (supported) {
+        await Linking.openURL(
+          "https://drive.google.com/drive/folders/18YYcZV4YOr0iEXA_XwvSB8i_DRuQF6tK"
+        );
+      } else {
+        showErrorAlert("Link açılmadı");
+      }
     } catch (error) {
       showErrorAlert("Link açılmadı");
     }
