@@ -24,7 +24,7 @@ const Mobile = ({ navigation }: any) => {
             React Native CLI ilə aşağıdakı ekranları və funksiyonları
             hazırlayın:
           </Text>
-          <Text style={styles.text}>1. Başlanğıc Ekranı (25 bal):</Text>
+          <Text style={styles.headerText}>1. Başlanğıc Ekranı (25 bal):</Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
@@ -35,7 +35,7 @@ const Mobile = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>2. Müraciətlər Ekranı (20 bal):</Text>
+          <Text style={styles.headerText}>2. Müraciətlər Ekranı (20 bal):</Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
@@ -57,7 +57,7 @@ const Mobile = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>
+          <Text style={styles.headerText}>
             3. Kursa Qoşulma və Müraciət Ekranları (45 bal):
           </Text>
           <View style={styles.steps}>
@@ -75,7 +75,7 @@ const Mobile = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>4. Bildirişlər (10 bal):</Text>
+          <Text style={styles.headerText}>4. Bildirişlər (10 bal):</Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
@@ -85,7 +85,7 @@ const Mobile = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>Digər Tələblər:</Text>
+          <Text style={styles.headerText}>Digər Tələblər:</Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
@@ -116,11 +116,11 @@ const Mobile = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 20 }} />
-          <Text style={styles.text}>Uğurlar!</Text>
+          <Text style={styles.headerText}>Uğurlar!</Text>
           <View style={{ height: 10 }} />
-          <Text style={styles.text}>
+          <Text style={styles.headerText}>
             Bu dəyişikliklərlə, mobil tətbiqda yalnız müraciət detallarına
-            baxma, kursa qoşulma və bildirişlər funksiyaları olacaq.!
+            baxma, kursa qoşulma və bildirişlər funksiyaları olacaq!
           </Text>
         </View>
       </ScrollView>
@@ -136,9 +136,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     paddingTop: Platform.OS == "ios" ? 40 : StatusBar.currentHeight! + 20,
   },
-  text: {
+  headerText: {
     fontSize: 18,
     fontWeight: "500",
+    color: "#000000",
+    lineHeight: 26,
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: "400",
     color: "#000000",
     lineHeight: 26,
   },
