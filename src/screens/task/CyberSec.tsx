@@ -36,7 +36,7 @@ const CyberSec = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 20 }} />
-          <Text style={styles.text}>
+          <Text style={styles.headerText}>
             1. xdr serverinə wazuh servisini quraşdırın (10 bal)
           </Text>
           <View style={styles.steps}>
@@ -49,7 +49,7 @@ const CyberSec = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>
+          <Text style={styles.headerText}>
             2. waf maşınında nginx servisini və modsecurity connectorunu
             quraşdırın.
           </Text>
@@ -81,7 +81,7 @@ const CyberSec = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>
+          <Text style={styles.headerText}>
             3. wazuh, waf və dockera gələn sorğuları (http, ssh) izləyin və əgər
             kimsə brute force, injection (command, sql, xss) etmək istəyirsə
             onun ip adresini active response özəlliyi ilə 1 saatlıq blocka
@@ -95,13 +95,13 @@ const CyberSec = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>
+          <Text style={styles.headerText}>
             4. Komandanın digər üzvləri ilə birgə işləməli,baş verə biləcək
             vulnerability qarşı tədbirlər görməli,məsləhətlər verilməlidir. (20
             bal)
           </Text>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>Təqdimatın hazırlanması: </Text>
+          <Text style={styles.headerText}>Təqdimatın hazırlanması: </Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
@@ -112,12 +112,12 @@ const CyberSec = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>Pentest: (30 bal)</Text>
+          <Text style={styles.headerText}>Pentest: (30 bal)</Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
                 Digər komandanın hazırladığı proyekti penetration test edin və
-                yaranan boşluqları report edin
+                yaranan boşluqları report edin{"\n"}
               </Text>
             </Unorderedlist>
             <Unorderedlist bulletUnicode={0x2022}>
@@ -156,9 +156,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     paddingTop: Platform.OS == "ios" ? 40 : StatusBar.currentHeight! + 20,
   },
-  text: {
+  headerText: {
     fontSize: 18,
     fontWeight: "500",
+    color: "#000000",
+    lineHeight: 26,
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: "400",
     color: "#000000",
     lineHeight: 26,
   },

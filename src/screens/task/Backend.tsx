@@ -16,7 +16,7 @@ const Backend = ({ navigation }: any) => {
       <GradientHeader title="Back-End" showArrow navigation={navigation} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.textContainer}>
-          <Text style={styles.text}>1. Introduction (10 bal)</Text>
+          <Text style={styles.headerText}>1. Introduction (10 bal)</Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
@@ -33,7 +33,7 @@ const Backend = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>
+          <Text style={styles.headerText}>
             2. Cihaz Qeydiyyatı Endpointi (10 bal)
           </Text>
           <View style={styles.steps}>
@@ -45,7 +45,9 @@ const Backend = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>3. Müraciətlər Endpointi (5 bal)</Text>
+          <Text style={styles.headerText}>
+            3. Müraciətlər Endpointi (5 bal)
+          </Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
@@ -56,7 +58,9 @@ const Backend = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>4. Kursa Qoşul Endpointi (10 bal)</Text>
+          <Text style={styles.headerText}>
+            4. Kursa Qoşul Endpointi (10 bal)
+          </Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
@@ -71,7 +75,7 @@ const Backend = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>
+          <Text style={styles.headerText}>
             5. Kursa Müraciət Et Endpointi (10 bal)
           </Text>
           <View style={styles.steps}>
@@ -84,7 +88,9 @@ const Backend = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>6. Görüş Təyin Et Endpointi (10 bal)</Text>
+          <Text style={styles.headerText}>
+            6. Görüş Təyin Et Endpointi (10 bal)
+          </Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
@@ -95,7 +101,9 @@ const Backend = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>7. Admin Giriş Endpointi (10 bal)</Text>
+          <Text style={styles.headerText}>
+            7. Admin Giriş Endpointi (10 bal)
+          </Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
@@ -105,7 +113,9 @@ const Backend = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>8. İstifadəçilər Endpointi (5 bal)</Text>
+          <Text style={styles.headerText}>
+            8. İstifadəçilər Endpointi (5 bal)
+          </Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
@@ -116,7 +126,9 @@ const Backend = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>9. İstəyi Qəbul Et Endpointi (10 bal)</Text>
+          <Text style={styles.headerText}>
+            9. İstəyi Qəbul Et Endpointi (10 bal)
+          </Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
@@ -130,7 +142,9 @@ const Backend = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>10. İstəyi Rədd Et Endpointi (5 bal)</Text>
+          <Text style={styles.headerText}>
+            10. İstəyi Rədd Et Endpointi (5 bal)
+          </Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
@@ -144,7 +158,7 @@ const Backend = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>
+          <Text style={styles.headerText}>
             11. Görüş Tarixini Dəyiş Endpointi (5 bal)
           </Text>
           <View style={styles.steps}>
@@ -156,7 +170,7 @@ const Backend = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>
+          <Text style={styles.headerText}>
             12. Azure Portala Publish Etmək (10 bal)
           </Text>
           <View style={styles.steps}>
@@ -181,9 +195,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     paddingTop: Platform.OS == "ios" ? 40 : StatusBar.currentHeight! + 20,
   },
-  text: {
+  headerText: {
     fontSize: 18,
     fontWeight: "500",
+    color: "#000000",
+    lineHeight: 26,
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: "400",
     color: "#000000",
     lineHeight: 26,
   },

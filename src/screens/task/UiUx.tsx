@@ -17,7 +17,7 @@ const UiUx = ({ navigation }: any) => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.textContainer}>
           <Text style={styles.title}>Ediləcəklər: FormApp, Dashboard</Text>
-          <Text style={styles.text}>1. FormApp: (45 bal)</Text>
+          <Text style={styles.headerText}>1. FormApp: (45 bal)</Text>
           <View style={styles.steps}>
             <Text style={styles.text}>
               Screens: Logo screen, Login, Home (about form details: status,
@@ -25,7 +25,9 @@ const UiUx = ({ navigation }: any) => {
             </Text>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>2. Benchmark və Ideation:(10 bal)</Text>
+          <Text style={styles.headerText}>
+            2. Benchmark və Ideation:(10 bal)
+          </Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
@@ -43,7 +45,7 @@ const UiUx = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>3. Dashboard: (45 bal)</Text>
+          <Text style={styles.headerText}>3. Dashboard: (45 bal)</Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
@@ -66,7 +68,7 @@ const UiUx = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>Prototyping (Optional):</Text>
+          <Text style={styles.headerText}>Prototyping (Optional):</Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
@@ -78,7 +80,7 @@ const UiUx = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>Təqdimatın hazırlanması: </Text>
+          <Text style={styles.headerText}>Təqdimatın hazırlanması: </Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
@@ -89,7 +91,7 @@ const UiUx = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>
+          <Text style={styles.headerText}>
             Hazırlanan product üçün aktiv olaraq dev-lərlə əlaqədə olun:{" "}
           </Text>
           <View style={styles.steps}>
@@ -102,7 +104,7 @@ const UiUx = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>User Testing (Optional): </Text>
+          <Text style={styles.headerText}>User Testing (Optional): </Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
@@ -119,7 +121,7 @@ const UiUx = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>Yekun təqdimat: </Text>
+          <Text style={styles.headerText}>Yekun təqdimat: </Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
@@ -145,7 +147,7 @@ const UiUx = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 20 }} />
-          <Text style={styles.text}>Uğurlar!</Text>
+          <Text style={styles.headerText}>Uğurlar!</Text>
           <View style={{ height: 10 }} />
         </View>
       </ScrollView>
@@ -161,9 +163,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     paddingTop: Platform.OS == "ios" ? 40 : StatusBar.currentHeight! + 20,
   },
-  text: {
+  headerText: {
     fontSize: 18,
     fontWeight: "500",
+    color: "#000000",
+    lineHeight: 26,
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: "400",
     color: "#000000",
     lineHeight: 26,
   },
