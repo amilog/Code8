@@ -145,7 +145,7 @@ const AnimationCard = () => {
                       ref={imageRef}
                       style={styles.image}
                       source={{
-                        uri: item.image,
+                        uri: `https://firebasestorage.googleapis.com/v0/b/image-36a5a.appspot.com/o/${item._id}.jpeg?alt=media&token=2f7c16fd-dc5b-4406-8c9e-4e0dfabb4ff6&_gl=1*143gb7z*_ga*MTIwMTQwNTUzNS4xNjk1OTA5MTg2*_ga_CW55HF8NVT*MTY5NTkyMjU3NC4yLjEuMTY5NTkyMjg2Ny4zLjAuMA..`,
                       }}
                     />
                   )}

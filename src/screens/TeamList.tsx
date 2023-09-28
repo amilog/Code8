@@ -60,32 +60,21 @@ const TeamList = ({ navigation }: any) => {
   };
   return (
     <>
-      {teamState.loading ? (
-        <View
-          style={[
-            styles.container,
-            { justifyContent: "center", alignItems: "center" },
-          ]}
-        >
-          <ActivityIndicator size="large" color="gray" />
-        </View>
-      ) : (
-        <View style={styles.container}>
-          <FlatList
-            refreshing={false}
-            onRefresh={() => {
-              dispatch(getTeamState());
-            }}
-            data={teamState.teams}
-            showsVerticalScrollIndicator={false}
-            keyExtractor={(item) => item._id}
-            renderItem={renderVerticalItem}
-            ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
-            ListHeaderComponent={() => <View style={{ height: 32 }} />}
-            ListFooterComponent={() => <View style={{ height: 50 }} />}
-          />
-        </View>
-      )}
+      <View style={styles.container}>
+        <FlatList
+          refreshing={false}
+          onRefresh={() => {
+            dispatch(getTeamState());
+          }}
+          data={teamState.teams}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item) => item._id}
+          renderItem={renderVerticalItem}
+          ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
+          ListHeaderComponent={() => <View style={{ height: 32 }} />}
+          ListFooterComponent={() => <View style={{ height: 50 }} />}
+        />
+      </View>
     </>
   );
 };

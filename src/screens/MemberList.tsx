@@ -1,5 +1,4 @@
 import {
-  ActivityIndicator,
   FlatList,
   Platform,
   StyleSheet,
@@ -13,6 +12,7 @@ import { AppDispatch, RootState } from "../redux/store";
 import { getTeamByIdState } from "../redux/data/TeamSlice";
 import { MembersModel } from "../models/dataModels";
 import MemberCard from "../components/MemberCard";
+import Skleton from "../components/Skeleton";
 
 const MemberList = ({ navigation, route }: any) => {
   const { teamName, teamId } = route.params;
@@ -37,7 +37,10 @@ const MemberList = ({ navigation, route }: any) => {
       />
       {state.byIdLoading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size={"large"} color={"gray"} />
+          <Skleton />
+          <Skleton />
+          <Skleton />
+          <Skleton />
         </View>
       ) : (
         <FlatList
@@ -67,7 +70,9 @@ const styles = StyleSheet.create({
   },
   loadingContainer: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "#fff",
+    marginHorizontal: 2,
+    marginTop: 16,
+    gap: 12,
   },
 });
