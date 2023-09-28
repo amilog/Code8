@@ -19,12 +19,12 @@ const DataScience = ({ navigation }: any) => {
   const openLinkInBrowser = async () => {
     try {
       const supported = await Linking.canOpenURL(
-        "https://st2.depositphotos.com/1823785/7833/i/950/depositphotos_78333908-stock-photo-ny-people-hands-holding-red.jpg"
+        "https://drive.google.com/drive/folders/18YYcZV4YOr0iEXA_XwvSB8i_DRuQF6tK"
       );
 
       if (supported) {
         await Linking.openURL(
-          "https://st2.depositphotos.com/1823785/7833/i/950/depositphotos_78333908-stock-photo-many-people-hands-hlding-red.jpg"
+          "https://drive.google.com/drive/folders/18YYcZV4YOr0iEXA_XwvSB8i_DRuQF6tK"
         );
       } else {
         showErrorAlert("Link açılmadı");
