@@ -15,7 +15,7 @@ import Animated, {
   runOnJS,
   FadeIn,
   FadeOut,
-  withTiming,
+  withSpring,
 } from "react-native-reanimated";
 import SvgTriangle from "../assets/icons/triangleBottom";
 import SvgTopTriangle from "../assets/icons/triangleTop";
@@ -24,7 +24,7 @@ import SvgBehance from "../assets/icons/behance";
 import SvgGithub from "../assets/icons/github";
 import { MembersModel } from "../models/dataModels";
 import Metrics from "../styling/Metrics";
-import * as WebBrowser from "expo-web-browser";
+import * as Linking from 'expo-linking';
 
 const MemberCard = ({ item }: { item: MembersModel }) => {
   const [expanded, setExpanded] = useState(false);
@@ -33,9 +33,10 @@ const MemberCard = ({ item }: { item: MembersModel }) => {
   const cardHeight = useSharedValue(80);
 
   const toggleCardHeight = () => {
-    cardHeight.value = withTiming(expanded ? 80 : 160, {
-      duration: 300,
-    });
+    cardHeight.value = withSpring(expanded ? 80 : 160, {
+      damping: 12,
+      stiffness: 90,
+      });
 
     runOnJS(setExpanded)(!expanded);
   };
@@ -48,7 +49,7 @@ const MemberCard = ({ item }: { item: MembersModel }) => {
 
   const openLinkInBrowser = async (url: string) => {
     try {
-      await WebBrowser.openBrowserAsync(url);
+      await Linking.openURL(url);
     } catch (error) {
       showErrorAlert("Link açılmadı");
     }

@@ -8,7 +8,7 @@ const HomeCard = ({ navigation,route }: any) => {
   return (
     <View style={styles.container}>
       <GradientHeader
-        title={"CODE8"}
+        title={"Code8"}
         navigation={navigation}
         showValution={true}
         showArrow={true}

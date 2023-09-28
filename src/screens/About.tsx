@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -13,9 +13,11 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { AboutTeam, MemberType } from "../data/About";
 import DevCard from "../components/DevCard";
-import * as WebBrowser from "expo-web-browser";
+import * as Linking from "expo-linking";
 
 const About = () => {
+  const [loading, setLoading] = useState(true);
+
   const renderItem = ({ item }: { item: MemberType }) => {
     if (item.position === "Developer (Proqramçı)") {
       return <RenderStudent item={item} />;
@@ -26,7 +28,7 @@ const About = () => {
 
   const openLinkInBrowser = async (url: string) => {
     try {
-      await WebBrowser.openBrowserAsync(url);
+      await Linking.openURL(url);
     } catch (error) {
       Alert.alert("Link açılmadı");
     }
@@ -54,7 +56,27 @@ const About = () => {
           end={{ x: 1.0, y: 1.0 }}
           style={styles.gradient}
         >
-          <Image source={{ uri: item.image }} style={styles.image} />
+          <View>
+            <Image
+              source={{ uri: item.image }}
+              style={styles.image}
+              onLoad={() => {
+                setLoading(false);
+              }}
+            />
+            <Image
+              source={require("../assets/images/noProfile.jpeg")}
+              style={{
+                opacity: loading ? 1 : 0,
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: 48,
+                height: 48,
+                borderRadius: 100,
+              }}
+            />
+          </View>
         </LinearGradient>
         <View style={styles.textContainer}>
           <Text style={styles.nameText}>{item.name}</Text>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -13,6 +13,7 @@ import {
 import { Video, ResizeMode } from "expo-av";
 import * as Animatable from "react-native-animatable";
 import SvgPlayButton from "../assets/icons/PlayButton";
+import { useFocusEffect } from "@react-navigation/native";
 
 const LastHackathon = () => {
   const video = useRef<Video>(null);
@@ -39,19 +40,22 @@ const LastHackathon = () => {
     setIsPlaying(!isPlaying);
   };
 
-  useEffect(() => {
-    let controllerTimeout: NodeJS.Timeout;
+  useFocusEffect(
+    useCallback(() => {
+      let controllerTimeout: NodeJS.Timeout;
 
-    if (showController) {
-      controllerTimeout = setTimeout(() => {
-        setShowController(false);
-      }, 3000);
-    }
+      if (showController) {
+        controllerTimeout = setTimeout(() => {
+          setShowController(false);
+        }, 3000);
+      }
 
-    return () => {
-      clearTimeout(controllerTimeout);
-    };
-  }, [showController]);
+      return () => {
+        clearTimeout(controllerTimeout);
+        video.current?.pauseAsync();
+      };
+    }, [showController])
+  );
 
   const renderVideoController = () => {
     const controllerAnimation = loading
