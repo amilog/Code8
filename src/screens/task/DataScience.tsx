@@ -18,17 +18,10 @@ import CircleArrow from "../../assets/icons/circleArrow";
 const DataScience = ({ navigation }: any) => {
   const openLinkInBrowser = async () => {
     try {
-      const supported = await Linking.canOpenURL(
-        "https://drive.google.com/drive/folders/18YYcZV4YOr0iEXA_XwvSB8i_DRuQF6tK"
-      );
-
-      if (supported) {
-        await Linking.openURL(
+        await WebBrowser.openBrowserAsync(
           "https://drive.google.com/drive/folders/18YYcZV4YOr0iEXA_XwvSB8i_DRuQF6tK"
         );
-      } else {
-        showErrorAlert("Link açılmadı");
-      }
+      
     } catch (error) {
       showErrorAlert("Link açılmadı");
     }

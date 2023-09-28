@@ -90,7 +90,7 @@ const CyberSec = ({ navigation }: any) => {
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
-                Baş verən hadisəni dashboard-la təqdim edin
+                Baş verən hadisəni dashboard-la təqdim edin.
               </Text>
             </Unorderedlist>
           </View>
@@ -117,29 +117,26 @@ const CyberSec = ({ navigation }: any) => {
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
                 Digər komandanın hazırladığı proyekti penetration test edin və
-                yaranan boşluqları report edin{"\n"}
+                yaranan boşluqları report edin.{"\n"}
               </Text>
             </Unorderedlist>
             <Unorderedlist bulletUnicode={0x2022}>
-              <Text style={styles.text1}>1-ci komanda → 2-ci komanda</Text>
+              <Text style={styles.text1}>Proxies → CodeGate</Text>
             </Unorderedlist>
             <Unorderedlist bulletUnicode={0x2022}>
-              <Text style={styles.text1}>2-ci komanda → 3-cu komanda</Text>
+              <Text style={styles.text1}>CodeGate → Kerberos</Text>
             </Unorderedlist>
             <Unorderedlist bulletUnicode={0x2022}>
-              <Text style={styles.text1}>3-cu komanda → 4-cu komanda</Text>
+              <Text style={styles.text1}>Kerberos → Hack Avengers</Text>
             </Unorderedlist>
             <Unorderedlist bulletUnicode={0x2022}>
-              <Text style={styles.text1}>4-cu komanda → 5-ci komanda</Text>
+              <Text style={styles.text1}>Hack Avengers→ Hack Avengers</Text>
             </Unorderedlist>
             <Unorderedlist bulletUnicode={0x2022}>
-              <Text style={styles.text1}>5-ci komanda → 6-cı komanda</Text>
+              <Text style={styles.text1}>TechnoRisk →Techwarrior</Text>
             </Unorderedlist>
             <Unorderedlist bulletUnicode={0x2022}>
-              <Text style={styles.text1}>6-cı komanda → 7-ci komandanı</Text>
-            </Unorderedlist>
-            <Unorderedlist bulletUnicode={0x2022}>
-              <Text style={styles.text1}>7-ci komanda → 1-ci komandanı</Text>
+              <Text style={styles.text1}>Techwarrior → Proxies</Text>
             </Unorderedlist>
           </View>
         </View>
