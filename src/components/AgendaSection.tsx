@@ -4,6 +4,7 @@ import { SectionList, StyleSheet, Text, View } from "react-native";
 import Metrics from "../styling/Metrics";
 import { heightPercentageToDP } from "react-native-responsive-screen";
 import { Dimensions } from "react-native";
+import Carousel from "react-native-reanimated-carousel";
 
 const AgendaData = [
   {
@@ -24,12 +25,12 @@ const AgendaData = [
   {
     id: 4,
     title: "Gerisayım başlayır",
-    time: "10:00",
+    time: "10:00 - 10:01",
   },
   {
     id: 5,
     title: "Hər kəsə uğurlar!",
-    time: "10:00 - 12:30",
+    time: "10:01 - 12:30",
   },
   {
     id: 6,
@@ -43,28 +44,28 @@ const AgendaData = [
   },
   {
     id: 8,
-    title: "Şam yeməyi",
-    time: "18:00 - 19:00",
+    title: "Gerisayım dayanır",
+    time: "18:00 - 18:01",
   },
   {
     id: 9,
     title: "Gerisayım dayanır",
-    time: "19:00",
+    time: "18:01 - 19:01",
   },
   {
     id: 10,
-    title: "Təqdimat",
-    time: "19:00 - 20:30",
+    title: "“Karyeranı yüksəlt” haqqında məlumat",
+    time: "18:30 - 19:00",
   },
   {
     id: 11,
-    title: "Diplom və sertifikatların verilməsi",
-    time: "20:30 - 21:00",
+    title: "Lahiyələrin təqdimatı",
+    time: "19:00 - 20:30",
   },
   {
-    id: 12,
+    id: 13,
     title: "Qalibin açıqlanması",
-    time: "21:00",
+    time: "21:00 - 21:01",
   },
 ];
 
@@ -100,7 +101,6 @@ const Samm = () => {
   const [nextId, setNextId] = useState<number | null>(null);
   const sectionRef = useRef<SectionList>(null);
 
-
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentSectionIndex((prevIndex) => (prevIndex === 0 ? 1 : 0));
@@ -132,55 +132,64 @@ const Samm = () => {
   };
 
   return (
-    <SectionList
-      showsVerticalScrollIndicator={false}
-      scrollEnabled={false}
-      ref={sectionRef}
-      SectionSeparatorComponent={() => <View style={{ height: viewHeight }} />}
-      sections={[
-        {
-          title: "indi:",
-          data: [
-            {
-              title: getTitleById(currentId),
-            },
-          ],
-        },
-        {
-          title: "Daha sonra:",
-          data: [
-            {
-              title: getTitleById(nextId),
-            },
-          ],
-        },
-      ]}
-      keyExtractor={(item, index) => `${item.title}-${index}`}
-      renderItem={({ item }) => (
-        <View
-          style={{
-            justifyContent: "center",
-          }}
-        >
-          <Text style={styles.text}>{item.title}</Text>
-        </View>
-      )}
+    <View
       style={{
-        height: 60,
+        flex: 1,
+        justifyContent: "center",
       }}
-      renderSectionHeader={({ section: { title } }) => (
-        <View
-          style={{
-            backgroundColor: title === "indi:" ? "#228E09" : "#EC7F00",
-            width: title === "indi:" ? 50 : 100,
-            borderRadius: 6,
-            justifyContent: "center",
-          }}
-        >
-          <Text style={[styles.sectionHeader]}>{title}</Text>
-        </View>
-      )}
-    />
+    >
+      <Carousel
+        vertical
+        enabled={false}
+        width={200}
+        height={60}
+        autoPlayInterval={3000}
+        autoPlay={true}
+        data={[
+          {
+            title: "indi:",
+            data: [
+              {
+                title: getTitleById(currentId),
+              },
+            ],
+          },
+          {
+            title: "Daha sonra:",
+            data: [
+              {
+                title: getTitleById(nextId),
+              },
+            ],
+          },
+        ]}
+        scrollAnimationDuration={1500}
+        renderItem={({ item }) => (
+          <View style={{ width: 200 }}>
+            <View
+              style={{
+                backgroundColor: item.title === "indi:" ? "#228E09" : "#EC7F00",
+                width: item.title === "indi:" ? 50 : 100,
+                borderRadius: 6,
+                justifyContent: "center",
+              }}
+            >
+              <Text style={[styles.sectionHeader]}>{item.title}</Text>
+            </View>
+            <View
+              style={{
+                justifyContent: "center",
+              }}
+            >
+              <Text style={styles.text}>
+                {item.data[0].title.slice(0, 25)}
+                {item.data[0].title.length > 25 && "..."}
+              </Text>
+            </View>
+          </View>
+        )}
+      />
+    </View>
   );
 };
 
@@ -188,11 +197,12 @@ export default Samm;
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 14 * Metrics.rem,
+    fontSize: 14,
     fontWeight: "500",
     color: "#000",
     lineHeight: 20,
     letterSpacing: 0.1,
+    marginTop: 10,
   },
   sectionHeader: {
     borderRadius: 6,

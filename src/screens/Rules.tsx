@@ -25,7 +25,7 @@ const Rules = () => {
     },
     {
       title: "Enerjinizi qoruyun – ",
-      text: "8 saatlıq hackathon boyunca enerjinizi saxlaya bilməniz üçün maye qəbul edin və yemək fasiləsinə çıxın.\n",
+      text: "8 saatlıq hackathon boyunca enerjinizi saxlaya bilməyiniz üçün maye qəbul edin və yemək fasiləsinə çıxın.\n",
     },
     {
       title: "Mövcud resurslardan istifadə edin – ",
@@ -68,15 +68,17 @@ const Rules = () => {
         })}
         <Text style={styles.header}>Təqdimat zamanı{"\n"}</Text>
         <Text style={styles.text}>
-          Layihənizin təqdimat zamanı inamla, ayrılmış vaxt ərzində və nəzərdə
-          tutulduğu formada işləməsi üçün öncədən məşq edin.{"\n\n"}
+          Layihənizin təqdimat zamanı inamla, sizə ayrılan 10 dəqiqə vaxt
+          ərzində və nəzərdə tutulduğu formada işlənməsi üçün öncədən
+          hazırlaşın. Digər komandaların da layihələrini izləmək üçün bağlanış
+          mərasimində iştirak edin.
+          {"\n"}
         </Text>
-        <Text style={styles.header}>Tədbir bitdikdən sonra{"\n"}</Text>
+        <Text style={styles.header}>{"Tədbirdən sonra\n"}</Text>
         <Text style={styles.text}>
-          Digər komandaların da layihələrini izləmək üçün bağlanış mərasimində
-          iştirak edin. Hackathon boyunca topladığınız təcrübə, qarşılaşdığınız
-          çətinliklər və həll yolları haqqında düşünün və müəyyən nəticəyə
-          gəlin. Bu tədbirdən öyrəndiklərinizi daim inkişaf etdirin.{"\n"}
+          Hackathon boyunca topladığınız təcrübə, qarşılaşdığınız çətinliklər və
+          həll yolları haqqında düşünün və müəyyən nəticəyə gəlin. Bu tədbirdən
+          öyrəndiklərinizi daim inkişaf etdirin.{"\n"}
         </Text>
       </View>
     </ScrollView>

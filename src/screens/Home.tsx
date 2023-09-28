@@ -8,6 +8,7 @@ import {
   Image,
   ScrollView,
   Dimensions,
+  RefreshControl,
 } from "react-native";
 import moment from "moment";
 import { LinearGradient } from "expo-linear-gradient";
@@ -21,11 +22,16 @@ import SvgArrow from "../assets/icons/arrow";
 import SvgRules from "../assets/icons/rules";
 import SvgCareer from "../assets/icons/career";
 import Metrics from "../styling/Metrics";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../redux/store";
+import { startHackathonState } from "../redux/data/ValuationSlice";
 
 const Home = ({ navigation }: any) => {
   const [time, setTime] = useState(
     moment().utcOffset("+04:00").format("HH:mm")
   );
+
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -68,14 +74,18 @@ const Home = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       <GradientHeader
-        title={"CODE8"}
+        title={"code8"}
         navigation={navigation}
         showValution={true}
       />
       <ScrollView
+        refreshControl={
+          <RefreshControl
+            onRefresh={() => dispatch(startHackathonState())}
+            refreshing={false}
+          />
+        }
         showsVerticalScrollIndicator={false}
-        bounces={false}
-        bouncesZoom={false}
       >
         <Pressable
           onPress={() =>
