@@ -16,7 +16,7 @@ const Frontend = ({ navigation }: any) => {
       <GradientHeader title="Front-End" showArrow navigation={navigation} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.textContainer}>
-          <Text style={styles.text}>
+          <Text style={styles.headerText}>
             1. Uİ-ın yazılım tərzi və istifadə etməli olduğunuz texnologiyalar
             (30 bal)
           </Text>
@@ -31,7 +31,7 @@ const Frontend = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>2. Admin Girişi(20 bal)</Text>
+          <Text style={styles.headerText}>2. Admin Girişi(20 bal)</Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>
@@ -43,7 +43,7 @@ const Frontend = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>
+          <Text style={styles.headerText}>
             3. Müraciət edən istifadəçilərin Siyahısı (10 bal)
           </Text>
           <View style={styles.steps}>
@@ -55,7 +55,7 @@ const Frontend = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>
+          <Text style={styles.headerText}>
             4. İstifadəçilərin Axtarışı və filterlənməsi(15 bal)
           </Text>
           <View style={styles.steps}>
@@ -67,7 +67,7 @@ const Frontend = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>
+          <Text style={styles.headerText}>
             5. Müraciəti Qəbul Et Funksiyası (10 bal)
           </Text>
           <View style={styles.steps}>
@@ -79,7 +79,7 @@ const Frontend = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>
+          <Text style={styles.headerText}>
             6. Müraciəti Rədd Et Funksiyası(10 bal)
           </Text>
           <View style={styles.steps}>
@@ -88,7 +88,7 @@ const Frontend = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>
+          <Text style={styles.headerText}>
             7. Görüş Tarixini Dəyiş Funksiyası (5 bal)
           </Text>
           <View style={styles.steps}>
@@ -113,9 +113,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     paddingTop: Platform.OS == "ios" ? 40 : StatusBar.currentHeight! + 20,
   },
-  text: {
-    fontSize: 18,
+  headerText: {
+    fontSize: 17,
     fontWeight: "500",
+    color: "#000000",
+    lineHeight: 26,
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: "400",
     color: "#000000",
     lineHeight: 26,
   },

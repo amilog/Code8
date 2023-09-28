@@ -6,29 +6,21 @@ import {
   StatusBar,
   ScrollView,
   TouchableOpacity,
-  Linking,
   Alert,
 } from "react-native";
 import React from "react";
 import GradientHeader from "../../components/GradientHeader";
 import Unorderedlist from "react-native-unordered-list";
 import InfoCard from "../../assets/icons/infoCard";
+import * as WebBrowser from "expo-web-browser";
 import CircleArrow from "../../assets/icons/circleArrow";
 
 const DataScience = ({ navigation }: any) => {
   const openLinkInBrowser = async () => {
     try {
-      const supported = await Linking.canOpenURL(
-        "https://st2.depositphotos.com/1823785/7833/i/950/depositphotos_78333908-stock-photo-ny-people-hands-holding-red.jpg"
+      await WebBrowser.openBrowserAsync(
+        "https://st2.depositphotos.com/1823785/7833/i/950/depositphotos_78333908-stock-photo-many-people-hands-hlding-red.jpg"
       );
-
-      if (supported) {
-        await Linking.openURL(
-          "https://st2.depositphotos.com/1823785/7833/i/950/depositphotos_78333908-stock-photo-many-people-hands-hlding-red.jpg"
-        );
-      } else {
-        showErrorAlert("Link açılmadı");
-      }
     } catch (error) {
       showErrorAlert("Link açılmadı");
     }
@@ -43,7 +35,7 @@ const DataScience = ({ navigation }: any) => {
       <GradientHeader title="Data Science" showArrow navigation={navigation} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.textContainer}>
-          <Text style={styles.text}>I. Data Understanding(15 bal)</Text>
+          <Text style={styles.headerText}>1. Data Understanding(15 bal)</Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>Addımlar</Text>
@@ -75,7 +67,9 @@ const DataScience = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>II. Data Preparation(30 bal)Izahat</Text>
+          <Text style={styles.headerText}>
+            2. Data Preparation(30 bal){"\n"}Izahat
+          </Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>Addımlar</Text>
@@ -104,7 +98,7 @@ const DataScience = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>III. Modeling.(15 bal)</Text>
+          <Text style={styles.headerText}>3. Modeling.(15 bal)</Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>Addımlar</Text>
@@ -125,7 +119,7 @@ const DataScience = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>IV. Evaluation(15)</Text>
+          <Text style={styles.headerText}>4. Evaluation(15)</Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>Addımlar</Text>
@@ -154,7 +148,7 @@ const DataScience = ({ navigation }: any) => {
             </Unorderedlist>
           </View>
           <View style={{ height: 30 }} />
-          <Text style={styles.text}>V. Deployment(25 bal)</Text>
+          <Text style={styles.headerText}>5. Deployment(25 bal)</Text>
           <View style={styles.steps}>
             <Unorderedlist bulletUnicode={0x2022}>
               <Text style={styles.text}>İzahat</Text>
@@ -206,9 +200,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     paddingTop: Platform.OS == "ios" ? 40 : StatusBar.currentHeight! + 20,
   },
-  text: {
+  headerText: {
     fontSize: 18,
     fontWeight: "500",
+    color: "#000000",
+    lineHeight: 26,
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: "400",
     color: "#000000",
     lineHeight: 26,
   },

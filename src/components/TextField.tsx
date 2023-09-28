@@ -67,7 +67,7 @@ const TextField: React.FC<Props> = (props) => {
       <TextInput
         ref={inputRef}
         value={inputValue}
-        secureTextEntry={secureText}
+        secureTextEntry={!secureText}
         inlineImageLeft="search_icon"
         cursorColor={
           isPasswordCorrect === false

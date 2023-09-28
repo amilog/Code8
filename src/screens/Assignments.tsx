@@ -51,7 +51,7 @@ const Assignments = () => {
 
   return (
     <View style={styles.container}>
-      {state.isStarted.start ? (
+      {state.isStarted[0].start ? (
         <FlatList
           showsVerticalScrollIndicator={false}
           data={taskData}
