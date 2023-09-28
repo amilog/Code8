@@ -58,10 +58,11 @@ const AnimationCard = () => {
           </View>
           <Carousel
             loop
-            pagingEnabled={false}
+            enabled={false}
             width={Dimensions.get("window").width / 1.8}
             height={30}
             autoPlay={true}
+            autoPlayInterval={3000}
             data={[
               {
                 id: 1,
@@ -111,7 +112,7 @@ const AnimationCard = () => {
               <ArrowRightIcon style={styles.arrowIcon3} />
               <Text
                 style={styles.subtitleText}
-              >{`Hər komandada 13 \nüzv`}</Text>
+              >{`Hər komandada 14 \nüzv`}</Text>
             </View>
           </View>
           <Carousel

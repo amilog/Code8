@@ -7,7 +7,6 @@ import Animated, {
   useAnimatedProps,
   useAnimatedStyle,
   useSharedValue,
-  withSpring,
   withTiming,
 } from "react-native-reanimated";
 
@@ -33,7 +32,7 @@ const BottomSheet = React.forwardRef<BottomSheetRefProps, BottomSheetProps>(
       "worklet";
       active.value = destination !== 0;
 
-      translateY.value = withSpring(destination, { damping: 50 });
+      translateY.value = withTiming(destination, { duration: 500 });
     }, []);
 
     const isActive = useCallback(() => {

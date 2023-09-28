@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { AgendaData } from "../data/Agenda";
+import Metrics from "../styling/Metrics";
 
 const Agenda = () => {
   return (
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
   text: {
-    fontSize: 16,
+    fontSize: 16 * Metrics.rem,
     fontWeight: "500",
     color: "#000",
     lineHeight: 24,

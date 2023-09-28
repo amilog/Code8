@@ -10,12 +10,12 @@ import {
   Alert,
 } from "react-native";
 import Animated, {
-  withSpring,
   useSharedValue,
   useAnimatedStyle,
   runOnJS,
   FadeIn,
   FadeOut,
+  withTiming,
 } from "react-native-reanimated";
 import SvgTriangle from "../assets/icons/triangleBottom";
 import SvgTopTriangle from "../assets/icons/triangleTop";
@@ -32,8 +32,8 @@ const MemberCard = ({ item }: { item: MembersModel }) => {
   const cardHeight = useSharedValue(80);
 
   const toggleCardHeight = () => {
-    cardHeight.value = withSpring(expanded ? 80 : 160, {
-      damping: 10,
+    cardHeight.value = withTiming(expanded ? 80 : 160, {
+      duration: 300,
     });
 
     runOnJS(setExpanded)(!expanded);
