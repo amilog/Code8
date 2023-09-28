@@ -1,11 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  StatusBar,
-  Platform,
-} from "react-native";
+import { StyleSheet, Text, View, StatusBar, Platform } from "react-native";
 import { FlatList } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../redux/store";
@@ -49,11 +43,11 @@ const Result = ({ navigation }: any) => {
       <SvgTeamIcon fill={getTeamColorById(item._id)} />
       <View style={{ gap: 4 }}>
         <Text style={styles.nameText}>{item.name}</Text>
-        {renderLine("Münsiflərin qiyməti:", item.juryAverage)}
-        {renderLine("Texniki heyət qiyməti:", item.coachAverage)}
+        {renderLine("Münsiflərin qiyməti:", item.juryAverage.toFixed(2))}
+        {renderLine("Texniki heyət qiyməti:", item.coachAverage.toFixed(2))}
         {renderLine(
           "Ortalama:",
-          `${(item.juryAverage * 20 + item.coachAverage) / 2}/100`
+          `${((item.juryAverage * 20 + item.coachAverage) / 2).toFixed(2)}/100`
         )}
       </View>
     </View>
