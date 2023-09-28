@@ -28,6 +28,7 @@ import * as WebBrowser from "expo-web-browser";
 
 const MemberCard = ({ item }: { item: MembersModel }) => {
   const [expanded, setExpanded] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const cardHeight = useSharedValue(80);
 
@@ -73,14 +74,29 @@ const MemberCard = ({ item }: { item: MembersModel }) => {
     >
       <Animated.View style={[cardStyle, styles.cardContainer]}>
         <View style={styles.contentContainer}>
-          {item.image.length > 0 ? (
-            <Image source={{ uri: item.image }} style={styles.profileImage} />
-          ) : (
+          <View>
             <Image
-              source={require("../assets/images/noProfile.jpeg")}
+              onLoadEnd={() => {
+                setLoading(false);
+              }}
+              source={{
+                uri: `https://firebasestorage.googleapis.com/v0/b/image-36a5a.appspot.com/o/${item._id}.jpeg?alt=media&token=2f7c16fd-dc5b-4406-8c9e-4e0dfabb4ff6&_gl=1*143gb7z*_ga*MTIwMTQwNTUzNS4xNjk1OTA5MTg2*_ga_CW55HF8NVT*MTY5NTkyMjU3NC4yLjEuMTY5NTkyMjg2Ny4zLjAuMA..`,
+              }}
               style={styles.profileImage}
             />
-          )}
+            <Image
+              source={require("../assets/images/noProfile.jpeg")}
+              style={[
+                styles.profileImage,
+                {
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  opacity: loading ? 1 : 0,
+                },
+              ]}
+            />
+          </View>
           <View style={styles.textContainer}>
             <Text style={styles.nameText}>{item.name}</Text>
             <Text style={styles.roleText}>{item.role}</Text>
