@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "520123401699",
+    "project_id": "code8-cc0ef",
+    "storage_bucket": "code8-cc0ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520123401699:android:2eda4aa379f51d961cccd6",
+        "android_client_info": {
+          "package_name": "com.ilhamstr.code8"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBireq_zlEtIwP7paPmoz6lLAkzLXqy2ZY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

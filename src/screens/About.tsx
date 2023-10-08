@@ -9,6 +9,7 @@ import {
   SectionList,
   Alert,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { AboutTeam, MemberType } from "../data/About";
@@ -91,7 +92,7 @@ const About = () => {
       <TouchableOpacity
         onPress={() => openLinkInBrowser(item.linkedIn)}
         style={[
-          styles.itemContainer,
+          styles.itemDevContainer,
           Platform.OS === "android" && styles.androidShadow,
           Platform.OS === "ios" && styles.iosShadow,
           { padding: 0 },
@@ -152,9 +153,10 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 16,
     width: "95%",
-    height: 80,
+    height: 90,
     backgroundColor: "#fff",
     alignSelf: "center",
+    alignItems: "center",
   },
   gradient: {
     width: 50,
@@ -169,8 +171,19 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   textContainer: {
-    justifyContent: "space-between",
+    gap: 4,
     marginLeft: 16,
+  },
+  itemDevContainer: {
+    flexDirection: "row",
+    borderWidth: 0.5,
+    borderColor: "#C2C2C2",
+    padding: 16,
+    borderRadius: 16,
+    width: "95%",
+    height: 80,
+    backgroundColor: "#fff",
+    alignSelf: "center",
   },
   nameText: {
     fontSize: 16,
@@ -185,6 +198,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     fontWeight: "400",
     color: "#868686",
+    width: Dimensions.get("window").width * 0.7,
   },
   androidShadow: {
     shadowColor: "#000",

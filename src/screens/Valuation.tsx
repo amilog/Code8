@@ -57,14 +57,14 @@ const Valuation = ({ navigation }: any) => {
 
   const navigateToCorrectScreen = () => {
     const screenMappings: any = {
-      admin: "Result",
-      mobile2023: "CoachValuation",
-      front2023: "CoachValuation",
-      back2023: "CoachValuation",
-      data2023: "CoachValuation",
-      cyber2023: "CoachValuation",
-      uiux2023: "CoachValuation",
-      jury2023: "JuryValuation",
+      codeadmin: "Result",
+      mobileali: "CoachValuation",
+      frontorxan: "CoachValuation",
+      backasgar: "CoachValuation",
+      datamushviq: "CoachValuation",
+      cybermirmehdi: "CoachValuation",
+      uxuirufatzeyneb: "CoachValuation",
+      jurycode8: "JuryValuation",
     };
 
     const screenName = screenMappings[password];
@@ -73,12 +73,12 @@ const Valuation = ({ navigation }: any) => {
 
   const getTypeFromPassword = (pass: string) => {
     const typeMappings: any = {
-      mobile2023: "Mobile",
-      front2023: "FrontEnd",
-      back2023: "BackEnd",
-      data2023: "Data Science",
-      cyber2023: "Cyber Security",
-      uiux2023: "UX/UI",
+      mobileali: "Mobile",
+      frontorxan: "FrontEnd",
+      backasgar: "BackEnd",
+      datamushviq: "Data Science",
+      cybermirmehdi: "Cyber Security",
+      uxuirufatzeyneb: "UX/UI",
     };
 
     return typeMappings[pass];
@@ -115,7 +115,7 @@ const Valuation = ({ navigation }: any) => {
           <TextField
             label="6 rəqəmli parol"
             inputValue={password}
-            onChangeText={(text) => setPassword(text)}
+            onChangeText={(text) => setPassword(text.toLowerCase())}
             isPasswordCorrect={isPasswordCorrect}
           />
         </Animated.View>
