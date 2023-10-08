@@ -14,7 +14,7 @@ import Animated, {
   runOnJS,
   FadeIn,
   FadeOut,
-  withTiming,
+  withSpring,
 } from "react-native-reanimated";
 import SvgTriangle from "../assets/icons/triangleBottom";
 import SvgTopTriangle from "../assets/icons/triangleTop";
@@ -48,9 +48,11 @@ const CoachValuateCard: React.FC<CoachValuateCardProps> = ({
   const cardHeight = useSharedValue(70);
 
   const toggleCardHeight = () => {
-    cardHeight.value = withTiming(expanded ? 70 : 260, {
-      duration: 300,
-    });
+    cardHeight.value = withSpring(expanded ? 70 : 260, {
+      damping: 12,
+      stiffness: 90,
+
+      });
 
     runOnJS(setExpanded)(!expanded);
   };

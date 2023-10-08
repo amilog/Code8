@@ -7,21 +7,20 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider } from "react-redux";
 import { store } from "./src/redux/store";
 import "react-native-gesture-handler";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import ValutionStack from "./src/stacks/ValuationStack";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { LogBox } from "react-native";
 import DataScience from "./src/screens/task/DataScience";
 import UiUx from "./src/screens/task/UiUx";
 import Frontend from "./src/screens/task/Frontend";
 import Backend from "./src/screens/task/Backend";
 import Mobile from "./src/screens/task/Mobile";
 import CyberSec from "./src/screens/task/CyberSec";
+import registerNNPushToken from "native-notify";
 
-const App = () => {
+export default function App() {
   const Stack = createNativeStackNavigator();
-  //AsyncStorage.clear();
-  LogBox.ignoreAllLogs();
+  registerNNPushToken(12757, "eZkaDbb2b10xoXdetMddDm");
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Provider store={store}>
@@ -90,6 +89,4 @@ const App = () => {
       </Provider>
     </GestureHandlerRootView>
   );
-};
-
-export default App;
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -9,13 +9,16 @@ import {
   SectionList,
   Alert,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { AboutTeam, MemberType } from "../data/About";
 import DevCard from "../components/DevCard";
-import * as WebBrowser from "expo-web-browser";
+import * as Linking from "expo-linking";
 
 const About = () => {
+  const [loading, setLoading] = useState(true);
+
   const renderItem = ({ item }: { item: MemberType }) => {
     if (item.position === "Developer (Proqramçı)") {
       return <RenderStudent item={item} />;
@@ -26,7 +29,7 @@ const About = () => {
 
   const openLinkInBrowser = async (url: string) => {
     try {
-      await WebBrowser.openBrowserAsync(url);
+      await Linking.openURL(url);
     } catch (error) {
       Alert.alert("Link açılmadı");
     }
@@ -54,7 +57,27 @@ const About = () => {
           end={{ x: 1.0, y: 1.0 }}
           style={styles.gradient}
         >
-          <Image source={{ uri: item.image }} style={styles.image} />
+          <View>
+            <Image
+              source={{ uri: item.image }}
+              style={styles.image}
+              onLoad={() => {
+                setLoading(false);
+              }}
+            />
+            <Image
+              source={require("../assets/images/noProfile.jpeg")}
+              style={{
+                opacity: loading ? 1 : 0,
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: 48,
+                height: 48,
+                borderRadius: 100,
+              }}
+            />
+          </View>
         </LinearGradient>
         <View style={styles.textContainer}>
           <Text style={styles.nameText}>{item.name}</Text>
@@ -69,7 +92,7 @@ const About = () => {
       <TouchableOpacity
         onPress={() => openLinkInBrowser(item.linkedIn)}
         style={[
-          styles.itemContainer,
+          styles.itemDevContainer,
           Platform.OS === "android" && styles.androidShadow,
           Platform.OS === "ios" && styles.iosShadow,
           { padding: 0 },
@@ -130,9 +153,10 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 16,
     width: "95%",
-    height: 80,
+    height: 90,
     backgroundColor: "#fff",
     alignSelf: "center",
+    alignItems: "center",
   },
   gradient: {
     width: 50,
@@ -147,8 +171,19 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   textContainer: {
-    justifyContent: "space-between",
+    gap: 4,
     marginLeft: 16,
+  },
+  itemDevContainer: {
+    flexDirection: "row",
+    borderWidth: 0.5,
+    borderColor: "#C2C2C2",
+    padding: 16,
+    borderRadius: 16,
+    width: "95%",
+    height: 80,
+    backgroundColor: "#fff",
+    alignSelf: "center",
   },
   nameText: {
     fontSize: 16,
@@ -163,6 +198,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     fontWeight: "400",
     color: "#868686",
+    width: Dimensions.get("window").width * 0.7,
   },
   androidShadow: {
     shadowColor: "#000",

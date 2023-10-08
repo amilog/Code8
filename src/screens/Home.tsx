@@ -30,6 +30,7 @@ const Home = ({ navigation }: any) => {
   const [time, setTime] = useState(
     moment().utcOffset("+04:00").format("HH:mm")
   );
+  const [loading, setLoadin] = useState(true);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -66,7 +67,25 @@ const Home = ({ navigation }: any) => {
           },
         ]}
       >
-        <Image source={{ uri: item.image }} style={styles.teamMemberImage} />
+        <View>
+          <Image
+            source={{ uri: item.image }}
+            style={styles.teamMemberImage}
+            onLoad={() => setLoadin(false)}
+          />
+          <Image
+            source={require("../assets/images/noProfile.jpeg")}
+            style={{
+              opacity: loading ? 1 : 0,
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: 42 * Metrics.rem - 2,
+              height: 42 * Metrics.rem - 2,
+              borderRadius: 100,
+            }}
+          />
+        </View>
       </LinearGradient>
     ));
   };
@@ -74,7 +93,7 @@ const Home = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       <GradientHeader
-        title={"code8"}
+        title={"Code8"}
         navigation={navigation}
         showValution={true}
       />

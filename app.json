@@ -6,9 +6,7 @@
     "orientation": "portrait",
     "icon": "./src/assets/images/CodeIcon.png",
     "userInterfaceStyle": "light",
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "config": {
@@ -21,13 +19,17 @@
         "foregroundImage": "./src/assets/images/CodeIcon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.ilhamstr.code8"
+      "package": "com.ilhamstr.code8",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      "expo-localization"
-    ]
+    "plugins": ["expo-localization"],
+    "extra": {
+      "eas": {
+        "projectId": "57fc52b1-8306-4f20-9428-9e7a9d2448de"
+      }
+    }
   }
 }

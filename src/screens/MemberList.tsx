@@ -1,9 +1,4 @@
-import {
-  FlatList,
-  Platform,
-  StyleSheet,
-  View,
-} from "react-native";
+import { Dimensions, FlatList, Platform, StyleSheet, View } from "react-native";
 import React, { useEffect } from "react";
 import GradientHeader from "../components/GradientHeader";
 import { StatusBar } from "react-native";
@@ -37,10 +32,11 @@ const MemberList = ({ navigation, route }: any) => {
       />
       {state.byIdLoading ? (
         <View style={styles.loadingContainer}>
-          <Skleton />
-          <Skleton />
-          <Skleton />
-          <Skleton />
+          {Array(10)
+            .fill(0)
+            .map((_, index) => (
+              <Skleton key={index} />
+            ))}
         </View>
       ) : (
         <FlatList
