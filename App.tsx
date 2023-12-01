@@ -16,11 +16,11 @@ import Backend from "./src/screens/task/Backend";
 import Mobile from "./src/screens/task/Mobile";
 import CyberSec from "./src/screens/task/CyberSec";
 import registerNNPushToken from "native-notify";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
   registerNNPushToken(12757, "eZkaDbb2b10xoXdetMddDm");
-
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Provider store={store}>

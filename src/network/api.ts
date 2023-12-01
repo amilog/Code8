@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://clownfish-app-cx6dw.ondigitalocean.app/api/code8/",
+  baseURL: "http://192.168.1.103:8080/api/code8",
 });
 
 export const getTeams = async () => {
